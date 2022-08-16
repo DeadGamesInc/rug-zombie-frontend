@@ -83,7 +83,6 @@ const graves: GraveConfig[] = [
     nftId: 108,
     rug: tokens.one,
     isNew: true,
-    isFeatured: true,
     rugDex: Dex.PCS_V2,
     announcementIds: [],
   },
@@ -95,8 +94,6 @@ const graves: GraveConfig[] = [
     name: 'BAYC Rare',
     nftId: 104,
     rug: tokens.zape,
-    isNew: true,
-    isFeatured: true,
     liquidityDetails: 'ZAPE token can be found in the Catacombs (RugMarket / RugRoll), you can also ask a community member in the  RugZombie telegram.',
     announcementIds: [137],
   },
@@ -108,10 +105,9 @@ const graves: GraveConfig[] = [
     name: 'TerraUSD Legendary',
     nftId: 106,
     rug: tokens.ust,
-    isNew: true,
-    isFeatured: true,
     rugDex: Dex.PCS_V2,
     announcementIds: [],
+    endDate: 1665028799
   },
   {
     pid: {
@@ -121,10 +117,9 @@ const graves: GraveConfig[] = [
     name: 'Luna Legendary',
     nftId: 105,
     rug: tokens.luna,
-    isNew: true,
-    isFeatured: true,
     rugDex: Dex.PCS_V2,
     announcementIds: [],
+    endDate: 1665028799
   },
   {
     pid: {
@@ -134,8 +129,6 @@ const graves: GraveConfig[] = [
     name: 'Axie Infinity Rare',
     nftId: 101,
     rug: tokens.axs,
-    isNew: true,
-    isFeatured: true,
     rugDex: Dex.PCS_V2,
     announcementIds: [134],
   },
@@ -175,7 +168,6 @@ const graves: GraveConfig[] = [
     name: 'Salvation Finance Common',
     nftId: 97,
     rug: tokens.slvn,
-    isNew: true,
     rugDex: Dex.PCS_V2,
     announcementIds: [132],
   },
