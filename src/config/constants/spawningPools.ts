@@ -3,6 +3,35 @@ import tokens from './tokens'
 
 const spawningPools: SpawningPoolConfig[] = [
   {
+    id: 24,
+    name: 'Main Street Legendary',
+    placeholder: 'images/rugZombie/mainstsp.jpeg',
+    address: {
+      56: '0xfd21cb1dEE8d9950576B100d2e509aA570E3534B',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 23120000,
+    endDate: 1668542078,
+    project: {
+      name: 'Main Street',
+      description:
+        'Main Street is a deflationary token that provides its holders with a space to find new high use case tokens in their Neighborhood and Alley, as well as entertainment and games in their Shops.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.mainst.projectLink,
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/buymainstreet',
+        },
+      ],
+    },
+    rewardToken: tokens.mainst,
+    dex: Dex.PCS_V2,
+    announcementIds: [138],
+  },
+  {
     id: 23,
     name: 'French Connection Legendary',
     nftId: 107,

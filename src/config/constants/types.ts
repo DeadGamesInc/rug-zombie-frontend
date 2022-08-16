@@ -148,9 +148,10 @@ export interface SpawningPoolConfig extends AnnouncementSubject{
   isNew?: boolean
   rewardToken: Token
   dex: Dex
-  nftId: number
+  nftId?: number
   color?: string
   unknownPrice?: boolean
+  placeholder?: string
 }
 
 export interface PoolConfig {

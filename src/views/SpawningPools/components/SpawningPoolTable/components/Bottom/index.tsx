@@ -229,7 +229,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     label: `Mint NFT`,
     sent: `Minting...`,
     func: onHarvest,
-    toast: { title: `Minted ${nft.symbol} NFT` },
+    toast: { title: `Minted ${nft?.symbol} NFT` },
   }
   unstakeSteps[UnstakeStep.Harvest] = {
     label: `Harvest`,

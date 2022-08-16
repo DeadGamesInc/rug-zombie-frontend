@@ -100,9 +100,10 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
     address,
     nftId,
     endDate,
+    placeholder,
     poolInfo: { withdrawCooldown, nftMintTime, totalAmount, minimumStake, unlockFee },
   } = spawningPool
-  const { name, address: nftAddress, type } = useGetNftById(nftId)
+  const nft = useGetNftById(nftId)
   const tvl = getBalanceAmount(totalAmount.times(useGetZombiePriceUsd()))
   const unlockFeeUsd = unlockFee.times(useGetBnbPriceUsd())
   const history = useHistory()
@@ -114,18 +115,18 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
 
   return (
     <Container>
-      <NftImageContainer onClick={() => history.push(`/nfts/${nftId}`)}>
-        {type === 'video' ? (
+      <NftImageContainer onClick={() => placeholder ? null : history.push(`/nfts/${nftId}`)}>
+        {nft?.type === 'video' ? (
           <NftVideo autoPlay loop muted>
-            <source src={getHighResImage(getAddress(nftAddress))} type="video/webm" />
+            <source src={getHighResImage(getAddress(nft?.address))} type="video/webm" />
           </NftVideo>
         ) : (
-          <NftImage src={getHighResImage(getAddress(nftAddress))} onError={imageOnErrorHandler} />
+          <NftImage src={placeholder || getHighResImage(getAddress(nft?.address))} onError={imageOnErrorHandler} />
         )}
       </NftImageContainer>
       <Details>
         <SpawningPoolInfo>
-          <HeaderText>{name}</HeaderText>
+          <HeaderText>{placeholder ? 'Official artwork coming soon!' : nft?.name}</HeaderText>
           <SubHeaderText>
             Pool TVL: <Text>{numeral(tvl.toString()).format('$ (0.00 a)')}</Text>
           </SubHeaderText>
