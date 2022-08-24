@@ -169,7 +169,7 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
       <SpawningPoolHeaderRow>
         <TokenFlex>
           <img src={tokenImage(tokens.zmbe)} style={{ width: '30px', height: '30px' }} alt="Zombie Token logo" />
-          <img src={tokenImage(rewardToken)} style={{ width: '30px', height: '30px' }} alt="Reward token logo" />
+          <img src={tokenImage(rewardToken)} style={{ maxWidth: '30px', maxHeight: '30px', objectFit: 'scale-down' }} alt="Reward token logo" />
         </TokenFlex>
         <SpawningPoolTitle>{name}</SpawningPoolTitle>
         <TabFlex>

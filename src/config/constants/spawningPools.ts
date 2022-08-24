@@ -3,6 +3,25 @@ import tokens from './tokens'
 
 const spawningPools: SpawningPoolConfig[] = [
   {
+    id: 25,
+    name: 'iPunks Legendary',
+    placeholder: 'images/rugZombie/ipunks.jpeg',
+    address: {
+      56: '0x47E7A4C0166C3B0ec5a979d81F228ba24B303E30',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 23350000,
+    endDate: 1669262400,
+    project: {
+      name: 'iPunks',
+      description: '',
+      additionalDetails: [],
+    },
+    rewardToken: tokens.ipunks,
+    dex: Dex.PCS_V2,
+    announcementIds: [],
+  },
+  {
     id: 24,
     name: 'Main Street Legendary',
     placeholder: 'images/rugZombie/mainstsp.jpeg',

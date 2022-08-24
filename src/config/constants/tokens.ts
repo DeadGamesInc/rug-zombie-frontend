@@ -582,6 +582,16 @@ const tokens: { [key: string]: Token } = {
     projectLink: 'https://autoshark.finance/',
     tokenLogo: 'images/tokens/FINS.svg',
   },
+  ipunks: {
+    symbol: 'iPUNKS',
+    address: {
+      56: '0x8bdB65c5D7f1f53b0ac46Bf4dc90D9c4DF1f163F',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+    tokenLogo: 'https://res2.yourwebsite.life/res/62e5a713520d83000e069976/62e5a74d180c43000dd41f83_optimized_524?nowebp',
+  },
   finsbnb: {
     symbol: 'FINS-BNB LP',
     address: {

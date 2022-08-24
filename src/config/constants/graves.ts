@@ -107,7 +107,7 @@ const graves: GraveConfig[] = [
     rug: tokens.ust,
     rugDex: Dex.PCS_V2,
     announcementIds: [],
-    endDate: 1665028799
+    endDate: 1665716400
   },
   {
     pid: {
@@ -119,7 +119,7 @@ const graves: GraveConfig[] = [
     rug: tokens.luna,
     rugDex: Dex.PCS_V2,
     announcementIds: [],
-    endDate: 1665028799
+    endDate: 1665716400
   },
   {
     pid: {
