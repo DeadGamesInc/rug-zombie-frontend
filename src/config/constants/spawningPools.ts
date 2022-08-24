@@ -5,7 +5,7 @@ const spawningPools: SpawningPoolConfig[] = [
   {
     id: 25,
     name: 'iPunks Legendary',
-    placeholder: 'images/rugZombie/ipunks.jpeg',
+    nftId: 109,
     address: {
       56: '0x47E7A4C0166C3B0ec5a979d81F228ba24B303E30',
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
@@ -20,6 +20,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.ipunks,
     dex: Dex.PCS_V2,
     announcementIds: [],
+    isNew: true,
   },
   {
     id: 24,
@@ -67,7 +68,6 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.fcf,
     dex: Dex.PCS_V2,
-    isNew: true,
     announcementIds: [],
   },
   {

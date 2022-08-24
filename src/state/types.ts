@@ -203,7 +203,7 @@ export interface Nft {
   symbol: string
   address: Address
   totalSupply: BigNumber
-  path: string
+  path?: string
   type: string
   rarity: string
   artist?: Artist

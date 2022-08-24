@@ -1701,6 +1701,20 @@ const nfts: Nft[] = [
     artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 109,
+    name: 'Crawler',
+    symbol: 'CRAWLER',
+    description: "Fetch me your iSouls",
+    address: {
+      56: '0x5Cb193eF3ff889b529eA6326d22b4fa2EEBe3a79',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
