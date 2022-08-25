@@ -20,7 +20,7 @@ import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import useToast from '../../../../hooks/useToast'
 import { getAddress } from '../../../../utils/addressHelpers'
-import { instaBuyById } from '../../../../utils'
+import { getLowResImage, instaBuyById } from '../../../../utils'
 import { useGetNftById } from '../../../../state/hooks'
 
 const StyleDetails = styled.div`
@@ -103,7 +103,7 @@ const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
         <StyleCardHeader>
           <Flex justifyContent="center" paddingTop="5%" paddingBottom="5%" height="100%" onClick={openModal}>
             {type === 'image' ? (
-              <img src={path} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
+              <img src={getLowResImage(getAddress(address))} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
             ) : (
               <Video path={path} />
             )}
