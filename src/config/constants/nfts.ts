@@ -1729,6 +1729,20 @@ const nfts: Nft[] = [
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 111,
+    name: 'Nomad Zombie',
+    symbol: 'NOMADZ',
+    description: "Survival is the ability to swim in strange water.",
+    address: {
+      56: '0x7F40d8Cf24a009DfbBb65AA4850b46e57715a1b3',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

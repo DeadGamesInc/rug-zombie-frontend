@@ -1,5 +1,6 @@
 const ruggedTokens = [
   'zape',
+  'znomad',
   'luna',
   'bonfire',
   'tndr',
@@ -16,6 +17,7 @@ const ruggedTokens = [
   'kids',
   'msc',
   'zroningmz',
+  'squidstake',
 ]
 
 export default ruggedTokens

@@ -76,13 +76,23 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 63,
+      97: 1,
+    },
+    name: 'Nomad Bridge Legendary',
+    nftId: 111,
+    rug: tokens.znomad,
+    isNew: true,
+    announcementIds: [],
+  },
+  {
+    pid: {
       56: 62,
       97: 1,
     },
     name: 'Harmony One Rare',
     nftId: 108,
     rug: tokens.one,
-    isNew: true,
     rugDex: Dex.PCS_V2,
     announcementIds: [],
   },

@@ -41,6 +41,15 @@ const tokens: { [key: string]: Token } = {
     projectLink: 'https://axieinfinity.com/',
     tokenLogo: 'https://assets.coingecko.com/coins/images/13029/small/axie_infinity_logo.png?1604471082',
   },
+  znomad: {
+    symbol: 'zNOMAD',
+    address: {
+      56: '0x2F697E6224D89822c4b95B310bf30F6eC862393b',
+      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+    },
+    decimals: 0,
+    tokenLogo: 'images/tokens/znomad.png'
+  },
   luna: {
     symbol: 'LUNA',
     address: {
