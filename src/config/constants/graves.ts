@@ -83,7 +83,7 @@ const graves: GraveConfig[] = [
     nftId: 111,
     rug: tokens.znomad,
     isNew: true,
-    announcementIds: [],
+    announcementIds: [140],
   },
   {
     pid: {
