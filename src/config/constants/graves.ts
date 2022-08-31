@@ -84,6 +84,7 @@ const graves: GraveConfig[] = [
     rug: tokens.znomad,
     isNew: true,
     announcementIds: [140],
+    liquidityDetails: 'zNOMAD token can be found in the Catacombs (RugMarket / RugRoll), you can also ask a community member in the  RugZombie telegram.',
   },
   {
     pid: {
