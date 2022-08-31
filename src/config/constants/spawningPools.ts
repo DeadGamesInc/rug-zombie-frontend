@@ -19,13 +19,13 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.ipunks,
     dex: Dex.PCS_V2,
-    announcementIds: [],
+    announcementIds: [139],
     isNew: true,
   },
   {
     id: 24,
     name: 'Main Street Legendary',
-    placeholder: 'images/rugZombie/mainstsp.jpeg',
+    nftId: 110,
     address: {
       56: '0xfd21cb1dEE8d9950576B100d2e509aA570E3534B',
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
