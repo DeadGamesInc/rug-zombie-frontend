@@ -1743,6 +1743,20 @@ const nfts: Nft[] = [
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 112,
+    name: 'Heatwave',
+    symbol: 'HEATWAVE',
+    description: "Melting wallets since day one.",
+    address: {
+      56: '0x69099a41c5cC34B4A6C72396713C05dD01431aA7',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

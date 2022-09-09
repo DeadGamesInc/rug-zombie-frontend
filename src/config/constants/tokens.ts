@@ -50,6 +50,15 @@ const tokens: { [key: string]: Token } = {
     decimals: 0,
     tokenLogo: 'images/tokens/znomad.png'
   },
+  zcelsius: {
+    symbol: 'zCEL',
+    address: {
+      56: '0x844e529507C272075Dc0b382664d6f297a030105',
+      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+    },
+    decimals: 0,
+    tokenLogo: 'https://assets.coingecko.com/coins/images/3263/small/CEL_logo.png?1609598753'
+  },
   luna: {
     symbol: 'LUNA',
     address: {

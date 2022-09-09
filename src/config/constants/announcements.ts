@@ -5,6 +5,14 @@ import { Announcement } from './types'
  */
 const announcements: Map<number, Announcement> = new Map([
   [
+    141,
+    {
+      url: 'https://rugzombie.medium.com/celsius-grave-incoming-a7e3e4f8f1ab',
+      title: 'Celsius Grave Incoming!',
+      published: 1662436800,
+    },
+  ],
+  [
     140,
     {
       url: 'https://rugzombie.medium.com/nomad-zombie-new-grave-with-16x-multiplier-743715b5dfc5',
