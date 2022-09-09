@@ -93,7 +93,7 @@ const graves: GraveConfig[] = [
     },
     name: 'Celsius Network Rare',
     nftId: 112,
-    rug: tokens.zcelsius,
+    rug: tokens.zcel,
     isNew: true,
     announcementIds: [141],
     liquidityDetails: 'zCEL token can be found in the Catacombs (RugMarket / RugRoll), you can also ask a community member in the  RugZombie telegram.',

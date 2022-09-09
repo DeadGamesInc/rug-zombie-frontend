@@ -1,4 +1,5 @@
 const allowedRuggedTokens = [
+  'zcel',
   'znomad',
   'zape',
   'luna',

@@ -50,7 +50,7 @@ const tokens: { [key: string]: Token } = {
     decimals: 0,
     tokenLogo: 'images/tokens/znomad.png'
   },
-  zcelsius: {
+  zcel: {
     symbol: 'zCEL',
     address: {
       56: '0x844e529507C272075Dc0b382664d6f297a030105',
