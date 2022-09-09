@@ -19,6 +19,7 @@ const ruggedTokens = [
   'msc',
   'zroningmz',
   'squidgame',
+  'kcake',
 ]
 
 export default ruggedTokens
