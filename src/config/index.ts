@@ -26,7 +26,7 @@ export const BLOCKS_PER_YEAR = new BigNumber((60 / BSC_BLOCK_TIME) * 60 * 24 * 3
  * Base URL for PancakeSwap.
  */
 export const BASE_EXCHANGE_URL = 'https://pancakeswap.finance'
-export const BASE_V1_EXCHANGE_URL = 'https://v1exchange.pancakeswap.finance'
+export const BASE_V1_EXCHANGE_URL = 'https://v1exchange.pancakeswap.finance/#/swap'
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_EXCHANGE_URL}/add`
 
 /**

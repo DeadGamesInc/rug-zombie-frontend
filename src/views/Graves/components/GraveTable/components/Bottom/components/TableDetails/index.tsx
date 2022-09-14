@@ -7,7 +7,7 @@ import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../..
 import { Grave } from '../../../../../../../../state/types'
 import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
 import { useGetBnbPriceUsd, useGetNftById, useGetZombiePriceUsd } from '../../../../../../../../state/hooks'
-import { BASE_EXCHANGE_URL } from '../../../../../../../../config'
+import { BASE_EXCHANGE_URL, BASE_V1_EXCHANGE_URL } from '../../../../../../../../config'
 import { getAddress } from '../../../../../../../../utils/addressHelpers'
 import { Dex } from '../../../../../../../../config/constants/types'
 import { getHighResImage } from "../../../../../../../../utils";
@@ -147,9 +147,16 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
           <SubHeaderText>
             Grave TVL: <Text>{numeral(tvl.toString()).format('$ (0.00 a)')}</Text>
           </SubHeaderText>
-          {rugDex === Dex.PCS_V2 ? (
-            <Link href={`${BASE_EXCHANGE_URL}/swap?outputCurrency=${getAddress(rug.address)}`}>Get {rug.symbol}</Link>
-          ) : null}
+          {(() => {
+            switch (rugDex) {
+              case Dex.PCS_V2:
+                return <Link href={`${BASE_EXCHANGE_URL}/swap?outputCurrency=${getAddress(rug.address)}`}>Get {rug.symbol}</Link>
+              case Dex.PCS_V1:
+                return <Link href={`${BASE_V1_EXCHANGE_URL}/swap?outputCurrency=${getAddress(rug.address)}`}>Get {rug.symbol}</Link>
+              default:
+                return null
+            }
+          })()}
           {liquidityDetails ? <SubHeaderText style={{ maxWidth: '300px' }}>
             Liquidity: <LiquidityText>{liquidityDetails}</LiquidityText>
           </SubHeaderText> : null}
