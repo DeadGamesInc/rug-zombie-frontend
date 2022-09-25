@@ -60,7 +60,7 @@ const spawningPools: SpawningPoolConfig[] = [
       97: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
     },
     endBlock: 21600000,
-    endDate: 1664078399,
+    endDate: 1664075109,
     project: {
       name: 'French Connection Finance',
       description: '',
