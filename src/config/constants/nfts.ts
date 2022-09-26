@@ -1757,6 +1757,22 @@ const nfts: Nft[] = [
     rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 113,
+    name: 'Ode of Vigilance',
+    symbol: 'VIGILANCE',
+    description: "They come with blinded eyes\n" +
+      "They come with haunting stares\n" +
+      "Yet in the fog of war...",
+    address: {
+      56: '0xaAEBa7895F558Ac9115eBE8DAF7Eda327CBd1a84',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Uncommon',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
