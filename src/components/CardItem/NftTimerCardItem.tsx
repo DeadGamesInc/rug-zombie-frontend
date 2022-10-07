@@ -5,7 +5,7 @@ import { useWeb3React } from '@web3-react/core'
 import { secondsToDays } from '../../utils/timerHelpers'
 import CardItem, { CardItemValueType } from './CardItem'
 
-const CLASS_USER_ACTION_NEEDED = 'nft-timer-mint-depends-on-user-action'
+export const CLASS_USER_ACTION_NEEDED = 'nft-timer-mint-depends-on-user-action'
 
 enum MintingStatus {
   NotApplicable = 'N/A',
@@ -84,7 +84,7 @@ const getMintingStatus = (
   return secondsUntilMintable <= 0 ? MintingStatus.Ready : MintingStatus.TimerCountingDown
 }
 
-const getTier = (secondsUntilMintable: number): TimeRemainingTier => {
+export const getTier = (secondsUntilMintable: number): TimeRemainingTier => {
   const daysRemaining = secondsToDays(secondsUntilMintable)
   if (!daysRemaining) {
     return TimeRemainingTier.LessThan1Day
