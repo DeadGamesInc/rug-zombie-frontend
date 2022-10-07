@@ -110,11 +110,15 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
         <Separator/>
         <SubTextBox style={{ color: "#AE32AA", textAlign: "center" }}>
           Start your journey in the RugZombie universe with the PØ minigame.
-        </SubTextBox>
+          <LinkExternal style={{ margin: "auto" }}
+                        href="https://patientzero.rugzombie.io/">
+            PLAY NOW
+          </LinkExternal></SubTextBox>
         <LinkExternal style={{ margin: "auto" }}
                       href="https://rugzombie.medium.com/patient-zero-major-updates-9-23-22-43d4bd4a7656">
           PATIENT ZERØ MAJOR UPDATES
         </LinkExternal>
+
         <Separator/>
         <LaunchText>
           ZOM BETA LAUNCH
