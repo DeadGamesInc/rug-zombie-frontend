@@ -50,7 +50,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
   const { ref, inView, entry } = useInView();
-  const launch = 1666303200
+  const launch = 1666393199
   const [remaining, setRemaining] = useState(0);
 
   const updateTimer = () => {
