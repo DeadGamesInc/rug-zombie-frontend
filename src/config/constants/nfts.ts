@@ -1773,6 +1773,20 @@ const nfts: Nft[] = [
     rarity: 'Uncommon',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 114,
+    name: 'ZOM BETA Pass',
+    symbol: 'ZOM-BETA-PASS',
+    description: "This pass provides its holder early access to the ZOM card game and exclusive ingame perks.",
+    address: {
+      56: '0x3B7532562E9b83d25Cb5eAA33ae6895422Af8159',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Special',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
