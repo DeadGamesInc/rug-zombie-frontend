@@ -127,6 +127,10 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
           T - {formatDuration(remaining, true)}
         </TimerText>
         <LinkExternal style={{ margin: "auto" }}
+                     href="https://www.oblivion.art/zom">
+          Get early access
+        </LinkExternal>
+        <LinkExternal style={{ margin: "auto" }}
                       href="https://rugzombie.medium.com/rugzombie-releasing-ambitious-web3-gaming-project-on-bnbchain-b4093e58b69e">
           Read more
         </LinkExternal>
