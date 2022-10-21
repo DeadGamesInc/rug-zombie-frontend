@@ -61,7 +61,6 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
     if(remaining === 0) setInterval(updateTimer, 1000)
   }, [])
 
-  const timerClassName = remaining > 0 ? getTier(remaining) : CLASS_USER_ACTION_NEEDED
   return (
     <HeroContainer>
       <div>
@@ -123,8 +122,8 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
         <LaunchText>
           ZOM BETA LAUNCH
         </LaunchText>
-        <TimerText className={timerClassName}>
-          T - {formatDuration(remaining, true)}
+        <TimerText className={CLASS_USER_ACTION_NEEDED}>
+          Launching this weekend
         </TimerText>
         <LinkExternal style={{ margin: "auto" }}
                      href="https://www.oblivion.art/zom">
