@@ -15,6 +15,7 @@ export const routes = {
   BURNGRAVES: '/burngraves',
   NFTS: '/nfts/:id',
   WHALE_POOLS: '/whalepool',
+  ZOM: '/zom',
 
   // Catacombs
   CATACOMBS: '/catacombs',
