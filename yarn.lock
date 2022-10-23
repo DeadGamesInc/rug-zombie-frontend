@@ -12299,6 +12299,11 @@ react-transition-group@^4.4.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+react-unity-webgl@^9.2.1:
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/react-unity-webgl/-/react-unity-webgl-9.2.1.tgz#148dd54081a1fa17e4908f1637bb6d78f1f33852"
+  integrity sha512-FfnzjWT3hwlRe6aKzYAvjo5OFVw7eJJWfsnB884a+5AsBF9VhLaJdQADNlQL3wPfmfpQ4zgq07G56tGfZSSNNg==
+
 react-youtube@^7.13.1:
   version "7.13.1"
   resolved "https://registry.yarnpkg.com/react-youtube/-/react-youtube-7.13.1.tgz#3b327599a687bf22e071468818522920b36bcb57"

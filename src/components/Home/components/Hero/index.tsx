@@ -117,7 +117,6 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
                       href="https://rugzombie.medium.com/patient-zero-major-updates-9-23-22-43d4bd4a7656">
           PATIENT ZERØ MAJOR UPDATES
         </LinkExternal>
-
         <Separator/>
         <LaunchText>
           ZOM BETA LAUNCH
