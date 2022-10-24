@@ -205,14 +205,6 @@ const App: React.FC = () => {
               </AppContainer>
             </>
           </Route>
-          <Route exact path={routes.ZOM}>
-            <>
-              <TopMenu />
-              <AppContainer>
-                <Zom />
-              </AppContainer>
-            </>
-          </Route>
         </Switch>
       </SuspenseWithChunkError>
       <ToastListener />

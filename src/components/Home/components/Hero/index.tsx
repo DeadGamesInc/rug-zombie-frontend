@@ -105,7 +105,7 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
           The RugZombie / Dead Games team builds regardless of the current market, a special thanks to
           everyone sticking with us.
         </SubTextBox>
-        <WhatsNewText >Whats new?</WhatsNewText>
+        <WhatsNewText>Whats new?</WhatsNewText>
         <Separator/>
         <SubTextBox style={{ color: "#AE32AA", textAlign: "center" }}>
           Start your journey in the RugZombie universe with the PØ minigame.
@@ -121,11 +121,14 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
         <LaunchText>
           ZOM BETA LAUNCH
         </LaunchText>
-        <TimerText className={CLASS_USER_ACTION_NEEDED}>
-          Launching this weekend
-        </TimerText>
+        <LinkExternal href="https://zom.rugzombie.io/"
+                      style={{ margin: "auto", paddingBottom: "10px", fontSize: "18px" }}
+                      className={CLASS_USER_ACTION_NEEDED}>
+          PLAY NOW
+        </LinkExternal>
+
         <LinkExternal style={{ margin: "auto" }}
-                     href="https://www.oblivion.art/zom">
+                      href="https://www.oblivion.art/zom">
           Get early access
         </LinkExternal>
         <LinkExternal style={{ margin: "auto" }}
