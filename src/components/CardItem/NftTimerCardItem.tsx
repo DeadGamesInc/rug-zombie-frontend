@@ -65,7 +65,7 @@ const getTombMintingStatus = (
   return MintingStatus.TimerCountingDown
 }
 
-const getMintingStatus = (
+export const getMintingStatus = (
   amountStaked: BigNumber,
   mintDate: BigNumber,
   secondsUntilMintable: number,

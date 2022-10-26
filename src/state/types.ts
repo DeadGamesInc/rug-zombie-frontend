@@ -325,3 +325,5 @@ export interface State {
   nfts: NftState
   whalePool: WhalePoolState
 }
+
+

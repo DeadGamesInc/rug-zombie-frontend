@@ -31,7 +31,7 @@ const noAccountGraveConfig: Grave[] = gravesConfig.map((grave) => ({
     tokenWithdrawalDate: BIG_ZERO,
     nftMintDate: BIG_ZERO,
     amount: BIG_ZERO,
-    pendingZombie: BIG_ZERO,
+    pendingZombie: BIG_ZERO
   },
 }))
 
