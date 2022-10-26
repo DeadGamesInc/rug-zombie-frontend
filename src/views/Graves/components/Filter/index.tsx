@@ -109,13 +109,13 @@ const DropdownText = styled.p`
 
 const DownPointer = (
   <div style={{ marginRight: '10px' }}>
-    <img src={downpointer} alt="Dropdown menu" width="30px" />
+    <img src={downpointer} alt="Dropdown menu" width="30px"/>
   </div>
 )
 
 const UpPointer = (
   <div style={{ marginRight: '10px' }}>
-    <img src={upPointer} alt="Hide Dropdown menu" width="30px" />
+    <img src={upPointer} alt="Hide Dropdown menu" width="30px"/>
   </div>
 )
 
@@ -125,7 +125,7 @@ interface FilterProps {
   handleFilter: (condition: string) => void
 }
 
-const GRAVES_FILTER = ['All graves', 'Staked', 'NFT-only', 'Retired', 'NFT-ready']
+const GRAVES_FILTER = ['All graves', 'Staked', 'NFT-only', 'NFT-ready', 'Retired']
 
 const RARITY_FILTER = ['All types', 'Legendary', 'Rare', 'Uncommon', 'Common']
 
@@ -137,10 +137,10 @@ const Filter: React.FC<FilterProps> = ({ searchValue, handleSearch, handleFilter
 
   const handleDropdownClick = (e, condition) => {
     e.preventDefault()
-    if (condition === 'graves') {
+    if(condition === 'graves') {
       setShowGravesMenu((prev) => !prev)
       setShowTypeMenu(false)
-    } else if (condition === 'types') {
+    } else if(condition === 'types') {
       setShowTypeMenu((prev) => !prev)
       setShowGravesMenu(false)
     }
@@ -148,11 +148,11 @@ const Filter: React.FC<FilterProps> = ({ searchValue, handleSearch, handleFilter
 
   const handleItemClick = (e: any, condition: string) => {
     e.preventDefault()
-    if (condition === 'graves') {
+    if(condition === 'graves') {
       handleFilter(e.target.textContent)
       setGravesLabel(e.target.textContent)
       setTypesLabel('All types')
-    } else if (condition === 'types') {
+    } else if(condition === 'types') {
       handleFilter(e.target.textContent)
       setTypesLabel(e.target.textContent)
       setGravesLabel('All graves')
@@ -198,7 +198,7 @@ const Filter: React.FC<FilterProps> = ({ searchValue, handleSearch, handleFilter
         </Dropdown>
       </Dropdowns>
       <SearchBar>
-        <Input onInput={handleSearch} value={searchValue} placeholder="Search by name, symbol or NFT" />
+        <Input onInput={handleSearch} value={searchValue} placeholder="Search by name, symbol or NFT"/>
       </SearchBar>
     </FilterContainer>
   )
