@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
-import { getZombieAddressForPrices } from '../../utils/addressHelpers'
-import { TokenPrices } from '../types'
+import { getWbnbAddress, getZombieAddress, getZombieAddressForPrices } from '../../utils/addressHelpers'
+import { PriceApiThunk, TokenPrices } from '../types'
+import { coingeckoPrice } from "../../redux/get";
 
 export interface PriceApiResultInfo {
   name: string
@@ -24,30 +25,33 @@ const infoToTokenPrices = ({ price, price_BNB }: PriceApiResultInfo): TokenPrice
   priceBnb: parseFloat(price_BNB),
 })
 
-const fetchPrices = async () => {
-  const zombieAddress = getZombieAddressForPrices()
-  const [topTokensResponse, zombieResponse] = await Promise.all([
-    fetch('https://api.pancakeswap.info/api/v2/tokens'),
-    fetch(`https://api.pancakeswap.info/api/v2/tokens/${zombieAddress}`),
+const fetchPrices = async (): Promise<PriceApiThunk> => {
+  const [bnbRes, zombieRes] = await Promise.all([
+    coingeckoPrice('binancecoin'),
+    coingeckoPrice('rugzombie'),
   ])
 
-  const data = (await topTokensResponse.json()) as PluralPriceApiResponse
-  const zombieData = (await zombieResponse.json()) as PriceApiResponse
-
-  const prices = Object.entries(data.data).reduce(
-    (accum, [token, info]) => ({
-      ...accum,
-      [token.toLowerCase()]: infoToTokenPrices(info),
-    }),
-    {},
-  )
-  prices[zombieAddress.toLowerCase()] = infoToTokenPrices(zombieData.data)
+  const zombiePriceUsd =  zombieRes.data.rugzombie.usd
+  const bnbPriceUsd =  bnbRes.data.binancecoin.usd
 
   // Return normalized token names
   return {
-    updatedAt: data.updated_at,
-    prices,
+    prices: {
+      [getZombieAddressForPrices().toLowerCase()]: {
+        priceUsd: zombiePriceUsd,
+        priceBnb: zombiePriceUsd / bnbPriceUsd
+      },
+      [getWbnbAddress().toLowerCase()]: {
+        priceUsd: bnbPriceUsd,
+        priceBnb: bnbPriceUsd / bnbPriceUsd
+      },
+    },
+    updatedAt: ""
   }
+  // {
+  //   updatedAt: data.updated_at,
+  //   prices,
+  // }
 }
 
 export default fetchPrices

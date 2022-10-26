@@ -20,6 +20,7 @@ import { useAppDispatch } from '../../state'
 import { fetchTombsPublicDataAsync } from '../../state/tombs'
 import { fetchSpawningPoolsPublicDataAsync } from '../../state/spawningPools'
 import { fetchGravesPublicDataAsync } from '../../state/graves'
+import { useGetPrices } from "../../state/prices/hooks";
 
 const Home: React.FC = () => {
   const history = useHistory()
@@ -59,6 +60,8 @@ const Home: React.FC = () => {
     },
     { totalAmount: BIG_ZERO },
   )
+
+  console.log(zombiePriceUsd)
 
   const spawningPoolsTvl = getBalanceNumber(spawningPoolSum.totalAmount) * zombiePriceUsd
   const bnbPriceUsd = useGetBnbPriceUsd()

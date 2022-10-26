@@ -36,6 +36,7 @@ import Nfts from './views/Nfts'
 import BurnGraves from './views/BurnGraves'
 import { fetchPricesAsync } from './state/prices'
 import WhalePools from "./views/WhalePool";
+import Home from "./components/Home";
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -106,7 +107,7 @@ const App: React.FC = () => {
             <Barracks />
           </Route>
           <Route exact path={routes.HOME}>
-            <Redirect to={routes.LANDING} />
+            <Home/>
           </Route>
           <Route exact path={routes.LANDING}>
             <>
