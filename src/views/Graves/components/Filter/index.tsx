@@ -14,7 +14,7 @@ const FilterContainer = styled.div`
   @media (max-width: 640px) {
     flex-direction: column-reverse;
     height: auto;
-    align-items: space-between;
+    align-items: center;
   }
 `
 
@@ -125,7 +125,7 @@ interface FilterProps {
   handleFilter: (condition: string) => void
 }
 
-const GRAVES_FILTER = ['All graves', 'Staked', 'NFT-only', 'Retired']
+const GRAVES_FILTER = ['All graves', 'Staked', 'NFT-only', 'Retired', 'NFT-ready']
 
 const RARITY_FILTER = ['All types', 'Legendary', 'Rare', 'Uncommon', 'Common']
 

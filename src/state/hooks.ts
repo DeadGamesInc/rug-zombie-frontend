@@ -1,3 +1,6 @@
+import {useWeb3React} from "@web3-react/core";
+import React from "react";
+import BigNumber from "bignumber.js";
 import { createSelector } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
@@ -9,6 +12,11 @@ import { getId } from '../utils'
 import { getContract, getPancakePair } from '../utils/contractHelpers'
 import { now } from '../utils/timerHelpers'
 import { State } from './types'
+import {NftTimerCardItem} from '../components/CardItem'
+
+
+
+
 
 export const getBnbPriceinBusd = () => {
   return axios.get('https://api.binance.com/api/v3/avgPrice?symbol=BNBBUSD')
@@ -41,6 +49,32 @@ export const useGetFilteredGraves = (filter: string[]) => {
   return useSelector((state: State) => selectFilteredGraves(state, filter))
 }
 
+
+
+
+
+interface Props {
+  mintDate: BigNumber
+  amountStaked: BigNumber
+  mintingReady?: boolean
+  isMinting?: boolean
+  secondsUntilMintable?: number
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const selectFilteredGraves = createSelector(
   (state: State) => state.graves,
   (state: State) => state.nfts,
@@ -72,6 +106,9 @@ const selectFilteredGraves = createSelector(
         return graves.data.filter((g) => !g.isRetired && g.poolInfo.allocPoint.isZero() && !g.isRetired && (!g.endDate || g.endDate > now()))
       case 'Retired':
         return graves.data.filter((g) => g.isRetired || now() > g.endDate)
+      case 'NFT-ready':
+        // long equation below converts nftMintDate to seconds until mintable, then checks if less than zero
+        return graves.data.filter((g) => ((g.userInfo.nftMintDate.toNumber() - Math.floor(Date.now() / 1000)) <= 0 ) && g.userInfo.amount.gt(0))
       case 'Legendary':
         return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Legendary' && !g.isRetired && (!g.endDate || g.endDate > now()))
       case 'Rare':
