@@ -19,12 +19,14 @@ interface NftsProps {
 const Nfts: React.FC<NftsProps> = ({ filter, inWallet }) => {
   const [items, setItems] = useState([])
   const nfts = useGetNfts().data.slice().reverse()
-  useEffect(() => {
-    if (filter === 'All') setItems(nfts)
-    else setItems(nfts.filter((nft) => nft.rarity === filter))
 
-    if (inWallet) setItems((prev) => prev.filter((nft) => nft.userInfo.ownedIds.length > 0))
-  }, [filter, inWallet, nfts])
+  useEffect(() => {
+    let temp = nfts
+    if (filter !== 'All') temp = nfts.filter((nft) => nft.rarity === filter)
+
+    if (inWallet) temp = temp.filter((nft) => nft.userInfo.ownedIds.length > 0)
+    setItems(temp)
+  }, [filter, inWallet])
 
   const NftCardList = items.map((nft) => <NftCard showTotalSupply key={nft.id} id={nft.id} />)
 

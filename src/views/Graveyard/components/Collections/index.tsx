@@ -69,7 +69,6 @@ const Collections: React.FC = () => {
     const [isActive, setIsActive] = useState('All')
     const [tabSelected, setTab] = useState(true)
 
-
   const handleTabClick = (e, title) => {
     e.preventDefault()
     setCollection(title)

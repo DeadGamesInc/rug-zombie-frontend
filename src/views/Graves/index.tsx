@@ -99,7 +99,6 @@ const Graves: React.FC = () => {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
   const isUserDependentFilter: boolean = filter === 'Staked'
-
   return (
     <>
       <GravePage>

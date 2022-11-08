@@ -54,6 +54,7 @@ const Graveyard: React.FC = () => {
     dispatch(fetchNftPublicDataAsync())
     if (account) {
       dispatch(fetchNftUserDataAsync(account))
+      // todo sometimes fails
     }
   }, [account, dispatch])
   return (
