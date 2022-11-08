@@ -4,7 +4,7 @@ import { getAddress } from '../../utils/addressHelpers'
 import { Nft, NftUserInfo } from '../types'
 import { getNftOwnership } from '../../utils/contractHelpers'
 
-const FETCH_BATCH_SIZE = 16
+const FETCH_BATCH_SIZE = 30
 
 export interface NftIdAndUserInfo {
   id: number
