@@ -37,6 +37,7 @@ import BurnGraves from './views/BurnGraves'
 import { fetchPricesAsync } from './state/prices'
 import WhalePools from "./views/WhalePool";
 import Zom from "./views/Zom";
+import useToast from "./hooks/useToast";
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -76,6 +77,13 @@ const App: React.FC = () => {
   useEffect(() => {
     fetch.initialData(account)
   }, [account])
+
+  // toast tester
+  // const { toastGraves } = useToast()
+  // useEffect(() => {
+  //   let i = 0
+  //   setInterval(() => toastGraves(`${i++}`), 1000)
+  // }, [])
 
   return (
     <Router history={history}>

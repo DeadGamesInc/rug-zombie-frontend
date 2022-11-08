@@ -330,7 +330,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     currentUnstakingStep = UnstakingStep.MintingInProgress
   } else if (isMinting && mintingReady) {
     currentUnstakingStep = UnstakingStep.FinishMinting
-  } else if (amount.gt(0) && nftMintTime.isZero()) {
+  } else if (nftMintTime.isZero() && amount.gt(0) && (unstakeAmount.isZero() || unstakeAmount.isNaN())) {
     currentUnstakingStep = UnstakingStep.StartMinting
   } else if ((unstakeAmount.isZero() || unstakeAmount.isNaN()) && amount.gt(0)) {
     currentUnstakingStep = UnstakingStep.Harvest

@@ -58,6 +58,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onRemove, style, ttl, ...props }) 
     clearTimeout(timer.current)
   }
 
+  console.log(id)
   const handleMouseLeave = () => {
     if (timer.current) {
       clearTimeout(timer.current)
