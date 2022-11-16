@@ -238,26 +238,26 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
           return
         }
       }
-      if(
-        (nftMintTime.gt(endDate - now()) || isClosed)) {
-        toastGraves(
-          'Notice',
-          <FlexColumn>
-            <text>
-              {endDate - now() > 0 || isClosed
-                ? 'This grave is retired. '
-                : `This grave retires in ${formatDuration(endDate - now())}. `}
-              You will can no longer earn the {nft.name} NFT by staking.
-            </text>
-            <FlexRow>
-              <PrimaryStakeButton onClick={step.func}>
-                <PrimaryStakeButtonText>Proceed</PrimaryStakeButtonText>
-              </PrimaryStakeButton>
-            </FlexRow>
-          </FlexColumn>,
-        )
-        return
-      }
+      // if(
+      //   (nftMintTime.gt(endDate - now()) || isClosed)) {
+      //   toastGraves(
+      //     'Notice',
+      //     <FlexColumn>
+      //       <text>
+      //         {endDate - now() > 0 || isClosed
+      //           ? 'This grave is retired. '
+      //           : `This grave retires in ${formatDuration(endDate - now())}. `}
+      //         You will can no longer earn the {nft.name} NFT by staking.
+      //       </text>
+      //       <FlexRow>
+      //         <PrimaryStakeButton onClick={step.func}>
+      //           <PrimaryStakeButtonText>Proceed</PrimaryStakeButtonText>
+      //         </PrimaryStakeButton>
+      //       </FlexRow>
+      //     </FlexColumn>,
+      //   )
+      //   return
+      // }
 
       setConfirmingStake(true)
       step
