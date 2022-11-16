@@ -4,13 +4,15 @@ import useTheme from 'hooks/useTheme'
 import BigNumber from 'bignumber.js'
 import { useDrBurnenstein } from 'hooks/useContract'
 import styled from 'styled-components'
-import { account, burnGraveById, coingeckoPrice } from '../../../../redux/get'
+import { useWeb3React } from "@web3-react/core";
 import { getBalanceAmount, getDecimalAmount, getFullDisplayBalance } from '../../../../utils/formatBalance'
 import useTokenBalance from '../../../../hooks/useTokenBalance'
 import { getAddress } from '../../../../utils/addressHelpers'
 import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import { BASE_EXCHANGE_URL } from '../../../../config'
+import { useGetBurnGraveById } from "../../../../state/hooks";
+import { coingeckoPrice } from "../../../../redux/get";
 
 const StyledButton = styled(Button)`
   flex-grow: 1;
@@ -23,13 +25,13 @@ export interface IncreaseStakeModalProps {
 }
 
 const IncreaseStakeModal: React.FC<IncreaseStakeModalProps> = ({ id, updateResult, onDismiss }) => {
-  const grave = burnGraveById(id)
+  const grave = useGetBurnGraveById(id)
+  const { account } = useWeb3React()
 
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(grave.poolInfo.minimumStake))
   const [percent, setPercent] = useState(0)
   const [stakeTokenPrice, setStakeTokenPrice] = useState(0)
 
-  const wallet = account()
   const { theme } = useTheme()
   const tokenBalance = useTokenBalance(getAddress(grave.stakingToken.address))
   const graveContract = useDrBurnenstein()
@@ -52,7 +54,7 @@ const IncreaseStakeModal: React.FC<IncreaseStakeModalProps> = ({ id, updateResul
   const handleChangePercent = (sliderPercent: number) => {
     let percentageOfStakingMax
     let amountToStake
-    if (grave.userInfo.stakedAmount.toString() === '0') {
+    if (grave.userInfo.amount.toString() === '0') {
       percentageOfStakingMax = tokenBalance
         .minus(grave.poolInfo.minimumStake)
         .dividedBy(100)
@@ -76,7 +78,7 @@ const IncreaseStakeModal: React.FC<IncreaseStakeModalProps> = ({ id, updateResul
 
     graveContract.methods
       .enterStaking(id, formattedAmount)
-      .send({ from: wallet })
+      .send({ from: account })
       .then(() => {
         updateResult(id)
         toastDefault(t(`Staked ${grave.stakingToken.symbol}`))
@@ -92,7 +94,7 @@ const IncreaseStakeModal: React.FC<IncreaseStakeModalProps> = ({ id, updateResul
   if (bigStakeAmount.gt(tokenBalance)) {
     isDisabled = true
     stakingDetails = `Invalid Stake: Insufficient ${grave.stakingToken.symbol} Balance`
-  } else if (bigStakeAmount.plus(grave.userInfo.stakedAmount).lt(grave.poolInfo.minimumStake)) {
+  } else if (bigStakeAmount.plus(grave.userInfo.amount).lt(grave.poolInfo.minimumStake)) {
     isDisabled = true
     stakingDetails = `Invalid Stake: Minimum ${getBalanceAmount(grave.poolInfo.minimumStake).toString()} ${
       grave.stakingToken.symbol

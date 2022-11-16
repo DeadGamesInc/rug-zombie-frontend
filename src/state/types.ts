@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js'
 
 import {
-  Address,
-  Artist,
-  GraveConfig,
-  SpawningPoolConfig,
+  Address, AnnouncementSubject,
+  Artist, Dex,
+  Id,
+  SpawningPoolConfig, Token,
   TombConfig,
   UserActivityType,
   WhalePoolConfig
@@ -17,6 +17,11 @@ export type TranslatableText =
   data?: {
     [key: string]: string | number
   }
+}
+
+export enum GraveType {
+  Default,
+  Burn
 }
 
 export interface GraveUserInfo {
@@ -41,6 +46,28 @@ export interface GravePoolInfo {
   tokenAmount: BigNumber
   withdrawCooldown: BigNumber
   nftMintTime: BigNumber
+}
+
+export interface GraveConfig extends AnnouncementSubject {
+  // type: GraveType
+  pid: Id
+  name: string
+  nftId: number
+  nft?: number
+  depositNftId?: number
+  isNew?: boolean
+  isFeatured?: boolean
+  isClosed?: boolean
+  endDate?: number
+  startingDate?: number
+  nftConverterPid?: number // remove move to own type
+  graveNftToken?: string // remove move to own type
+  additionalDetails?: any[]
+  rug: Token
+  rugDex?: Dex
+  liquidityDetails?: string
+  isRetired?: boolean
+  isBurnGrave?: boolean
 }
 
 export interface Grave extends GraveConfig {
@@ -130,10 +157,61 @@ export interface UserActivity {
   data: Record<string, any>
 }
 
+export interface BurnGraveConfig {
+  // type: GraveType
+  pid: Id
+  name: string
+  mintingTime: string
+  nftId: number
+  isNew: boolean
+  isClosed: boolean
+  depositToken: Token
+  depositNftId: number
+  stakingToken: Token
+  geckoId: string
+  isRetired?: boolean
+  isFeatured?: boolean
+  endDate: number
+  isBurnGrave: boolean
+}
+
+export interface BurnGrave extends BurnGraveConfig {
+  poolInfo: BurnGravePoolInfo
+  userInfo?: BurnGraveUserInfo
+}
+
+export interface BurnGravePoolInfo {
+  pid?: Id
+  isEnabled: boolean
+  depositType: number
+  depositAddress: string
+  minimumStake: BigNumber
+  nftMintTime: BigNumber
+  tokensToBurn: BigNumber
+  burnReduction: BigNumber
+  maxBurned: BigNumber
+  totalStaked: BigNumber
+  totalBurned: BigNumber
+}
+
+export interface BurnGraveUserInfo {
+  amount: BigNumber
+  zombieBalance: BigNumber
+  zombieAllowance: BigNumber
+  hasDeposited: boolean
+  nftMintDate: BigNumber
+  burnedAmount: BigNumber
+}
+
 // Slices states
 
 export interface GravesState {
   data: Grave[]
+  userDataLoaded: boolean
+}
+
+export interface BurnGravesState {
+  data: BurnGrave[]
   userDataLoaded: boolean
 }
 
@@ -320,6 +398,7 @@ export interface State {
   graves: GraveState
   tombs: TombsState
   spawningPools: SpawningPoolState
+  burnGraves: BurnGravesState
   userActivity: UserActivityState
   predictions: PredictionsState
   nfts: NftState

@@ -132,10 +132,10 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
       <NftImageContainer>
         {type === 'video' ? (
           <NftVideo onClick={linkToNft} autoPlay loop muted>
-            <source src={getHighResImage(getAddress(address))} type="video/webm" />
+            <source src={getHighResImage(address)} type="video/webm" />
           </NftVideo>
         ) : (
-          <NftImage onClick={linkToNft} src={getHighResImage(getAddress(address))} onError={imageOnErrorHandler} />
+          <NftImage onClick={linkToNft} src={getHighResImage(address)} onError={imageOnErrorHandler} />
         )}
       </NftImageContainer>
       <Details>

@@ -3,7 +3,7 @@ import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { BaseLayout, useModal } from '@rug-zombie-libs/uikit'
-import { account, burnGraveById } from '../../../../redux/get'
+import { useWeb3React } from "@web3-react/core";
 import { useDrBurnenstein, useERC20 } from '../../../../hooks/useContract'
 import { getAddress, getDrBurnensteinAddress } from '../../../../utils/addressHelpers'
 import useToast from '../../../../hooks/useToast'
@@ -11,6 +11,7 @@ import { useTranslation } from '../../../../contexts/Localization'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import IncreaseStakeModal from '../IncreaseStakeModal'
 import DecreaseStakeModal from '../DecreaseStakeModal'
+import { useGetBurnGraveById } from "../../../../state/hooks";
 
 const DisplayFlex = styled(BaseLayout)`
   display: flex;
@@ -20,7 +21,7 @@ const DisplayFlex = styled(BaseLayout)`
   -webkit-box-pack: center;
   justify-content: center;
   grid-gap: 0px;
-}`
+`
 
 export interface StakePanelProps {
   id: number
@@ -33,16 +34,16 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
   const { toastDefault } = useToast()
   const { t } = useTranslation()
 
-  const grave = burnGraveById(id)
-  const wallet = account()
+  const grave = useGetBurnGraveById(id)
+  const { account } = useWeb3React()
 
   const tokenContract = useERC20(getAddress(grave.stakingToken.address))
   const drBurnenstein = useDrBurnenstein()
 
   useEffect(() => {
-    if (wallet) {
+    if (account) {
       tokenContract.methods
-        .allowance(wallet, getDrBurnensteinAddress())
+        .allowance(account, getDrBurnensteinAddress())
         .call()
         .then((res) => {
           if (parseInt(res.toString()) !== 0) {
@@ -52,13 +53,13 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
           }
         })
     }
-  }, [tokenContract, wallet, setIsApproved])
+  }, [tokenContract, account, setIsApproved])
 
   const handleApprove = () => {
-    if (wallet) {
+    if (account) {
       tokenContract.methods
         .approve(getDrBurnensteinAddress(), ethers.constants.MaxUint256)
-        .send({ from: wallet })
+        .send({ from: account })
         .then(() => {
           toastDefault(t(`Approved ${grave.stakingToken.symbol}`))
           setIsApproved(true)
@@ -73,7 +74,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
       .then((res) => {
         drBurnenstein.methods
           .unlock(id)
-          .send({ from: wallet, value: res })
+          .send({ from: account, value: res })
           .then(() => {
             toastDefault(t('TombTable unlocked'))
             updateResult(id)
@@ -86,7 +87,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
   const [handleDecreaseStake] = useModal(<DecreaseStakeModal id={id} updateResult={updateResult} />)
 
   const renderButtons = () => {
-    if (!wallet) {
+    if (!account) {
       return null
     }
 
@@ -94,7 +95,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
       return null
     }
 
-    if (!grave.userInfo.hasUnlocked) {
+    // if (!grave.userInfo.hasUnlocked) {
       return (
         <div className="frank-card">
           <div className="small-text">
@@ -105,7 +106,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
           </button>
         </div>
       )
-    }
+    // }
 
     if (!isApproved) {
       return (
@@ -127,7 +128,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
         </div>
         <DisplayFlex>
           <span style={{ paddingRight: '50px' }} className="total-earned text-shadow">
-            {getFullDisplayBalance(new BigNumber(grave.userInfo.stakedAmount), grave.stakingToken.decimals, 4)}
+            {getFullDisplayBalance(new BigNumber(grave.userInfo.amount), grave.stakingToken.decimals, 4)}
           </span>
           <button onClick={handleDecreaseStake} style={{ marginRight: '10px' }} className="btn w-100" type="button">
             -

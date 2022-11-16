@@ -6,11 +6,13 @@ import { fetchGravesUserDataAsync } from 'state/graves'
 import { approve } from 'utils/callHelpers'
 import { fetchSpawningPoolsUserDataAsync } from '../state/spawningPools'
 import { fetchTombsUserDataAsync } from '../state/tombs'
+import { fetchBurnGravesUserDataAsync } from "../state/burnGraves";
 
 export enum ApproveTarget {
   Graves,
   Tombs,
   SpawningPools,
+  BurnGraves
 }
 
 // Approve an address
@@ -25,6 +27,8 @@ const useApprove = (tokenContract: Contract, spenderAddress: string, approveTarg
         dispatch(fetchSpawningPoolsUserDataAsync(account))
       } else if (approveTarget === ApproveTarget.Tombs) {
         dispatch(fetchTombsUserDataAsync(account))
+      } else if(approveTarget === ApproveTarget.BurnGraves) {
+        dispatch(fetchBurnGravesUserDataAsync(account))
       } else {
         dispatch(fetchGravesUserDataAsync(account))
       }

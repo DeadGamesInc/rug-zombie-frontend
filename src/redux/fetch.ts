@@ -6,7 +6,6 @@ import {
   getBep20Contract,
   getDrFrankensteinContract,
   getZombieContract,
-  getDrBurnensteinContract,
   getRugMarketContract,
 } from '../utils/contractHelpers'
 
@@ -27,8 +26,6 @@ import {
   updateBnbBalance,
   updateSharkPoolInfo,
   updateSharkPoolUserInfo,
-  updateBurnGravePoolInfo,
-  updateBurnGraveUserInfo,
   updateRugMarketListing,
   addRugMarketListing,
 } from './actions'
@@ -37,7 +34,7 @@ import {
   getDrFrankensteinAddress,
   getMausoleumAddress,
   getSpawningPoolAddress,
-  getSharkPoolAddress,
+  getSharkPoolAddress, getDrBurnensteinAddress,
 } from '../utils/addressHelpers'
 import * as get from './get'
 import spawningPoolAbi from '../config/abi/spawningPool.json'
@@ -76,7 +73,7 @@ export const initialData = (accountAddress: string) => {
       store.dispatch(updateDrFrankensteinTotalAllocPoint(new BigNumber(res)))
     })
 
-  if (accountAddress) {
+  if(accountAddress) {
     web3.eth.getBalance(accountAddress).then((res) => {
       store.dispatch(updateBnbBalance(new BigNumber(res)))
     })
@@ -108,13 +105,13 @@ export const grave = (
     .methods.poolInfo(pid)
     .call()
     .then((poolInfoRes) => {
-      if (pid !== 0) {
+      if(pid !== 0) {
         const graveStakingTokenContract = getBep20Contract(get.graveByPid(pid).stakingToken)
         graveStakingTokenContract.methods
           .totalSupply()
           .call()
           .then((stakingTokenSupplyRes) => {
-            if (poolInfoRes.allocPoint !== 0) {
+            if(poolInfoRes.allocPoint !== 0) {
               store.dispatch(
                 updateGravePoolInfo(pid, {
                   allocPoint: parseInt(poolInfoRes.allocPoint),
@@ -126,7 +123,7 @@ export const grave = (
                   minimumStake: new BigNumber(poolInfoRes.minimumStake),
                 }),
               )
-              if (setPoolInfoState) {
+              if(setPoolInfoState) {
                 setPoolInfoState.setUpdate(!setUserInfoState.update)
               }
             }
@@ -135,7 +132,7 @@ export const grave = (
         let traditionalGraveTotalStaked = BIG_ZERO
         get.graves().forEach((g) => {
           const totalStaked = g.poolInfo.totalStakingTokenStaked
-          if (!totalStaked.isNaN()) {
+          if(!totalStaked.isNaN()) {
             traditionalGraveTotalStaked = traditionalGraveTotalStaked.plus(totalStaked)
           }
         })
@@ -144,7 +141,7 @@ export const grave = (
           totalStaked.isZero() || totalStaked.isNegative()
             ? get.grave(pid).poolInfo.totalStakingTokenStaked
             : totalStaked
-        if (poolInfoRes.allocPoint !== 0) {
+        if(poolInfoRes.allocPoint !== 0) {
           store.dispatch(
             updateGravePoolInfo(pid, {
               allocPoint: poolInfoRes.allocPoint,
@@ -156,13 +153,13 @@ export const grave = (
               minimumStake: new BigNumber(poolInfoRes.minimumStake),
             }),
           )
-          if (setPoolInfoState) {
+          if(setPoolInfoState) {
             setPoolInfoState.setUpdate(!setPoolInfoState.update)
           }
         }
       }
     })
-  if (get.account()) {
+  if(get.account()) {
     getDrFrankensteinContract()
       .methods.userInfo(pid, get.account())
       .call()
@@ -181,7 +178,7 @@ export const grave = (
                 pendingZombie: new BigNumber(pendingZombieRes),
               }),
             )
-            if (setUserInfoState) {
+            if(setUserInfoState) {
               setUserInfoState.setUpdate(!setUserInfoState.update)
             }
           })
@@ -229,13 +226,13 @@ export const sharkPool = (
             totalStaked: new BigNumber(balanceRes.toString()),
           }),
         )
-        if (poolUpdateObj) {
+        if(poolUpdateObj) {
           poolUpdateObj.setUpdate(poolUpdateObj.update + 1)
         }
       })
   })
 
-  if (account()) {
+  if(account()) {
     calls = [{ address, name: 'userInfo', params: [account()] }]
 
     multicallv2(sharkpoolAbi, calls).then((res) => {
@@ -247,7 +244,7 @@ export const sharkPool = (
           nftMintDate: res[0].nftMintDate,
         }),
       )
-      if (userUpdateObj) {
+      if(userUpdateObj) {
         userUpdateObj.setUpdate(userUpdateObj.update + 1)
       }
     })
@@ -283,14 +280,14 @@ export const spawningPool = (
             nftRevivalTime: res[5],
           }),
         )
-        if (poolUpdateObj) {
+        if(poolUpdateObj) {
           poolUpdateObj.setUpdate(poolUpdateObj.update + 1)
         }
       })
   })
 
   const wallet = account()
-  if (wallet && address) {
+  if(wallet && address) {
     calls = [
       { address, name: 'userInfo', params: [wallet] },
       { address, name: 'pendingReward', params: [wallet] },
@@ -311,7 +308,7 @@ export const spawningPool = (
               zombieAllowance: new BigNumber(balanceRes.toString()),
             }),
           )
-          if (userUpdateObj) {
+          if(userUpdateObj) {
             userUpdateObj.setUpdate(userUpdateObj.update + 1)
           }
         })
@@ -328,7 +325,7 @@ export const auction = (
 ) => {
   const { aid, version } = auctionById(id)
   const v3 = version === 'v3'
-  if (account()) {
+  if(account()) {
     mausoleum.methods
       .bidsLength(aid)
       .call()
@@ -337,11 +334,11 @@ export const auction = (
           { address: getMausoleumAddress(version), name: 'userInfo', params: [aid, account()] },
           { address: getMausoleumAddress(version), name: 'auctionInfo', params: [aid] },
         ]
-        if (!v3) {
+        if(!v3) {
           calls.push({ address: getMausoleumAddress(version), name: 'unlockFeeInBnb', params: [aid] })
         }
         for (let x = parseInt(bidsLengthRes) - 5; x <= parseInt(bidsLengthRes); x++) {
-          if (x - 1 >= 0) {
+          if(x - 1 >= 0) {
             calls.push({ address: getMausoleumAddress(version), name: 'bidInfo', params: [aid, x - 1] })
           }
         }
@@ -376,10 +373,10 @@ export const auction = (
               paidUnlockFee: userInfoRes.paidUnlockFee,
             }),
           )
-          if (updateUserObj && !updateUserObj.update) {
+          if(updateUserObj && !updateUserObj.update) {
             updateUserObj.setUpdate(!updateUserObj.update)
           }
-          if (everyUpdateObj) {
+          if(everyUpdateObj) {
             everyUpdateObj.setUpdate(!everyUpdateObj.update)
           }
         })
@@ -391,7 +388,7 @@ export const auction = (
       .then((bidsLengthRes) => {
         const calls = [{ address: getMausoleumAddress(version), name: 'unlockFeeInBnb', params: [aid] }]
         for (let x = parseInt(bidsLengthRes) - 5; x <= parseInt(bidsLengthRes); x++) {
-          if (x - 1 >= 0) {
+          if(x - 1 >= 0) {
             calls.push({ address: getMausoleumAddress(version), name: 'bidInfo', params: [aid, x - 1] })
           }
         }
@@ -419,10 +416,10 @@ export const auction = (
               unlockFeeInBnb: v3 ? BIG_ZERO : new BigNumber(res[1].toString()),
             }),
           )
-          if (updateAuctionObj && !updateAuctionObj.update) {
+          if(updateAuctionObj && !updateAuctionObj.update) {
             updateAuctionObj.setUpdate(!updateAuctionObj.update)
           }
-          if (everyUpdateObj) {
+          if(everyUpdateObj) {
             everyUpdateObj.setUpdate(!everyUpdateObj.update)
           }
         })
@@ -459,64 +456,6 @@ export const initialSharkPoolData = (
       setUserData ? { update: setUserData.update + index, setUpdate: setUserData.setUpdate } : undefined,
     )
     index++
-  })
-}
-
-export const burnGrave = (
-  id: number,
-  setUserInfoState?: { update: boolean; setUpdate: any },
-  setPoolInfoState?: { update: boolean; setUpdate: any },
-) => {
-  const drBurnenstein = getDrBurnensteinContract()
-
-  drBurnenstein.methods
-    .graveInfo(id)
-    .call()
-    .then((res) => {
-      store.dispatch(
-        updateBurnGravePoolInfo(id, {
-          isEnabled: res.isEnabled,
-          depositType: parseInt(res.depositType.toString()),
-          depositAddress: res.deposit.toString(),
-          unlockFee: new BigNumber(res.unlockFee.toString()),
-          minimumStake: new BigNumber(res.minimumStake.toString()),
-          mintingTime: new BigNumber(res.mintingTime.toString()),
-          tokensToBurn: new BigNumber(res.burnTokens.toString()),
-          burnReduction: res.burnHours,
-          maxBurned: new BigNumber(res.maxBurned.toString()),
-          totalStaked: new BigNumber(res.totalStaked.toString()),
-          totalBurned: new BigNumber(res.totalBurned.toString()),
-        }),
-      )
-      if (setPoolInfoState) {
-        setPoolInfoState.setUpdate(!setPoolInfoState.update)
-      }
-    })
-
-  if (account()) {
-    drBurnenstein.methods
-      .userInfo(id, account())
-      .call()
-      .then((res) => {
-        store.dispatch(
-          updateBurnGraveUserInfo(id, {
-            stakedAmount: new BigNumber(res.amount.toString()),
-            hasDeposited: res.deposited,
-            hasUnlocked: res.paidUnlockFee,
-            nftMintDate: parseInt(res.nftMintDate),
-            burnedAmount: new BigNumber(res.burnedAmount.toString()),
-          }),
-        )
-        if (setUserInfoState) {
-          setUserInfoState.setUpdate(!setUserInfoState.update)
-        }
-      })
-  }
-}
-
-export const initialBurnGraveData = (setUserState?, setPoolState?) => {
-  get.burnGraves().forEach((g) => {
-    burnGrave(getId(g.id), setUserState, setPoolState)
   })
 }
 

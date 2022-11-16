@@ -88,8 +88,11 @@ export const getSharkPoolAddress = (id: number) => {
   return getAddress(sharkPoolById(id).address)
 }
 
-export const getDrBurnensteinAddress = () => {
-  return getAddress(addresses.drburnenstein)
+export const getDrBurnensteinAddress = (version = "v2") => {
+  if(version === 'v2') {
+    return getAddress(addresses.drBurnensteinV2)
+  }
+  return getAddress(addresses.drBurnenstein)
 }
 
 export const getPancakeFactoryAddress = () => {

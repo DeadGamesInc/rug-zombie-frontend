@@ -144,7 +144,7 @@ const ListLines: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupp
         userInfo: { ownedIds },
     } = useGetNftById(id)
     const history = useHistory()
-    const path = getHighResImage(getAddress(address))
+    const path = getHighResImage(address)
     return (
         <Container>
             <Card

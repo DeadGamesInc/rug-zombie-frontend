@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/prefer-default-export
-import { Dex, GraveConfig } from './types'
+import { Dex } from './types'
 import tokens from './tokens'
+import { GraveConfig } from "../../state/types";
 
 const graves: GraveConfig[] = [
   {
@@ -82,7 +83,6 @@ const graves: GraveConfig[] = [
     name: 'Nomad Bridge Legendary',
     nftId: 111,
     rug: tokens.znomad,
-    isNew: true,
     announcementIds: [140],
     liquidityDetails: 'zNOMAD token can be found in the Catacombs (RugMarket / RugRoll), you can also ask a community member in the  RugZombie telegram.',
   },
@@ -94,7 +94,6 @@ const graves: GraveConfig[] = [
     name: 'Celsius Network Rare',
     nftId: 112,
     rug: tokens.zcel,
-    isNew: true,
     announcementIds: [141],
     liquidityDetails: 'zCEL token can be found in the Catacombs (RugMarket / RugRoll), you can also ask a community member in the  RugZombie telegram.',
   },

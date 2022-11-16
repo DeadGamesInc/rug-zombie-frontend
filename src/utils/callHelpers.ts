@@ -68,6 +68,7 @@ export const emergencyWithdraw = async (drFrankensteinContract, pid, account) =>
 }
 
 export const unlock = async (drFrankensteinContract, pid, amount, account) => {
+  console.log(amount.toString())
   return drFrankensteinContract.methods
     .unlock(pid)
     .send({ from: account, value: amount.toString() })
@@ -196,6 +197,34 @@ export const whalePoolStartMinting = (whalePool, fee, account) => {
 export const whalePoolFinishMinting = (whalePool, account) => {
   return whalePool.methods
     .finishMinting()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+
+export const burnGraveEnterStaking = async (drBurnensteinContract, pid, amount, account) => {
+  return drBurnensteinContract.methods
+    .enterStaking(pid, amount.toString())
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const burnGraveLeaveStaking = async (drBurnensteinContract, pid, amount, account) => {
+  return drBurnensteinContract.methods
+    .leaveStaking(pid, amount.toString())
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const burnGraveBurnZombie = async (drBurnensteinContract, pid, amount, account) => {
+  return drBurnensteinContract.methods
+    .burnZombie(pid, amount.toString())
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash

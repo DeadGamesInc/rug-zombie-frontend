@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { Button, Flex, Modal, Text } from '@rug-zombie-libs/uikit'
 import { useDrBurnenstein, useERC721, useNftOwnership } from '../../../../hooks/useContract'
-import { account, burnGraveById } from '../../../../redux/get'
 import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import { getAddress, getDrBurnensteinAddress, getNftSwapperAddress } from '../../../../utils/addressHelpers'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import useTheme from '../../../../hooks/useTheme'
-import { useGetNftById } from '../../../../state/hooks'
+import { useGetBurnGraves, useGetNftById } from '../../../../state/hooks'
+import { getId } from "../../../../utils";
+import { useWeb3React } from "@web3-react/core";
 
 export interface DepositNftModalProps {
   id: number
@@ -17,6 +18,7 @@ export interface DepositNftModalProps {
 }
 
 const DepositNftModal: React.FC<DepositNftModalProps> = ({ id, updateResult, onDismiss }) => {
+  const { account } = useWeb3React()
   const [nftBalance, setNftBalance] = useState(BIG_ZERO)
   const [ids, setIds] = useState([])
   const [selected, setSelected] = useState(null)
@@ -25,10 +27,9 @@ const DepositNftModal: React.FC<DepositNftModalProps> = ({ id, updateResult, onD
   const { theme } = useTheme()
 
   const drburn = useDrBurnenstein()
-  const grave = burnGraveById(id)
+  const grave = useGetBurnGraves().data.find(bg => getId(bg.pid) === id)
   const nft = useGetNftById(grave.depositNftId)
 
-  const wallet = account()
   const { toastDefault } = useToast()
   const { t } = useTranslation()
 
@@ -36,7 +37,7 @@ const DepositNftModal: React.FC<DepositNftModalProps> = ({ id, updateResult, onD
   const nftContract = useERC721(getAddress(nft.address))
 
   useEffect(() => {
-    if (selected && wallet) {
+    if (selected && account) {
       nftContract.methods
         .getApproved(selected)
         .call()
@@ -44,35 +45,35 @@ const DepositNftModal: React.FC<DepositNftModalProps> = ({ id, updateResult, onD
           setApproved(res === getNftSwapperAddress())
         })
     }
-  }, [selected, wallet, nftContract.methods])
+  }, [selected, account, nftContract.methods])
 
   useEffect(() => {
-    if (wallet) {
+    if (account) {
       nftContract.methods
-        .balanceOf(wallet)
+        .balanceOf(account)
         .call()
         .then((res) => {
           setNftBalance(new BigNumber(res))
         })
     }
-  }, [nftContract.methods, wallet])
+  }, [nftContract.methods, account])
 
   useEffect(() => {
-    if (wallet) {
+    if (account) {
       nftOwnershipContract.methods
-        .checkOwnership(wallet, getAddress(nft.address))
+        .checkOwnership(account, getAddress(nft.address))
         .call()
         .then((res) => {
           setIds(res)
         })
     }
-  }, [nft.address, nftOwnershipContract.methods, wallet])
+  }, [nft.address, nftOwnershipContract.methods, account])
 
   function handleDeposit() {
-    if (wallet && approved) {
+    if (account && approved) {
       drburn.methods
         .deposit(id, 0, selected)
-        .send({ from: wallet })
+        .send({ from: account })
         .then(() => {
           toastDefault(t(`Deposited ${nft.symbol}`))
           updateResult(id)
@@ -82,10 +83,10 @@ const DepositNftModal: React.FC<DepositNftModalProps> = ({ id, updateResult, onD
   }
 
   const handleApprove = () => {
-    if (wallet && !approved) {
+    if (account && !approved) {
       nftContract.methods
         .approve(getDrBurnensteinAddress(), selected)
-        .send({ from: wallet })
+        .send({ from: account })
         .then(() => {
           setApproved(true)
         })

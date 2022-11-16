@@ -9,8 +9,6 @@ import {
   UserInfo,
   SharkPoolInfo,
   SharkPoolUserInfo,
-  BurnGravePoolInfo,
-  BurnGraveUserInfo,
   RugMarketListing,
 } from './types'
 
@@ -126,22 +124,6 @@ export const updateBnbBalance = (bnbBalance: BigNumber) => ({
   type: actions.UPDATE_BNB_BALANCE,
   payload: {
     bnbBalance,
-  },
-})
-
-export const updateBurnGravePoolInfo = (id: number, poolInfo: BurnGravePoolInfo) => ({
-  type: actions.UPDATE_BURNGRAVE_POOL_INFO,
-  payload: {
-    id,
-    poolInfo,
-  },
-})
-
-export const updateBurnGraveUserInfo = (id: number, userInfo: BurnGraveUserInfo) => ({
-  type: actions.UPDATE_BURNGRAVE_USER_INFO,
-  payload: {
-    id,
-    userInfo,
   },
 })
 

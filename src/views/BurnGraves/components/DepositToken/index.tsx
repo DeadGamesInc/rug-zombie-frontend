@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { account, burnGraveById } from 'redux/get'
 import { useModal } from '@rug-zombie-libs/uikit'
 import { useERC20 } from 'hooks/useContract'
 import { useTranslation } from 'contexts/Localization'
 import useToast from 'hooks/useToast'
 import { getDrBurnensteinAddress } from 'utils/addressHelpers'
 import { BIG_TEN } from 'utils/bigNumber'
+import { useWeb3React } from "@web3-react/core";
 import DepositTokenModal from './DepositTokenModal'
+import { useGetBurnGraveById } from "../../../../state/hooks";
 
 export interface DepositTokenProps {
   id: number
@@ -19,13 +20,14 @@ const DepositToken: React.FC<DepositTokenProps> = ({ id, updateResult }) => {
   const { toastDefault } = useToast()
   const { t } = useTranslation()
 
-  const wallet = account()
-  const grave = burnGraveById(id)
+  const grave = useGetBurnGraveById(id)
+  const { account } = useWeb3React()
+
   const tokenContract = useERC20(grave.poolInfo.depositAddress)
 
   useEffect(() => {
     tokenContract.methods
-      .allowance(wallet, getDrBurnensteinAddress())
+      .allowance(account, getDrBurnensteinAddress())
       .call()
       .then((res) => {
         if (parseInt(res.toString()) !== 0) {
@@ -34,13 +36,13 @@ const DepositToken: React.FC<DepositTokenProps> = ({ id, updateResult }) => {
           setIsApproved(false)
         }
       })
-  }, [tokenContract, wallet, setIsApproved])
+  }, [tokenContract, account, setIsApproved])
 
   const handleApprove = () => {
-    if (wallet) {
+    if (account) {
       tokenContract.methods
         .approve(getDrBurnensteinAddress(), BIG_TEN.pow(18).toString())
-        .send({ from: wallet })
+        .send({ from: account })
         .then(() => {
           toastDefault(t(`Approved ${grave.depositToken.symbol}`))
           setIsApproved(true)
@@ -51,8 +53,8 @@ const DepositToken: React.FC<DepositTokenProps> = ({ id, updateResult }) => {
   const [handleDeposit] = useModal(<DepositTokenModal id={id} updateResult={updateResult} />)
 
   const renderButton = () => {
-    if (!wallet) {
-      return <span className="total-earned text-shadow">Connect Wallet</span>
+    if (!account) {
+      return <span className="total-earned text-shadow">Connect account</span>
     }
 
     if (!isApproved && !grave.userInfo.hasDeposited) {

@@ -39,11 +39,21 @@ export const { setNftInfo, setNftUserInfo } = nftSlice.actions
 
 // Thunks
 export const fetchNftPublicDataAsync = () => async (dispatch) => {
-  const nfts = await fetchNfts(nftConfig)
-  dispatch(setNftInfo(nfts))
+  try {
+    const nfts = await fetchNfts(nftConfig)
+    dispatch(setNftInfo(nfts))
+  } catch (e) {
+    console.log("Fetch NFTs multicall failed")
+    console.warn(e)
+  }
 }
 export const fetchNftUserDataAsync = (account: string) => async (dispatch) => {
-  const nftIdAndUserInfos = await fetchNftsUser(account, nftConfig)
+  let nftIdAndUserInfos
+  try {
+    nftIdAndUserInfos = await fetchNftsUser(account, nftConfig)
+  } catch (e) {
+    console.log(e)
+  }
   dispatch(setNftUserInfo(nftIdAndUserInfos))
 }
 

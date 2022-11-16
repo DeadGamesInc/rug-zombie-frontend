@@ -1,35 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import PageHeader from 'components/PageHeader'
 import { Flex, Heading } from '@rug-zombie-libs/uikit'
-import { burnGraves } from 'redux/get'
-import { burnGrave, initialBurnGraveData } from 'redux/fetch'
 import { getId } from 'utils'
 import Page from 'components/layout/Page'
-import { useGetZombiePriceUsd } from '../../state/hooks'
-import Table from './components/Table'
+import { useWeb3React } from "@web3-react/core";
+import BurnGraveTable from "./components/BurnGraveTable";
+import { useAppDispatch } from "../../state";
+import { fetchBurnGravesPublicDataAsync, fetchBurnGravesUserDataAsync } from "../../state/burnGraves";
+import { useGetBurnGraves } from "../../state/hooks";
 
 const BurnGraves: React.FC = () => {
-  const [updateUserInfo, setUpdateUserInfo] = useState(false)
-  const [updatePoolInfo, setUpdatePoolInfo] = useState(false)
-  const liveZmbePrice = useGetZombiePriceUsd()
-  const [zmbePrice, setZmbePrice] = useState(liveZmbePrice)
+  const dispatch = useAppDispatch()
+  const { account } = useWeb3React()
+  const burnGraves = useGetBurnGraves().data
 
   useEffect(() => {
-    setZmbePrice(liveZmbePrice)
-  }, [liveZmbePrice])
+  dispatch(fetchBurnGravesPublicDataAsync())
+    }, [dispatch])
 
   useEffect(() => {
-    if (!updateUserInfo) {
-      initialBurnGraveData(
-        { update: updateUserInfo, setUpdate: setUpdateUserInfo },
-        { update: updatePoolInfo, setUpdate: setUpdatePoolInfo },
-      )
+    if (account) {
+      dispatch(fetchBurnGravesUserDataAsync(account))
     }
-  }, [updatePoolInfo, updateUserInfo])
-
-  const updateResult = (id: number) => {
-    burnGrave(id, { update: updateUserInfo, setUpdate: setUpdateUserInfo })
-  }
+  }, [dispatch, account])
 
   return (
     <>
@@ -47,8 +40,8 @@ const BurnGraves: React.FC = () => {
       </PageHeader>
       <Page>
         <div>
-          {burnGraves().map((a) => {
-            return <Table id={getId(a.id)} key={getId(a.id)} zmbePrice={zmbePrice} updateResult={updateResult} />
+          {burnGraves.map((a) => {
+            return <BurnGraveTable burnGrave={a} key={getId(a.pid)} />
           })}
         </div>
       </Page>

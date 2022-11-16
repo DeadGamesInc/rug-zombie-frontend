@@ -1,5 +1,6 @@
+import BigNumber from "bignumber.js";
 import { BASE_BSC_SCAN_URLS, DEXS } from '../config'
-import { Id } from '../config/constants/types'
+import { Address, ChainId, Id } from '../config/constants/types'
 import instabuys from '../config/constants/instabuys'
 import tombs from '../config/constants/tombs'
 import { graves } from '../config/constants'
@@ -62,10 +63,14 @@ export function tombPids(): number[] {
 
 export const range = (start, end) => Array.from(Array(end - start + 1).keys()).map((x) => x + start)
 
-export const getHighResImage = (nftAddress: string): string => {
-  return `https://api.oblivion.art/image-cache/${nftAddress.toLowerCase()}_1_high`
+export const getHighResImage = (nftAddress: Address): string => {
+  return `https://api.oblivion.art/image-cache/${nftAddress[ChainId.BSC].toLowerCase()}_1_high`
 }
 
 export const getLowResImage = (nftAddress: string): string => {
   return `https://api.oblivion.art/image-cache/${nftAddress.toLowerCase()}_1_low`
+}
+
+export function toBN(num): BigNumber {
+  return new BigNumber(num || num === 0 ? num.toString() : null);
 }

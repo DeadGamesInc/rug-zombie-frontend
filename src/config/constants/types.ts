@@ -92,26 +92,6 @@ export enum UserActivityType {
   DrFMintNft,
 }
 
-export interface GraveConfig extends AnnouncementSubject {
-  pid: Id
-  name: string
-  nftId: number
-  nft?: number
-  depositNftId?: number
-  isNew?: boolean
-  isFeatured?: boolean
-  isClosed?: boolean
-  endDate?: number
-  startingDate?: number
-  nftConverterPid?: number // remove move to own type
-  graveNftToken?: string // remove move to own type
-  additionalDetails?: any[]
-  rug: Token
-  rugDex?: Dex
-  liquidityDetails?: string
-  isRetired?: boolean
-}
-
 export interface WhalePoolConfig {
   address: Address
   nftId: number

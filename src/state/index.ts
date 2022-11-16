@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import gravesReducer from './graves'
 import tombsReducer from './tombs'
+import burnGravesReducer from './burnGraves'
 import spawningPoolsReducer from './spawningPools'
 import nftReducer from './nfts'
 import pricesReducer from './prices'
@@ -14,6 +15,7 @@ const store = configureStore({
     graves: gravesReducer,
     tombs: tombsReducer,
     spawningPools: spawningPoolsReducer,
+    burnGraves: burnGravesReducer,
     nfts: nftReducer,
     prices: pricesReducer,
     userActivity: userActivityReducer,

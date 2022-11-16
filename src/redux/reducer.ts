@@ -4,7 +4,6 @@ import graves from './graves'
 import spawningPools from './spawningPools'
 import sharkPools from './sharkPools'
 import auctions from './auctions'
-import burnGraves from './burnGraves'
 import { getId } from '../utils'
 import rugMarketListings from './rugMarketListings'
 import { RugMarketListing } from './types'
@@ -12,7 +11,6 @@ import { RugMarketListing } from './types'
 const defaultState = {
   account: '',
   graves,
-  burnGraves,
   spawningPools,
   sharkPools,
   auctions,
@@ -136,26 +134,6 @@ export default function reducer(state = defaultState, action) {
           sharkPool.id === action.payload.id
             ? { ...sharkPool, userInfo: { ...sharkPool.userInfo, ...action.payload.userInfo } }
             : sharkPool,
-        ),
-      }
-
-    case types.UPDATE_BURNGRAVE_POOL_INFO:
-      return {
-        ...state,
-        burnGraves: state.burnGraves.map((burnGrave) =>
-          getId(burnGrave.id) === action.payload.id
-            ? { ...burnGrave, poolInfo: { ...burnGrave.poolInfo, ...action.payload.poolInfo } }
-            : burnGrave,
-        ),
-      }
-
-    case types.UPDATE_BURNGRAVE_USER_INFO:
-      return {
-        ...state,
-        burnGraves: state.burnGraves.map((burnGrave) =>
-          getId(burnGrave.id) === action.payload.id
-            ? { ...burnGrave, userInfo: { ...burnGrave.userInfo, ...action.payload.userInfo } }
-            : burnGrave,
         ),
       }
     case types.ADD_RUG_MARKET_LISTING:

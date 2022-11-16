@@ -3,7 +3,7 @@ import { BigNumber } from 'bignumber.js'
 import { getId } from '../utils'
 import * as actions from './actions'
 import store from './store'
-import { Auction, BurnGrave, Grave, RugMarketListing, SharkPool, SpawningPool, UserInfo } from './types'
+import { Auction, Grave, RugMarketListing, SharkPool, SpawningPool, UserInfo } from './types'
 
 export const account = (): string => {
   return store.getState().account
@@ -75,14 +75,6 @@ export const auctions = (): Auction[] => {
 
 export const auctionById = (id: number): Auction => {
   return auctions().find((a) => a.id === id)
-}
-
-export const burnGraves = (): BurnGrave[] => {
-  return store.getState().burnGraves
-}
-
-export const burnGraveById = (id: number): BurnGrave => {
-  return store.getState().burnGraves.find((a) => getId(a.id) === id)
 }
 
 export const rugMarketListings = (filter, wallet): RugMarketListing[] => {

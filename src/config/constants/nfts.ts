@@ -1787,6 +1787,20 @@ const nfts: Nft[] = [
     rarity: 'Special',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 115,
+    name: 'The Black Swan',
+    symbol: 'BLACKSWAN',
+    description: "Out of the ashes beauty will rise.",
+    address: {
+      56: '0x0F8b9ec9c2E5bAd7B9eB66A3b4A7949000cF8932',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Special',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

@@ -3,6 +3,8 @@ import BigNumber from 'bignumber.js'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { PriceState, State, TokenPrices } from '../types'
 import { getWbnbAddress, getZombieAddress } from '../../utils/addressHelpers'
+import tokens from "../../config/constants/tokens";
+import { ChainId } from "../../config/constants/types";
 
 export const useGetPrices = (): PriceState => useSelector((state: State) => state.prices)
 
@@ -21,4 +23,4 @@ export const useGetBnbPriceByTokenAddress = (address: string): BigNumber => {
 // Using regular numbers for USD prices for now
 export const useGetBnbPriceUsd = (): number => useGetUsdPriceByTokenAddress(getWbnbAddress()).toNumber()
 export const useGetZombiePriceBnb = (): BigNumber => new BigNumber(useGetBnbPriceByTokenAddress(getZombieAddress()))
-export const useGetZombiePriceUsd = (): number => useGetUsdPriceByTokenAddress(getZombieAddress()).toNumber()
+export const useGetZombiePriceUsd = (): number => useGetUsdPriceByTokenAddress(tokens.zmbe.address[ChainId.BSC]).toNumber()

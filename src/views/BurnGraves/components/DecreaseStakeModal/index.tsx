@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { BalanceInput, Button, Flex, Image, Modal, Slider, Text } from '@rug-zombie-libs/uikit'
 import useTheme from 'hooks/useTheme'
-import { account, coingeckoPrice, burnGraveById } from 'redux/get'
+import { account, coingeckoPrice } from 'redux/get'
 import { getBalanceAmount, getDecimalAmount, getFullDisplayBalance } from 'utils/formatBalance'
 import BigNumber from 'bignumber.js'
 import { useDrBurnenstein } from 'hooks/useContract'
 import { useTranslation } from 'contexts/Localization'
 import useToast from 'hooks/useToast'
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber'
+import { useGetBurnGraves } from "../../../../state/hooks";
+import { getId } from "../../../../utils";
 
 const StyledButton = styled(Button)`
   flex-grow: 1;
@@ -21,7 +23,7 @@ export interface DecreaseStakeModalProps {
 }
 
 const DecreaseStakeModal: React.FC<DecreaseStakeModalProps> = ({ id, updateResult, onDismiss }) => {
-  const grave = burnGraveById(id)
+  const grave = useGetBurnGraves().data.find(bg => getId(bg.pid) === id)
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(grave.poolInfo.minimumStake))
   const [percent, setPercent] = useState(0)
   const [stakeTokenPrice, setStakeTokenPrice] = useState(0)
@@ -42,28 +44,28 @@ const DecreaseStakeModal: React.FC<DecreaseStakeModalProps> = ({ id, updateResul
 
   let withdrawalDetails = <div />
   let isDisabled = false
-  const remainingAmount = new BigNumber(grave.userInfo.stakedAmount).minus(stakeAmount)
-  const maxPartialAmount = new BigNumber(grave.userInfo.stakedAmount).minus(grave.poolInfo.minimumStake)
+  const remainingAmount = new BigNumber(grave.userInfo.amount).minus(stakeAmount)
+  const maxPartialAmount = new BigNumber(grave.userInfo.amount).minus(grave.poolInfo.minimumStake)
 
   const handleStakeInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const ether = BIG_TEN.pow(18)
     const inputValue = event.target.value || '0'
     let bigInputValue = getDecimalAmount(new BigNumber(inputValue))
     const distanceFromPartialMax = Math.abs(maxPartialAmount.minus(bigInputValue).toNumber())
-    const distanceFromMax = Math.abs(bigInputValue.minus(grave.userInfo.stakedAmount).toNumber())
+    const distanceFromMax = Math.abs(bigInputValue.minus(grave.userInfo.amount).toNumber())
 
     if (distanceFromPartialMax < ether.toNumber()) {
       bigInputValue = maxPartialAmount
     }
 
     if (distanceFromMax < ether.toNumber()) {
-      bigInputValue = new BigNumber(grave.userInfo.stakedAmount)
+      bigInputValue = new BigNumber(grave.userInfo.amount)
     }
 
     setStakeAmount(bigInputValue)
   }
 
-  const staked = new BigNumber(grave.userInfo.stakedAmount)
+  const staked = new BigNumber(grave.userInfo.amount)
 
   const handleChangePercent = (sliderPercent: number) => {
     const percentageOfStakingMax = staked.dividedBy(100).multipliedBy(sliderPercent)
@@ -101,7 +103,7 @@ const DecreaseStakeModal: React.FC<DecreaseStakeModalProps> = ({ id, updateResul
       })
   }
 
-  if (stakeAmount.gt(grave.userInfo.stakedAmount)) {
+  if (stakeAmount.gt(grave.userInfo.amount)) {
     isDisabled = true
     withdrawalDetails = (
       <Text mt="8px" ml="auto" color="tertiary" fontSize="12px" mb="8px">
@@ -152,7 +154,7 @@ const DecreaseStakeModal: React.FC<DecreaseStakeModalProps> = ({ id, updateResul
         } USD`}
       />
       <Text mt="8px" ml="auto" color="textSubtle" fontSize="12px" mb="8px">
-        Balance: {getFullDisplayBalance(grave.userInfo.stakedAmount, grave.stakingToken.decimals, 2)}
+        Balance: {getFullDisplayBalance(grave.userInfo.amount, grave.stakingToken.decimals, 2)}
       </Text>
       {withdrawalDetails}
       <Slider

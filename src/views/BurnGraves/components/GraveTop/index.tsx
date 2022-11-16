@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { BaseLayout, useMatchBreakpoints } from '@rug-zombie-libs/uikit'
-import { burnGraveById, coingeckoPrice } from 'redux/get'
+import { coingeckoPrice } from 'redux/get'
 import numeral from 'numeral'
 import { getBalanceAmount } from 'utils/formatBalance'
+import { useWeb3React } from "@web3-react/core";
+import { useGetBurnGraveById } from "../../../../state/hooks";
 
 const DisplayFlex = styled(BaseLayout)`
   display: flex;
@@ -45,7 +47,9 @@ const GraveTop: React.FC<GraveTopProps> = ({ id, zmbePrice, openHandler }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [stakeTokenPrice, setStakeTokenPrice] = useState(0)
 
-  const grave = burnGraveById(id)
+  const grave = useGetBurnGraveById(id)
+  const { account } = useWeb3React()
+
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
 

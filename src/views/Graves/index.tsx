@@ -13,6 +13,9 @@ import { getId } from '../../utils'
 import Footer from '../../components/Footer'
 import { useAppDispatch } from '../../state'
 import { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from '../../state/graves'
+import { BurnGrave, Grave } from "../../state/types";
+import BurnGraveTable from "../BurnGraves/components/BurnGraveTable";
+import { fetchBurnGravesPublicDataAsync, fetchBurnGravesUserDataAsync } from "../../state/burnGraves";
 
 const GravePage = styled(Page)`
   min-width: 80vw;
@@ -61,8 +64,10 @@ const Graves: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchGravesPublicDataAsync())
-    if (account) {
+    dispatch(fetchBurnGravesPublicDataAsync())
+    if(account) {
       dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchBurnGravesUserDataAsync(account))
     }
   }, [dispatch, account])
 
@@ -78,22 +83,26 @@ const Graves: React.FC = () => {
   const newGraves = []
   const remainingGraves = []
   graves.forEach((g) => {
-    if (g.isFeatured) {
+    if(g.isFeatured) {
       featuredGraves.push(g)
-    } else if (g.isNew) {
+    } else if(g.isNew) {
       newGraves.push(g)
     } else {
       remainingGraves.push(g)
     }
   })
 
-  const orderedGraves = featuredGraves.concat(
+
+  const orderedGraves: (BurnGrave | Grave)[] = featuredGraves.concat(
     newGraves,
     remainingGraves.sort((a, b) =>
       // eslint-disable-next-line no-nested-ternary
       a.poolInfo.allocPoint.gt(b.poolInfo.allocPoint) ? -1 : a.poolInfo.allocPoint.lt(b.poolInfo.allocPoint) ? 1 : 0,
     ),
   )
+
+  orderedGraves.forEach(g => Object.getPrototypeOf(g))
+
 
   const handleFilter = (condition: string) => setFilter(condition)
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
@@ -104,22 +113,23 @@ const Graves: React.FC = () => {
       <GravePage>
         <Row>
           <Header>
-            <HeaderCard />
+            <HeaderCard/>
           </Header>
           <GravesColumn>
-            <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch} />
+            <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch}/>
             {(isUserDependentFilter && !account) ?
               <Flex style={{ paddingTop: '10px', width: '100%', justifyContent: 'center' }}>
                 <div className="total-earned text-shadow">Connect Wallet to view staked graves</div>
               </Flex>
               : orderedGraves.map((g) => {
-                return <GraveTable grave={g} key={getId(g.pid)} />
+                return g.isBurnGrave ? <BurnGraveTable burnGrave={g as BurnGrave} key={getId(g.pid)}/> :
+                  <GraveTable grave={g as Grave} key={getId(g.pid)}/>
               })
             }
           </GravesColumn>
         </Row>
       </GravePage>
-      <Footer />
+      <Footer/>
     </>
   )
 }

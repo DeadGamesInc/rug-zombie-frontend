@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BaseLayout } from '@rug-zombie-libs/uikit'
-import { burnGraveById } from 'redux/get'
 import GraveTop from '../GraveTop'
 import DepositToken from '../DepositToken'
 import StakePanel from '../StakePanel'
 import DetailsPanel from '../DetailsPanel'
 import BurnPanel from '../BurnPanel'
 import DepositNftPanel from '../DepositNftPanel'
+import { useGetBurnGraveById } from "../../../../state/hooks";
 
 const TableCards = styled(BaseLayout)`
   align-items: stretch;
@@ -28,7 +28,7 @@ export interface TableProps {
 const Table: React.FC<TableProps> = ({ id, zmbePrice, updateResult }) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const grave = burnGraveById(id)
+  const grave = useGetBurnGraveById(id)
 
   const openInDetails = (data: boolean) => {
     setIsOpen(data)

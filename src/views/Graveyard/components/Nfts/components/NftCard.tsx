@@ -111,9 +111,9 @@ const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply
       >
         <PreviewDiv>
           {type === 'image' ? (
-            <PreviewImage src={getHighResImage(getAddress(address))} alt={`${name} NFT`} />
+            <PreviewImage src={getHighResImage(address)} alt={`${name} NFT`} />
           ) : (
-            <PreviewVid path={getHighResImage(getAddress(address))} />
+            <PreviewVid path={getHighResImage(address)} />
           )}
         </PreviewDiv>
         <div style={{ paddingTop: '20px' }} />

@@ -1,4 +1,4 @@
-import {useWeb3React} from "@web3-react/core";
+import { useWeb3React } from "@web3-react/core";
 import React from "react";
 import BigNumber from "bignumber.js";
 import { createSelector } from '@reduxjs/toolkit'
@@ -11,11 +11,7 @@ import tokens from '../config/constants/tokens'
 import { getId } from '../utils'
 import { getContract, getPancakePair } from '../utils/contractHelpers'
 import { now } from '../utils/timerHelpers'
-import { State } from './types'
-import {NftTimerCardItem} from '../components/CardItem'
-
-
-
+import { BurnGrave, Grave, State } from './types'
 
 
 export const getBnbPriceinBusd = () => {
@@ -49,8 +45,11 @@ export const useGetFilteredGraves = (filter: string[]) => {
   return useSelector((state: State) => selectFilteredGraves(state, filter))
 }
 
+export const useGetBurnGraves = () => {
+  return useSelector((state: State) => state.burnGraves)
+}
 
-
+export const useGetBurnGraveById = (id: number) => useGetBurnGraves().data.find(bg => getId(bg.pid) === id)
 
 
 interface Props {
@@ -62,44 +61,44 @@ interface Props {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 const selectFilteredGraves = createSelector(
   (state: State) => state.graves,
+  (state: State) => state.burnGraves,
   (state: State) => state.nfts,
   (state: State, filter: string[]) => filter,
-  (graves, nfts, filter) => {
+  (graves, burnGraves, nfts, filter) => {
     // search parameters
-    if (filter[0] !== '') {
-      return graves.data.filter(({ name, rug: { symbol }, nftId }) => {
-        const searchString = filter[0].toLowerCase()
+    const searchString = filter[0].toLowerCase()
+
+    if(filter[0] !== '') {
+      const bgTemp: BurnGrave[] = burnGraves.data.filter(({ name, nftId }) => {
+        const hasNameMatch = name.toLowerCase().includes(searchString)
+        const hasNftNameMatch = nfts.data
+          .find((n) => n.id === nftId)
+          .name.toLowerCase()
+          .includes(searchString)
+        return hasNameMatch || hasNftNameMatch
+      })
+      const gTemp: Grave[] = graves.data.filter(({ name, rug: { symbol }, nftId }) => {
         const hasNameMatch = name.toLowerCase().includes(searchString)
         const hasSymbolMatch = symbol.toLowerCase().includes(searchString)
         const hasNftNameMatch = nfts.data
           .find((n) => n.id === nftId)
           .name.toLowerCase()
           .includes(searchString)
-
         return hasNameMatch || hasSymbolMatch || hasNftNameMatch
       })
+      const temp: (Grave | BurnGrave)[] = [...bgTemp, ...gTemp]
+      return temp
     }
+
+    const allGraves: (Grave | BurnGrave)[] = [...graves.data, ...burnGraves.data]
 
     // filter parameters
     switch (filter[1]) {
       case 'All graves':
       case 'All types':
-        return graves.data.filter((g) => !g.isRetired && (!g.endDate || g.endDate > now()) || g.isFeatured )
+        return allGraves.filter((g) => !g.isRetired && (!g.endDate || g.endDate > now()) || g.isFeatured)
       case 'Staked':
         return graves.data.filter((g) => g.userInfo.amount.gt(0))
       case 'NFT-only':
@@ -108,7 +107,7 @@ const selectFilteredGraves = createSelector(
         return graves.data.filter((g) => g.isRetired || now() > g.endDate)
       case 'NFT-ready':
         // long equation below converts nftMintDate to seconds until mintable, then checks if less than zero
-        return graves.data.filter((g) => ((g.userInfo.nftMintDate.toNumber() - Math.floor(Date.now() / 1000)) <= 0 ) && g.userInfo.amount.gt(0))
+        return graves.data.filter((g) => ((g.userInfo.nftMintDate.toNumber() - now()) <= 0) && g.userInfo.amount.gt(0))
       case 'Legendary':
         return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Legendary' && !g.isRetired && (!g.endDate || g.endDate > now()))
       case 'Rare':
@@ -141,7 +140,7 @@ const selectFilteredSpawningPools = createSelector(
   (state: State, filter: string[]) => filter,
   (spawningPools, nfts, filter) => {
     // search parameters
-    if (filter[0] !== '') {
+    if(filter[0] !== '') {
       return spawningPools.data.filter(({ name, rewardToken: { symbol }, nftId }) => {
         const searchString = filter[0].toLowerCase()
         const hasNameMatch = name.toLowerCase().includes(searchString)

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { LinkExternal } from '@rug-zombie-libs/uikit'
-import { burnGraveById } from '../../../../redux/get'
 import { useDrBurnenstein } from '../../../../hooks/useContract'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import { formatDuration } from '../../../../utils/timerHelpers'
-import { useGetBnbPriceUsd, useGetNftById } from '../../../../state/hooks'
+import { useGetBnbPriceUsd, useGetBurnGraveById, useGetNftById } from '../../../../state/hooks'
 
 export interface DetailsPanelProps {
   id: number
@@ -14,8 +13,8 @@ export interface DetailsPanelProps {
 const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
   const [unlockFee, setUnlockFee] = useState(0)
   const now = Math.floor(Date.now() / 1000)
-  const grave = burnGraveById(id)
-  const nft = useGetNftById(grave.nftid)
+  const grave = useGetBurnGraveById(id)
+  const nft = useGetNftById(grave.nftId)
 
   const drburn = useDrBurnenstein()
 
@@ -66,7 +65,7 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
           Burn Amount:<span className="indetails-value">{getFullDisplayBalance(grave.poolInfo.tokensToBurn)} ZMBE</span>
         </span>
         <span className="indetails-title">
-          Timer Reduction By Burn:<span className="indetails-value">{grave.burnReduction}</span>
+          Timer Reduction By Burn:<span className="indetails-value">{grave.poolInfo.burnReduction.toString()}</span>
         </span>
         <span className="indetails-title">
           NFT Rewards End:<span className="indetails-value">{formatDuration(grave.endDate - now)}</span>

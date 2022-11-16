@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Flex, Image, Modal, Text } from '@rug-zombie-libs/uikit'
-import { account, burnGraveById } from 'redux/get'
 import BigNumber from 'bignumber.js'
 import { APESWAP_EXCHANGE_URL } from 'config'
+import { useWeb3React } from "@web3-react/core";
 import { getAddress } from '../../../../utils/addressHelpers'
 import { useDrBurnenstein, useERC20 } from '../../../../hooks/useContract'
 import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import { BIG_TEN } from '../../../../utils/bigNumber'
+import { useGetBurnGraveById } from "../../../../state/hooks";
 
 export interface DepositTokenModalProps {
   id: number
@@ -21,15 +22,15 @@ const DepositTokenModal: React.FC<DepositTokenModalProps> = ({ id, updateResult,
   const { toastDefault } = useToast()
   const { t } = useTranslation()
 
-  const grave = burnGraveById(id)
+  const grave = useGetBurnGraveById(id)
+  const {account} = useWeb3React()
   const token = useERC20(getAddress(grave.depositToken.address))
-  const wallet = account()
   const drBurnensteinContract = useDrBurnenstein()
 
   useEffect(() => {
-    if (wallet) {
+    if (account) {
       token.methods
-        .balanceOf(wallet)
+        .balanceOf(account)
         .call()
         .then((res) => {
           setHasToken(!new BigNumber(res).isZero())
@@ -38,10 +39,10 @@ const DepositTokenModal: React.FC<DepositTokenModalProps> = ({ id, updateResult,
   })
 
   const handleDeposit = () => {
-    if (wallet) {
+    if (account) {
       drBurnensteinContract.methods
         .deposit(id, BIG_TEN.pow(18).toString(), 0)
-        .send({ from: wallet })
+        .send({ from: account })
         .then(() => {
           updateResult(id)
           toastDefault(t(`1 ${grave.depositToken.symbol} DEPOSITED`))

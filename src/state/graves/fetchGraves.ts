@@ -6,9 +6,8 @@ import drFrankenstein from 'config/abi/drFrankenstein.json'
 import bep20Abi from 'config/abi/erc20.json'
 import multicall from 'utils/multicall'
 import { getDrFrankensteinAddress } from 'utils/addressHelpers'
-import { GraveConfig } from 'config/constants/types'
 import { getId } from '../../utils'
-import { Grave } from '../types'
+import { Grave, GraveConfig } from '../types'
 
 const fetchGraves = async (gravesToFetch: GraveConfig[]): Promise<Grave[]> => {
   const drFrankensteinAddress = getDrFrankensteinAddress()

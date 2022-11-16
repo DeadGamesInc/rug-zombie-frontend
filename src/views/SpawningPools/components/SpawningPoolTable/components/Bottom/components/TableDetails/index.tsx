@@ -118,10 +118,10 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
       <NftImageContainer onClick={() => placeholder ? null : history.push(`/nfts/${nftId}`)}>
         {nft?.type === 'video' ? (
           <NftVideo autoPlay loop muted>
-            <source src={getHighResImage(getAddress(nft?.address))} type="video/webm" />
+            <source src={getHighResImage(nft?.address)} type="video/webm" />
           </NftVideo>
         ) : (
-          <NftImage src={placeholder || getHighResImage(getAddress(nft?.address))} onError={imageOnErrorHandler} />
+          <NftImage src={placeholder || getHighResImage(nft?.address)} onError={imageOnErrorHandler} />
         )}
       </NftImageContainer>
       <Details>

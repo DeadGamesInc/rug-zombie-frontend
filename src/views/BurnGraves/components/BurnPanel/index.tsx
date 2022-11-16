@@ -1,13 +1,16 @@
 import React from 'react'
 import { Button, Flex, useModal } from '@rug-zombie-libs/uikit'
+import BigNumber from "bignumber.js";
+import { useWeb3React } from "@web3-react/core";
 import { formatDuration } from '../../../../utils/timerHelpers'
-import { account, burnGraveById } from '../../../../redux/get'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { useDrBurnenstein } from '../../../../hooks/useContract'
 import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import BurnZombieModal from '../BurnZombieModal'
+import { useGetBurnGraves } from "../../../../state/hooks";
+import { getId } from "../../../../utils";
 
 export interface BurnPanelProps {
   id: number
@@ -15,8 +18,8 @@ export interface BurnPanelProps {
 }
 
 const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
-  const wallet = account()
-  const grave = burnGraveById(id)
+  const { account } = useWeb3React()
+  const grave = useGetBurnGraves().data.find(bg => getId(bg.pid) === id)
   const drburn = useDrBurnenstein()
   const { toastDefault } = useToast()
   const { t } = useTranslation()
@@ -24,26 +27,26 @@ const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
   const currentDate = Math.floor(Date.now() / 1000)
   let nftMintDateFixed = grave.userInfo.nftMintDate
 
-  if (grave.userInfo.nftMintDate < 0) {
-    nftMintDateFixed = currentDate
+  if (grave.userInfo.nftMintDate.lt(0)) {
+    nftMintDateFixed = new BigNumber(currentDate)
   }
 
-  const initialNftTime = nftMintDateFixed - currentDate
+  const initialNftTime = nftMintDateFixed.minus(currentDate)
 
   const onMintNft = () => {
     drburn.methods
       .leaveStaking(id, 0)
-      .send({ from: wallet })
+      .send({ from: account })
       .then(() => {
         updateResult(id)
         toastDefault(t('Minted NFT'))
       })
   }
 
-  const [handleBurn] = useModal(<BurnZombieModal id={id} updateResult={updateResult} />)
+  const handleBurn = null // useModal(<BurnZombieModal id={id} updateResult={updateResult} />)
 
   const renderBurnButton = () => {
-    if (!wallet) {
+    if (!account) {
       return (
         <div className="frank-card">
           <div className="small-text">
@@ -81,7 +84,7 @@ const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
       }
     }
 
-    if (!grave.userInfo.hasUnlocked) {
+    // if (!grave.userInfo.hasUnlocked) {
       return (
         <div className="frank-card">
           <div className="small-text">
@@ -90,9 +93,9 @@ const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
           <span className="total-earned text-shadow">UNLOCK GRAVE</span>
         </div>
       )
-    }
+    // }
 
-    if (grave.userInfo.stakedAmount.lt(grave.poolInfo.minimumStake)) {
+    if (grave.userInfo.amount.lt(grave.poolInfo.minimumStake)) {
       return (
         <div className="frank-card">
           <div className="small-text">
@@ -128,11 +131,11 @@ const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
   }
 
   const renderTimer = () => {
-    if (grave.userInfo.stakedAmount.eq(BIG_ZERO)) {
+    if (grave.userInfo.amount.eq(BIG_ZERO)) {
       return null
     }
 
-    if (currentDate >= grave.userInfo.nftMintDate && grave.userInfo.stakedAmount.gte(grave.poolInfo.minimumStake)) {
+    if (currentDate >= grave.userInfo.nftMintDate.toNumber() && grave.userInfo.amount.gte(grave.poolInfo.minimumStake)) {
       return (
         <Button className="btn w-100" onClick={onMintNft}>
           MINT NFT
@@ -146,14 +149,14 @@ const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
           <span className="white-color">NFT Timer</span>
         </div>
         <span className="total-earned text-shadow" style={{ fontSize: '20px' }}>
-          {formatDuration(initialNftTime)}
+          {formatDuration(initialNftTime.toNumber())}
         </span>
       </div>
     )
   }
 
   const renderBurned = () => {
-    if (currentDate >= grave.userInfo.nftMintDate && grave.userInfo.stakedAmount.gte(grave.poolInfo.minimumStake)) {
+    if (currentDate >= grave.userInfo.nftMintDate.toNumber() && grave.userInfo.amount.gte(grave.poolInfo.minimumStake)) {
       return null
     }
 
