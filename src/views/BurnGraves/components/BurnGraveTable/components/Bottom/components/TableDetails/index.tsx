@@ -144,9 +144,6 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
         </GraveInfo>
         <GraveInfo>
           <SubHeaderText>
-            Early Withdraw Fee: <Text>5%</Text>
-          </SubHeaderText>
-          <SubHeaderText>
             NFT Minting Time: <Text>{formatDays(nftMintTime.toNumber())}</Text>
           </SubHeaderText>
           <SubHeaderText>

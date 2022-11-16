@@ -116,7 +116,7 @@ const BurnZombieModal: React.FC<BurnZombieModalProps> = ({ grave, onDismiss }) =
   const { onBurnZombie } = useBurnZombie(drburn, getId(grave.pid), burnAmount)
   const { toastError } = useToast()
   const { t } = useTranslation()
-  const { poolInfo: { burnReduction, tokensToBurn,  }} = grave
+  const { poolInfo: { burnReduction, tokensToBurn, } } = grave
 
   const handleBurnInputAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value || '0'
@@ -142,10 +142,7 @@ const BurnZombieModal: React.FC<BurnZombieModalProps> = ({ grave, onDismiss }) =
         }
         break
       case 2:
-        console.log(5 % 13)
-        console.log(grave.poolInfo.maxBurned.minus(grave.userInfo.burnedAmount).div(grave.poolInfo.tokensToBurn).toString())
         amount = new BigNumber(Math.floor(grave.poolInfo.maxBurned.minus(grave.userInfo.burnedAmount).div(grave.poolInfo.tokensToBurn.times(2)).toNumber())).times(grave.poolInfo.tokensToBurn)
-
         break
       default:
         amount = grave.poolInfo.maxBurned.minus(grave.userInfo.burnedAmount)
@@ -213,10 +210,10 @@ const BurnZombieModal: React.FC<BurnZombieModalProps> = ({ grave, onDismiss }) =
         This grave allows you to burn zombie to earn NFTs faster
       </GraveTitle>
       <Inputs>
-          <BalanceText>
-            Wallet Balance:{' '}
-            <AmountText>{numeral(getFullDisplayBalance(grave.userInfo.zombieBalance)).format('(0.00 a)', Math.floor)} ZMBE</AmountText>
-          </BalanceText>
+        <BalanceText>
+          Wallet Balance:{' '}
+          <AmountText>{numeral(getFullDisplayBalance(grave.userInfo.zombieBalance)).format('(0.00 a)', Math.floor)} ZMBE</AmountText>
+        </BalanceText>
         <BalanceText>
           Amount Burned:{' '}
           <AmountText>{numeral(getFullDisplayBalance(grave.userInfo.burnedAmount)).format('(0.00 a)', Math.floor)} ZMBE</AmountText>
@@ -224,7 +221,8 @@ const BurnZombieModal: React.FC<BurnZombieModalProps> = ({ grave, onDismiss }) =
       </Inputs>
       <Flex justifyContent="center" mt="20px">
         <GraveTitle>
-          {getFullDisplayBalance(burnAmount)} ZMBE - {formatBurnDuration(burnReduction.times(burnAmount.div(grave.poolInfo.tokensToBurn).times(3600)).toNumber())}
+          {getFullDisplayBalance(burnAmount)} ZMBE
+          - {formatBurnDuration(burnReduction.times(burnAmount.div(grave.poolInfo.tokensToBurn).times(3600)).toNumber())}
         </GraveTitle>
       </Flex>
 

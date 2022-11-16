@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import './Landing.Styles.css'
 import { useHistory } from 'react-router'
+import { sum } from "lodash";
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import Hero from './components/Hero'
@@ -8,7 +9,7 @@ import NftSection from './components/NftSection'
 import TutorialSection from './components/TutorialSection'
 import Footer from '../Footer'
 import {
-  useGetBnbPriceUsd,
+  useGetBnbPriceUsd, useGetBurnGraves,
   useGetGraveByPid,
   useGetGraves,
   useGetSpawningPools,
@@ -20,6 +21,7 @@ import { useAppDispatch } from '../../state'
 import { fetchTombsPublicDataAsync } from '../../state/tombs'
 import { fetchSpawningPoolsPublicDataAsync } from '../../state/spawningPools'
 import { fetchGravesPublicDataAsync } from '../../state/graves'
+import { fetchBurnGravesPublicDataAsync } from "../../state/burnGraves";
 
 const Home: React.FC = () => {
   const history = useHistory()
@@ -27,20 +29,15 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchGravesPublicDataAsync())
-  }, [dispatch])
-
-  useEffect(() => {
     dispatch(fetchSpawningPoolsPublicDataAsync())
-  }, [dispatch])
-
-  useEffect(() => {
     dispatch(fetchTombsPublicDataAsync())
+    dispatch(fetchBurnGravesPublicDataAsync())
   }, [dispatch])
 
   const graveSum = useGetGraves().data.reduce(
-    (sum, { pid, poolInfo: { tokenAmount } }) => {
+    (tvlSum, { pid, poolInfo: { tokenAmount } }) => {
       return {
-        totalAmount: getId(pid) === 0 ? sum.totalAmount : sum.totalAmount.plus(tokenAmount),
+        totalAmount: getId(pid) === 0 ? tvlSum.totalAmount : tvlSum.totalAmount.plus(tokenAmount),
       }
     },
     { totalAmount: BIG_ZERO },
@@ -52,9 +49,9 @@ const Home: React.FC = () => {
   const graveTvl = getBalanceNumber(graveSum.totalAmount) * zombiePriceUsd + legacyGraveTvl
 
   const spawningPoolSum = useGetSpawningPools().data.reduce(
-    (sum, { poolInfo: { totalAmount } }) => {
+    (tvlSum, { poolInfo: { totalAmount } }) => {
       return {
-        totalAmount: sum.totalAmount.plus(totalAmount),
+        totalAmount: tvlSum.totalAmount.plus(totalAmount),
       }
     },
     { totalAmount: BIG_ZERO },
@@ -64,16 +61,18 @@ const Home: React.FC = () => {
   const bnbPriceUsd = useGetBnbPriceUsd()
 
   const tombSum = useGetTombs().data.reduce(
-    (sum, { poolInfo: { tokenAmount, lpPriceBnb } }) => {
+    (tvlSum, { poolInfo: { tokenAmount, lpPriceBnb } }) => {
       const lpPrice = lpPriceBnb.times(bnbPriceUsd).toNumber()
       return {
-        tokenAmountTvl: sum.tokenAmountTvl.plus(getBalanceNumber(tokenAmount.times(lpPrice))),
+        tokenAmountTvl: tvlSum.tokenAmountTvl.plus(getBalanceNumber(tokenAmount.times(lpPrice))),
       }
     },
     { tokenAmountTvl: BIG_ZERO },
   )
 
-  const tvl = graveTvl + spawningPoolsTvl + tombSum.tokenAmountTvl.toNumber()
+  const drBurnTvl = sum(useGetBurnGraves().data.map(({ poolInfo: { totalStaked } }) => getBalanceNumber(totalStaked))) * zombiePriceUsd
+
+  const tvl = graveTvl + spawningPoolsTvl + tombSum.tokenAmountTvl.toNumber() + drBurnTvl
   return (
     <>
       <Hero tvl={tvl} history={history} />
