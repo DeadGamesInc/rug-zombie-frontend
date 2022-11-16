@@ -7,6 +7,7 @@ import { useAppDispatch } from '../state'
 import { depositRug, stake, unlock, unstake, unstakeEarly } from '../utils/callHelpers'
 import { fetchGravesUserDataAsync } from '../state/graves'
 import { BIG_ZERO } from '../utils/bigNumber'
+import { fetchBurnGravesUserDataAsync } from "../state/burnGraves";
 
 export const useStake = (drFrankensteinContract: Contract, pid: number, amount: BigNumber) => {
   const dispatch = useAppDispatch()
@@ -17,6 +18,7 @@ export const useStake = (drFrankensteinContract: Contract, pid: number, amount: 
       const tx = await stake(drFrankensteinContract, pid, amount, account)
       // @ts-ignore
       dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchBurnGravesUserDataAsync(account))
       return tx
     } catch (e) {
       return false
@@ -35,6 +37,7 @@ export const useUnstake = (drFrankensteinContract: Contract, pid: number, amount
       const tx = await unstake(drFrankensteinContract, pid, amount, account)
       // @ts-ignore
       dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchBurnGravesUserDataAsync(account))
       return tx
     } catch (e) {
       return false
@@ -53,6 +56,7 @@ export const useUnstakeEarly = (drFrankensteinContract: Contract, pid: number, a
       const tx = await unstakeEarly(drFrankensteinContract, pid, amount, account)
       // @ts-ignore
       dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchBurnGravesUserDataAsync(account))
       return tx
     } catch (e) {
       return false
@@ -71,6 +75,8 @@ export const useHarvest = (drFrankensteinContract: Contract, pid: number) => {
       const tx = await unstake(drFrankensteinContract, pid, BIG_ZERO, account)
       // @ts-ignore
       dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchBurnGravesUserDataAsync(account))
+
       return tx
     } catch (e) {
       return false

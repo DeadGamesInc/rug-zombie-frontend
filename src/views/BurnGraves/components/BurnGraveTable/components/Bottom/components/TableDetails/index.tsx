@@ -108,7 +108,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
   const {
     nftId,
     endDate,
-    poolInfo: { nftMintTime, totalBurned, minimumStake },
+    poolInfo: { nftMintTime, totalBurned, minimumStake, burnReduction, tokensToBurn },
   } = grave
   const { name, address, type } = useGetNftById(nftId)
   const history = useHistory()
@@ -151,6 +151,12 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
           </SubHeaderText>
           <SubHeaderText>
             Minimum Stake: <Text>{getBalanceAmount(minimumStake).toString()} ZMBE</Text>
+          </SubHeaderText>
+          <SubHeaderText>
+            Burn Amount: <Text>{getBalanceAmount(tokensToBurn).toString()} ZMBE</Text>
+          </SubHeaderText>
+          <SubHeaderText>
+            Burn Reduction: <Text>{burnReduction.toString()} Hour</Text>
           </SubHeaderText>
           {endDate ? (
             <SubHeaderText>
