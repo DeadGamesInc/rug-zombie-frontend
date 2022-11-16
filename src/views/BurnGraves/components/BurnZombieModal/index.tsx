@@ -141,6 +141,12 @@ const BurnZombieModal: React.FC<BurnZombieModalProps> = ({ grave, onDismiss }) =
           amount = burnAmount.plus(grave.poolInfo.tokensToBurn)
         }
         break
+      case 2:
+        console.log(5 % 13)
+        console.log(grave.poolInfo.maxBurned.minus(grave.userInfo.burnedAmount).div(grave.poolInfo.tokensToBurn).toString())
+        amount = new BigNumber(Math.floor(grave.poolInfo.maxBurned.minus(grave.userInfo.burnedAmount).div(grave.poolInfo.tokensToBurn.times(2)).toNumber())).times(grave.poolInfo.tokensToBurn)
+
+        break
       default:
         amount = grave.poolInfo.maxBurned.minus(grave.userInfo.burnedAmount)
         break
@@ -201,7 +207,6 @@ const BurnZombieModal: React.FC<BurnZombieModalProps> = ({ grave, onDismiss }) =
     ).toString()} ${grave.stakingToken.symbol}`
   }
 
-  console.log(grave.poolInfo.tokensToBurn)
   return (
     <Modal onDismiss={onDismiss} title="BURN ZOMBIE" headerBackground="black">
       <GraveTitle>
@@ -234,6 +239,11 @@ const BurnZombieModal: React.FC<BurnZombieModalProps> = ({ grave, onDismiss }) =
           </PrimaryStakeButtonText>
         </PrimaryStakeButton>
         <PrimaryStakeButton onClick={() => handleBurnChange(2)}>
+          <PrimaryStakeButtonText>
+            50%
+          </PrimaryStakeButtonText>
+        </PrimaryStakeButton>
+        <PrimaryStakeButton onClick={() => handleBurnChange(3)}>
           <PrimaryStakeButtonText>
             MAX
           </PrimaryStakeButtonText>

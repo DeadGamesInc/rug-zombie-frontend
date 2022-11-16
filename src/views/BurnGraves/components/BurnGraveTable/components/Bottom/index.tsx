@@ -161,7 +161,6 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     pid,
     nftId,
     endDate,
-    isClosed,
     userInfo: { zombieBalance, zombieAllowance, amount, nftMintDate },
     poolInfo: { minimumStake, nftMintTime },
   } = grave
@@ -287,10 +286,8 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
 
   enum UnstakingStep {
     MintNft,
-    Harvest,
     Unstake,
     UnstakeEarly,
-    StakeZombie,
     Staked,
   }
 
@@ -298,12 +295,6 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     label: `Mint NFT`,
     sent: `Minting...`,
     toast: { title: `Minted ${nft.symbol} NFT` },
-    func: onHarvest,
-  }
-  unstakingSteps[UnstakingStep.Harvest] = {
-    label: `Harvest`,
-    sent: `Harvesting...`,
-    toast: { title: 'Harvested ZMBE' },
     func: onHarvest,
   }
   unstakingSteps[UnstakingStep.Unstake] = {
@@ -324,7 +315,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     if(nftMintDate.lte(now())) {
       currentUnstakingStep = UnstakingStep.MintNft
     } else if(unstakeAmount.isZero() || unstakeAmount.isNaN()) {
-      currentUnstakingStep = UnstakingStep.Harvest
+      currentUnstakingStep = UnstakingStep.Unstake
     }
   }
 
@@ -340,13 +331,6 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
           <FlexColumn>
             <text>You must leave a minimum of {getFullDisplayBalance(minimumStake)} ZMBE in the grave</text>
             <FlexRow>
-              <PrimaryStakeButton
-                onClick={() => {
-                  setUnstakeAmount(amount.minus(minimumStake))
-                }}
-              >
-                <PrimaryStakeButtonText>Leave minimum</PrimaryStakeButtonText>
-              </PrimaryStakeButton>
               <SecondaryStakeButton
                 onClick={() => {
                   setUnstakeAmount(amount)
@@ -355,7 +339,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
                 <SecondaryStakeButtonText>Withdraw max</SecondaryStakeButtonText>
               </SecondaryStakeButton>
             </FlexRow>
-          </FlexColumn>,
+          </FlexColumn>
         )
         return
       }
