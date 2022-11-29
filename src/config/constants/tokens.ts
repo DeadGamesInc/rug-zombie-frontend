@@ -117,7 +117,7 @@ const tokens: { [key: string]: Token } = {
     },
     decimals: 18,
     projectLink: 'https://moonpot.com',
-    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/11242.png',
+    tokenLogo: 'https://icons.llama.fi/moonpot.svg',
   },
   slvn: {
     symbol: 'SLVN',
