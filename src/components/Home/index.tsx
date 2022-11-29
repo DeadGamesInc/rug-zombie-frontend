@@ -22,6 +22,7 @@ import { fetchTombsPublicDataAsync } from '../../state/tombs'
 import { fetchSpawningPoolsPublicDataAsync } from '../../state/spawningPools'
 import { fetchGravesPublicDataAsync } from '../../state/graves'
 import { fetchBurnGravesPublicDataAsync } from "../../state/burnGraves";
+import nfts from '../../config/constants/test.json'
 
 const Home: React.FC = () => {
   const history = useHistory()

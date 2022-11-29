@@ -77,6 +77,18 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 66,
+      97: 1,
+    },
+    name: 'Moonpot Rare',
+    nftId: 116,
+    rug: tokens.pots,
+    announcementIds: [],
+    isNew: true,
+    rugDex: Dex.PCS_V2,
+  },
+  {
+    pid: {
       56: 63,
       97: 1,
     },

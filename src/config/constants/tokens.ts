@@ -109,6 +109,16 @@ const tokens: { [key: string]: Token } = {
     geckoId: 'spartan-token',
     tokenLogo: 'https://assets.coingecko.com/coins/images/22787/small/Spartan_Logo.png?1642580873',
   },
+  pots: {
+    symbol: 'POTS',
+    address: {
+      56: '0x3fcca8648651e5b974dd6d3e50f61567779772a8',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
+    },
+    decimals: 18,
+    projectLink: 'https://moonpot.com',
+    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/11242.png',
+  },
   slvn: {
     symbol: 'SLVN',
     address: {

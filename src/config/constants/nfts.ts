@@ -1801,6 +1801,20 @@ const nfts: Nft[] = [
     rarity: 'Special',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 116,
+    name: 'Doom Pot',
+    symbol: 'DOOMPOT',
+    description: "Doom has no rivals.",
+    address: {
+      56: '0xa3021bDF4389942a091d152d05f2aE5a314a16A3',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
