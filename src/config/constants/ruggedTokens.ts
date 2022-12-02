@@ -1,4 +1,5 @@
 const ruggedTokens = [
+  'zpots',
   'pots',
   'zcel',
   'zape',

@@ -119,6 +119,16 @@ const tokens: { [key: string]: Token } = {
     projectLink: 'https://moonpot.com',
     tokenLogo: 'https://icons.llama.fi/moonpot.svg',
   },
+  zpots: {
+    symbol: 'zPOTS',
+    address: {
+      56: '0x5d902389CA41B88E3A140C7C21583a67869977c1',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
+    },
+    decimals: 0,
+    projectLink: 'https://moonpot.com',
+    tokenLogo: 'https://icons.llama.fi/moonpot.svg',
+  },
   slvn: {
     symbol: 'SLVN',
     address: {

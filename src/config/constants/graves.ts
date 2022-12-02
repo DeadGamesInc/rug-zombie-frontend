@@ -89,6 +89,18 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 67,
+      97: 1,
+    },
+    name: 'zMoonpot Rare',
+    nftId: 116,
+    rug: tokens.zpots,
+    announcementIds: [],
+    isNew: true,
+    liquidityDetails: 'zPOTS token can be found in the Catacombs (RugMarket / RugRoll), you can also ask a community member in the RugZombie telegram.',
+  },
+  {
+    pid: {
       56: 63,
       97: 1,
     },
