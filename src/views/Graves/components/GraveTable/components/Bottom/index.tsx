@@ -393,7 +393,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     Harvest,
     Unstake,
     UnstakeEarly,
-    StakeZombie,
+    MintAndUnstake,
     Staked,
   }
 
@@ -421,11 +421,25 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     toast: { title: 'Unstaked ZMBE' },
     func: onUnstakeEarly,
   }
+  unstakingSteps[UnstakingStep.MintAndUnstake] = {
+    label: `Mint & Unstake`,
+    sent: `Confirming...`,
+    toast: { title: `Unstaked ZMBE & Minted ${nft.symbol} NFT` },
+    func: onUnstake,
+  }
 
   let currentUnstakingStep = UnstakingStep.Unstake
   if (amount.gt(0)) {
     if (nftMintDate.lte(now())) {
-      currentUnstakingStep = UnstakingStep.MintNft
+      /*
+        Force mint if unstake amount is 0 or user has a withdrawal cooldown.
+        This is because calling the withdraw early function while you have a pending NFT will result in the loss of that NFT.
+       */
+      if(unstakeAmount.isZero() || unstakeAmount.isNaN() || tokenWithdrawalDate.gt(now())) {
+        currentUnstakingStep = UnstakingStep.MintNft
+      } else {
+        currentUnstakingStep = UnstakingStep.MintAndUnstake
+      }
     } else if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
       currentUnstakingStep = UnstakingStep.Harvest
     } else if (tokenWithdrawalDate.gt(now())) {
