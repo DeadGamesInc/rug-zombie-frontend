@@ -21,6 +21,7 @@ export enum GraveItemType {
 
 interface TableDetailsProps {
   grave: Grave
+  setMinimumStake: () => void
 }
 
 const Container = styled.div`
@@ -104,7 +105,7 @@ const Link = styled(LinkExternal)`
   color: #ae32aa;
 `
 
-const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
+const TableDetails: React.FC<TableDetailsProps> = ({ grave , setMinimumStake}) => {
   const {
     nftId,
     endDate,
@@ -174,7 +175,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
           <SubHeaderText>
             NFT Minting Time: <Text>{formatDays(nftMintTime.toNumber())}</Text>
           </SubHeaderText>
-          <SubHeaderText>
+          <SubHeaderText onClick={setMinimumStake}>
             Minimum Stake: <Text>{getBalanceAmount(minimumStake).toString()} ZMBE</Text>
           </SubHeaderText>
           {endDate ? (

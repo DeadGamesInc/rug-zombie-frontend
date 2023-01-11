@@ -582,7 +582,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
       {/* eslint-disable-next-line react/jsx-no-undef */}
       {zombieAllowance.gt(0) ? <ProgressBar grave={grave} /> : <PreApprovalProgressBar grave={grave} />}
       <Separator />
-      <TableDetails grave={grave} />
+      <TableDetails grave={grave} setMinimumStake={() => setStakeAmount(minimumStake)} />
     </>
   )
 }
