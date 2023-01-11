@@ -150,7 +150,7 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
       </Flex>
       <Flex justifyContent="center" style={{ maxHeight: '200px' }}>
         {type === 'image' ? (
-          <img src={path} alt="test" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
+          <img src={path} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
         ) : (
           <video autoPlay loop className="sc-cxNHIi bjMxQn">
             <source src={path} type="video/webm" />

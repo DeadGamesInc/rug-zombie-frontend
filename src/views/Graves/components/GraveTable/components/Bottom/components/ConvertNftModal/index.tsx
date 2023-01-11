@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import { useERC721, useNftConverter } from '../../../../../../../../hooks/useContract'
 import { getAddress, getNftConverterAddress } from '../../../../../../../../utils/addressHelpers'
-import { equalAddresses } from '../../../../../../../../utils'
+import { equalAddresses, getHighResImage, getLowResImage } from '../../../../../../../../utils'
 import { useAppDispatch } from '../../../../../../../../state'
 import { fetchNftUserDataAsync } from '../../../../../../../../state/nfts'
 import { useGetNftById } from '../../../../../../../../state/hooks'
@@ -137,7 +137,6 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
 
   const approveButton = selected && !approved
   const depositButton = selected && approved
-
   return (
     <Modal style={{maxWidth: "450px"}} onDismiss={onDismiss} title={`Convert ${symbol}`} headerBackground="black">
       <Flex alignItems="center" justifyContent="space-between" mb="8px">
@@ -150,10 +149,10 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
       </Flex>
       <Flex justifyContent="center" style={{ maxHeight: '200px' }}>
         {type === 'image' ? (
-          <img src={path} alt="test" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
+          <img src={getHighResImage(address)} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
         ) : (
           <video autoPlay loop className="sc-cxNHIi bjMxQn">
-            <source src={path} type="video/webm" />
+            <source src={getHighResImage(address)} type="video/webm" />
           </video>
         )}
       </Flex>

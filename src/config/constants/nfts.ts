@@ -108,7 +108,6 @@ const nfts: Nft[] = [
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
     },
     totalSupply: BIG_ZERO,
-    path: 'http://ipfs.deadgames.io:8080/ipfs/QmQHNfP5LmY9efTWRDZ1vzj48wSAA1J6tCySjqjmMQyV1r',
     type: 'image',
     rarity: 'Common',
     userInfo: { ...DEFAULT_USER_INFO },
@@ -1808,6 +1807,21 @@ const nfts: Nft[] = [
     description: "Doom has no rivals.",
     address: {
       56: '0xa3021bDF4389942a091d152d05f2aE5a314a16A3',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 117,
+    name: 'Whale Pass Rare',
+    symbol: 'WHALE',
+    description: 'Think of me in the depths of your despair.\n' +
+      'Make a home down there, as mine sure won\'t be shared.',
+    address: {
+      56: '0xC31B9Ac67d4402105EB214DF79Ed2D9b816e4B52',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,

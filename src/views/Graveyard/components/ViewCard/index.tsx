@@ -30,7 +30,7 @@ const ViewCard: React.FC<ViewCardProps> = ({ id, nftId }: ViewCardProps) => {
       <Card className={isOwned ? 'card-collectibles' : 'card-active'}>
         <Flex justifyContent="center" paddingTop="5%" height="100%" style={{ aspectRatio: '1/1' }}>
           {type === 'image' ? (
-            <img src={path} alt="test" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
+            <img src={path} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
           ) : (
             <Video path={path} />
           )}

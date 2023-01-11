@@ -108,7 +108,7 @@ const DepositNftModal: React.FC<DepositNftModalProps> = ({ id, updateResult, onD
       </Flex>
       <Flex justifyContent="center" style={{ maxHeight: '200px', maxWidth: '400px' }}>
         {nft.type === 'image' ? (
-          <img src={nft.path} alt="test" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
+          <img src={nft.path} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
         ) : (
           <video autoPlay loop className="sc-cxNHIi bjMxQn">
             <source src={nft.path} type="video/webm" />

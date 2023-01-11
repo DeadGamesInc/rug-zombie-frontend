@@ -8,6 +8,7 @@ import { account } from 'redux/get'
 import BigNumber from 'bignumber.js'
 import useToast from 'hooks/useToast'
 import { useTranslation } from 'contexts/Localization'
+import { getHighResImage, getLowResImage } from "../../utils";
 
 interface ConvertNftProps {
   rznftid: number
@@ -100,10 +101,10 @@ const ConvertNftModal: React.FC<ConvertNftProps> = ({ rznftid, onDismiss }) => {
       </Flex>
       <Flex justifyContent="center">
         {rznft.type === 'image' ? (
-          <img src={rznft.path} alt="NFT" style={{ maxWidth: '50%' }} className="sc-cxNHIi bjMxQn" />
+          <img src={getLowResImage(getAddress(rznft.address))} alt="NFT" style={{ maxWidth: '50%' }} className="sc-cxNHIi bjMxQn" />
         ) : (
           <video autoPlay loop className="sc-cxNHIi bjMxQn">
-            <source src={rznft.path} type="video/webm" />
+            <source src={getHighResImage(rznft.address)} type="video/webm" />
           </video>
         )}
       </Flex>

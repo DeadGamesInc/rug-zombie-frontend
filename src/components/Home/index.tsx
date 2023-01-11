@@ -35,6 +35,8 @@ const Home: React.FC = () => {
     dispatch(fetchBurnGravesPublicDataAsync())
   }, [dispatch])
 
+  // console.log(nfts.map(n => n.address))
+
   const graveSum = useGetGraves().data.reduce(
     (tvlSum, { pid, poolInfo: { tokenAmount } }) => {
       return {
