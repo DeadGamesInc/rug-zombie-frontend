@@ -33,7 +33,7 @@ const AnnouncementCard = styled.div`
   max-width: 520px;
   border-radius: 10px;
   border: 2px solid #AE32AA;
-  padding: 10px;
+  padding: 10px 10px 20px;
   margin: 50px auto auto auto;
   @media (max-width: 1175px) {
     margin: 50px auto auto auto;
@@ -100,33 +100,23 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
       </div>
       <AnnouncementCard
         className={entry?.boundingClientRect?.top > 100 || !entry?.boundingClientRect?.top ? `fade-in-section ${inView ? 'is-visible' : ''}` : ''}>
-        <AnnouncementTitle>Bear Market Dev Notes</AnnouncementTitle>
-        <SubTextBox style={{ fontSize: "18px" }}>
-          The RugZombie / Dead Games team builds regardless of the current market, a special thanks to
-          everyone sticking with us.
-        </SubTextBox>
-        <WhatsNewText>Whats new?</WhatsNewText>
+        <AnnouncementTitle>Dev Notes</AnnouncementTitle>
         <Separator/>
         <SubTextBox style={{ color: "#AE32AA", textAlign: "center" }}>
-          Start your journey in the RugZombie universe with the PØ minigame.
-          <LinkExternal style={{ margin: "auto" }}
-                        href="https://patientzero.rugzombie.io/">
-            PLAY NOW
-          </LinkExternal></SubTextBox>
-        <LinkExternal style={{ margin: "auto" }}
-                      href="https://rugzombie.medium.com/patient-zero-major-updates-9-23-22-43d4bd4a7656">
-          PATIENT ZERØ MAJOR UPDATES
-        </LinkExternal>
+          Whale Pass Season 2 is Live!
+          <SubTextBox style={{ fontSize: "18px", textAlign: 'center' }}>
+            Enter the whale grave before March 12th to be eligible to mint.
+          </SubTextBox>
+        </SubTextBox>
         <Separator/>
         <LaunchText>
           ZOM BETA LAUNCH
         </LaunchText>
-        <LinkExternal href="https://zom.rugzombie.io/"
+        <LinkExternal href="https://store.steampowered.com/app/2303480/ZOM_Rise_of_the_Apocalypse/"
                       style={{ margin: "auto", paddingBottom: "10px", fontSize: "18px" }}
                       className={CLASS_USER_ACTION_NEEDED}>
-          PLAY NOW
+          Whitelist on Steam
         </LinkExternal>
-
         <LinkExternal style={{ margin: "auto" }}
                       href="https://www.oblivion.art/zom">
           Get early access
@@ -135,6 +125,19 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
                       href="https://rugzombie.medium.com/rugzombie-releasing-ambitious-web3-gaming-project-on-bnbchain-b4093e58b69e">
           Read more
         </LinkExternal>
+        <Separator/>
+        <SubTextBox style={{ color: "#AE32AA", textAlign: "center" }}>
+          Start your journey in the ZOM universe with the PØ minigame.
+        </SubTextBox>
+        <LinkExternal style={{ margin: "auto" }}
+                      href="https://patientzero.rugzombie.io/">
+          PLAY NOW
+        </LinkExternal>
+        <LinkExternal style={{ margin: "auto" }}
+                      href="https://rugzombie.medium.com/patient-zero-major-updates-9-23-22-43d4bd4a7656">
+          Patient Zerø updates
+        </LinkExternal>
+
       </AnnouncementCard>
     </HeroContainer>
   )
