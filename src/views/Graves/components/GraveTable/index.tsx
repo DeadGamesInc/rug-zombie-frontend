@@ -4,22 +4,11 @@ import styled from 'styled-components'
 import Top from './components/Top'
 import Bottom from './components/Bottom'
 import { Grave } from '../../../../state/types'
+import { tableStyles } from "../../../../components/Style.styled";
 
 const GraveCard = styled.div<{ open: boolean }>`
-  width: 100%;
-  min-width: 260px;
-  min-height: 130px;
-  background-color: #151e21;
-  border-radius: 10px;
   border: ${(props) => (props.open ? '2px solid #AE32AA' : '2px solid #151E21')};
-  padding: 20px;
-  margin: 0 0 0 0;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  @media (min-width: 1280px) {
-    min-width: 668px;
-  }
+  ${tableStyles};
 `
 
 const Shadow = styled.div`

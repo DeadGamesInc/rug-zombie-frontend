@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Spacer from '../Spacer'
+import { ParentProps } from "../../config/types";
 
-const ModalActions: React.FC = ({ children }) => {
+const ModalActions: React.FC<ParentProps> = ({ children }) => {
   const l = React.Children.toArray(children).length
   return (
     <StyledModalActions>

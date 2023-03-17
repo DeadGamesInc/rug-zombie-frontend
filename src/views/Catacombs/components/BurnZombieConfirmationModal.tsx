@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Flex, Image, Modal, Text } from '@catacombs-libs/uikit'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import tokens from '../../../config/constants/tokens'
 import { account, zombieBalance } from '../../../redux/get'
 import { APESWAP_EXCHANGE_URL } from '../../../config'

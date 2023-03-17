@@ -1,4 +1,4 @@
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import sharkpoolAbi from 'config/abi/autosharkPool.json'
 
 import { parseInt } from 'lodash'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Text } from '@rug-zombie-libs/uikit'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { useGetZombieBnbLpPriceBnb } from '../../../../state/hooks'
 import PositionTag from '../PositionTag'
 import { UsdPriceRow, PrizePoolRow, RoundResultBox } from './styles'

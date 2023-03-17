@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { ParentProps } from "../config/types";
 
 const FAST_INTERVAL = 10000
 const SLOW_INTERVAL = 60000
@@ -6,9 +7,10 @@ const SLOW_INTERVAL = 60000
 const RefreshContext = React.createContext({ slow: 0, fast: 0 })
 
 // This context maintain 2 counters that can be used as a dependencies on other hooks.ts to force a periodic refresh
-const RefreshContextProvider = ({ children }) => {
+const RefreshContextProvider: React.FC<ParentProps> = ({ children }) => {
   const [slow, setSlow] = useState(0)
   const [fast, setFast] = useState(0)
+
 
   useEffect(() => {
     const interval = setInterval(async () => {

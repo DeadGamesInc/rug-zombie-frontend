@@ -4,7 +4,7 @@ import { ArrowDownIcon, Button, useModal } from '@rug-zombie-libs/uikit'
 import SwiperCore, { Keyboard, Mousewheel } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { BigNumber } from 'bignumber.js'
+import BigNumber from "bignumber.js";
 import MobileMenu from './components/MobileMenu'
 import useSwiper from './hooks/useSwiper'
 import { BIG_ZERO } from '../../utils/bigNumber'

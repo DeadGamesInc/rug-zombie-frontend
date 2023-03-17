@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react'
+import React, { ComponentProps, createContext, useCallback, useEffect, useState } from 'react'
 import { EN, languages, Language } from '../../config/localization/languages'
 import translations from '../../config/localization/translations.json'
 import { ContextApi, ContextData, ProviderState } from './types'
@@ -15,7 +15,7 @@ languageMap.set(EN.code, translations)
 
 export const LanguageContext = createContext<ContextApi>(undefined)
 
-export const LanguageProvider: React.FC = ({ children }) => {
+export const LanguageProvider: React.FC<ComponentProps<any>> = ({ children }) => {
   const [state, setState] = useState<ProviderState>(() => {
     const codeFromStorage = getLanguageCodeFromLS()
 

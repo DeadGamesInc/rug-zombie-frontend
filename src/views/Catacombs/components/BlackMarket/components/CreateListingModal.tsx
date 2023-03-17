@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Text } from '@catacombs-libs/uikit'
 import { ethers } from 'ethers'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import allowedRuggedTokens from '../../../../../config/constants/rugMarketTokenList'
 import tokens from '../../../../../config/constants/tokens'
 import { BIG_ZERO } from '../../../../../utils/bigNumber'

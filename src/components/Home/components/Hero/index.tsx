@@ -102,13 +102,6 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
         className={entry?.boundingClientRect?.top > 100 || !entry?.boundingClientRect?.top ? `fade-in-section ${inView ? 'is-visible' : ''}` : ''}>
         <AnnouncementTitle>Dev Notes</AnnouncementTitle>
         <Separator/>
-        <SubTextBox style={{ color: "#AE32AA", textAlign: "center" }}>
-          Whale Pass Season 2 is Live!
-          <SubTextBox style={{ fontSize: "18px", textAlign: 'center' }}>
-            Enter the whale grave before March 12th to be eligible to mint.
-          </SubTextBox>
-        </SubTextBox>
-        <Separator/>
         <LaunchText>
           ZOM BETA LAUNCH
         </LaunchText>

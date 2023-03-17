@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { ParentProps } from "../config/types";
 
 const Container = styled.div`
   max-width: 1920px;
@@ -9,7 +10,7 @@ const Container = styled.div`
   align-items: stretch;
 `
 
-const AppContainer: React.FC = ({ children }) => {
+const AppContainer: React.FC<ParentProps> = ({ children }) => {
   return <Container>{children}</Container>
 }
 

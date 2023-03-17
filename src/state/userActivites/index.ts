@@ -9,7 +9,7 @@ export const userActivitySlice = createSlice({
   name: 'UserActivity',
   initialState,
   reducers: {
-    setUserActivity: (state, action) => {
+    setUserActivity: (state: UserActivityState, action) => {
       state.userDataLoaded = true
       state.data = action.payload
     },

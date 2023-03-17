@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 
 interface ProgressTextProps {
@@ -17,7 +17,7 @@ const InactiveText = styled.p`
   color: #6b7682;
 `
 
-const BracketLine: React.FC<ProgressTextProps> = ({ active, children }) => {
+const BracketLine: React.FC<PropsWithChildren<ProgressTextProps>> = ({ active, children }) => {
     const Text = active ? ActiveText : InactiveText
 
     return <Text>{children}</Text>

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 
 interface ProgressTextProps {
   active: boolean
+  children?: ReactNode
 }
 
 const ActiveText = styled.p`

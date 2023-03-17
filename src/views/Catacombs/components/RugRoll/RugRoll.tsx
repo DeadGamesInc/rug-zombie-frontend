@@ -6,8 +6,8 @@ import { Flex } from '@catacombs-libs/uikit'
 import Menu from '../../../../components/Catacombs/Menu'
 import Page from '../../../../components/layout/Page'
 import RugRollCard from './components/RugRollCard'
-import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
-import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
+import CatacombsMain1920x1080 from "../../../../components/Icons/CatacombsMain1920x1080";
+import CatacombsMain414x720 from "../../../../components/Icons/CatacombsMain414x720";
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -40,9 +40,9 @@ const RugRoll: React.FC = () => {
     <Menu>
       <StyledDiv>
         {isDesktop ? (
-          <img src={CatacombsBackgroundDesktopSVG} alt="catacombs-rug-zombie" />
+          <CatacombsMain1920x1080 />
         ) : (
-          <img src={CatacombsBackgroundMobileSVG} alt="catacombs-rug-zombie" />
+          <CatacombsMain414x720 />
         )}
         <Flex justifyContent="center">
           <Container>

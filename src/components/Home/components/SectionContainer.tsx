@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 
 const Container = styled.section`
@@ -11,7 +11,7 @@ interface SectionContainerProps {
   backgroundColor: string
 }
 
-const SectionContainer: React.FC<SectionContainerProps> = ({ backgroundColor, children }) => {
+const SectionContainer: React.FC<PropsWithChildren<SectionContainerProps>> = ({ backgroundColor, children }) => {
   return <Container color={backgroundColor}>{children}</Container>
 }
 

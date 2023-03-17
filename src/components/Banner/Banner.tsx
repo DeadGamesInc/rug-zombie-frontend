@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Box, ExpandableLabel, Flex } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
 import usePersistState from 'hooks/usePersistState'
@@ -22,15 +22,18 @@ const Content = styled.div<{ isVisible: boolean }>`
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
 `
 
-const Banner: React.FC<Props> = ({ id, title, defaultVisible = true, children, ...props }) => {
+const Banner: React.FC<PropsWithChildren<Props>> = ({ id, title, defaultVisible = true, children, ...props }) => {
   const [isVisible, setIsVisible] = usePersistState(defaultVisible, `banner-${id}`)
   return (
     <Wrapper isVisible={isVisible} {...props}>
       <Flex justifyContent="space-between" flexDirection={['column', 'row']}>
         {title}
-        <ExpandableLabel expanded={isVisible} onClick={() => setIsVisible((prev) => !prev)}>
+        {/* <ExpandableLabel expanded={isVisible} onClick={() => setIsVisible((prev) => !prev)}> */}
+        {/*   {isVisible ? 'Hide' : 'Details'} */}
+        {/* </ExpandableLabel> */}
+        <div onClick={() => setIsVisible((prev) => !prev)}>
           {isVisible ? 'Hide' : 'Details'}
-        </ExpandableLabel>
+        </div>
       </Flex>
       <Content isVisible={isVisible}>{children}</Content>
     </Wrapper>

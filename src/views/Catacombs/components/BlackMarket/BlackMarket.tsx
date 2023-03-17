@@ -6,8 +6,8 @@ import Menu from '../../../../components/Catacombs/Menu'
 import Page from '../../../../components/layout/Page'
 import * as get from '../../../../redux/get'
 import { account, cancelRugMarketListing, markRugMarketListingSold } from '../../../../redux/get'
-import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
-import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
+// import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
+// import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
 import Table from './components/Table'
 import { addRugMarketListings, updateRugMarketListings } from '../../../../redux/fetch'
 import TabButtons from './components/TabButtons'
@@ -79,7 +79,7 @@ const BlackMarket: React.FC = () => {
       <Flex justifyContent="center">
         <Container
           style={{
-            backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`,
+            // backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`,
           }}
         >
           <Page style={{ paddingTop: '5%' }}>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Link, Text } from '@rug-zombie-libs/uikit'
 import { getBscScanLink } from 'utils'
 import { useTranslation } from 'contexts/Localization'
@@ -9,7 +9,7 @@ interface DescriptionWithTxProps {
   txHash?: string
 }
 
-const DescriptionWithTx: React.FC<DescriptionWithTxProps> = ({ txHash, children }) => {
+const DescriptionWithTx: React.FC<PropsWithChildren<DescriptionWithTxProps>> = ({ txHash, children }) => {
   const { t } = useTranslation()
 
   return (

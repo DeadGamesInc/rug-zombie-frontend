@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { Box } from '@rug-zombie-libs/uikit'
 import Container from '../layout/Container'
@@ -12,7 +12,7 @@ const Inner = styled(Container)`
   padding-bottom: 32px;
 `
 
-const PageHeader: React.FC<{ background?: string }> = ({ background, children, ...props }) => (
+const PageHeader: React.FC<{ background?: string, children?: ReactNode }> = ({ background, children, ...props }) => (
   <Outer background={background} {...props}>
     <Inner>{children}</Inner>
   </Outer>

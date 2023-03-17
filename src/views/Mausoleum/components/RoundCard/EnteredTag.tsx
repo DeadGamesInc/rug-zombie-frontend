@@ -26,7 +26,8 @@ const EnteredTag: React.FC<EnteredTagProps> = ({ amount }) => {
   return (
     <>
       <span ref={targetRef}>
-        <StyledEnteredTag>{t('Entered')}</StyledEnteredTag>{' '}
+        {/* <StyledEnteredTag>{t('Entered')}</StyledEnteredTag>{' '} */}
+        <div>{t('Entered')}</div>{' '}
       </span>{' '}
       {tooltipVisible && tooltip}
     </>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Flex, TooltipText, Skeleton } from '@rug-zombie-libs/uikit'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { auctionById } from '../../../../redux/get'
 import { useMausoleum } from '../../../../hooks/useContract'
 import { BIG_ZERO } from '../../../../utils/bigNumber'

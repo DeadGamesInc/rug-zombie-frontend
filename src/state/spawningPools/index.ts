@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 import spawningPoolsConfig from 'config/constants/spawningPools'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import fetchSpawningPools from './fetchSpawningPools'
 import {
   fetchSpawningPoolUserEarnings,

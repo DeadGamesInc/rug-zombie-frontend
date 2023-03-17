@@ -1,6 +1,6 @@
 import { EventData } from 'web3-eth-contract'
 
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { getDrFrankensteinContract } from '../../utils/contractHelpers'
 import web3 from '../../utils/web3'
 import { UserActivityType } from '../../config/constants/types'
@@ -19,7 +19,7 @@ const getActivityType = (event: EventData): UserActivityType => {
   const { event: eventName, returnValues } = event
 
   if (!RELEVANT_EVENT_TYPES.has(eventName)) {
-    return -1
+    return UserActivityType.None
   }
 
   if (eventName === 'Withdraw') {

@@ -4,12 +4,12 @@ import styled from 'styled-components'
 import { useMatchBreakpoints } from '@rug-zombie-libs/uikit' // requires a loader
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Menu from '../../../../components/Catacombs/Menu'
-import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
-import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import Page from '../../../../components/layout/Page'
 import InstabuyCard from './InstabuyCard'
 import useSwiper from '../../../Mausoleum/hooks/useSwiper'
+import CatacombsMain1920x1080 from "../../../../components/Icons/CatacombsMain1920x1080";
+import CatacombsMain414x720 from "../../../../components/Icons/CatacombsMain414x720";
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -61,9 +61,9 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
     <Menu>
       <StyledDiv>
         {isDesktop ? (
-          <img src={CatacombsBackgroundDesktopSVG} alt="catacombs-rug-zombie" />
+          <CatacombsMain1920x1080/>
         ) : (
-          <img src={CatacombsBackgroundMobileSVG} alt="catacombs-rug-zombie" />
+          <CatacombsMain414x720/>
         )}
         <Flex justifyContent="center">
           <Container>
@@ -83,17 +83,17 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
                 >
                   <SwiperSlide>
                     <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
-                      <InstabuyCard id={3} modalObj={modalObj} />
+                      <InstabuyCard id={3} modalObj={modalObj}/>
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
                     <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
-                      <InstabuyCard id={4} modalObj={modalObj} />
+                      <InstabuyCard id={4} modalObj={modalObj}/>
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
                     <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
-                      <InstabuyCard id={5} modalObj={modalObj} />
+                      <InstabuyCard id={5} modalObj={modalObj}/>
                     </div>
                   </SwiperSlide>
                 </Swiper>

@@ -1,4 +1,4 @@
-import burnGraves from 'redux/burnGraves'
+import burnGraves from 'config/constants/burnGraves'
 
 describe('Config burnGraves', () => {
   it.each(burnGraves.map((burnGrave) => burnGrave.pid))('BurnGrave #%d has a unique identifier', (id) => {

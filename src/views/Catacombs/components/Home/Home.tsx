@@ -3,9 +3,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { useMatchBreakpoints } from '@rug-zombie-libs/uikit'
-import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
-import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
 import Menu from '../../../../components/Catacombs/Menu'
+import CatacombsMain1920x1080 from "../../../../components/Icons/CatacombsMain1920x1080";
+import CatacombsMain414x720 from "../../../../components/Icons/CatacombsMain414x720";
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -95,12 +95,13 @@ const Home: React.FC = () => {
     <Menu>
       <StyledDiv>
         {isDesktop ? (
-          <img src={CatacombsBackgroundDesktopSVG} alt="catacombs-rug-zombie" />
+          <CatacombsMain1920x1080/>
         ) : (
-          <img src={CatacombsBackgroundMobileSVG} alt="catacombs-rug-zombie" />
+          <CatacombsMain414x720/>
         )}
         <DataLabDiv>
-          <NavLink exact activeClassName="active" to="/datalab" id="lottery-pot-banner" style={{ paddingTop: '8px' }}>
+          <NavLink exact activeClassName="active" to="/datalab" id="lottery-pot-banner"
+                   style={{ paddingTop: '8px' }}>
             <StyledButton>{t('DATA LAB')}</StyledButton>
           </NavLink>
         </DataLabDiv>
@@ -108,7 +109,8 @@ const Home: React.FC = () => {
           <StyledButton>{t('BARRACKS')}</StyledButton>
         </BarracksDiv>
         <RugRollDiv>
-          <NavLink exact activeClassName="active" to="/rugroll" id="lottery-pot-banner" style={{ paddingTop: '8px' }}>
+          <NavLink exact activeClassName="active" to="/rugroll" id="lottery-pot-banner"
+                   style={{ paddingTop: '8px' }}>
             <StyledButton>{t('RUG ROLL')}</StyledButton>
           </NavLink>
         </RugRollDiv>

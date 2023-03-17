@@ -90,6 +90,7 @@ export enum UserActivityType {
   DrFWithdrawEarly,
   DrFHarvest,
   DrFMintNft,
+  None,
 }
 
 export interface WhalePoolConfig {

@@ -30,7 +30,11 @@
     "@typescript-eslint/no-explicit-any": 0,
     "radix": 0,
     "import/no-extraneous-dependencies": 0,
-    "jsx-a11y/media-has-caption": 0
+    "jsx-a11y/media-has-caption": 0,
+    "react/require-default-props": "off",
+    "react/no-unused-prop-types": "off",
+    "react/jsx-no-bind": "off",
+    "jsx-a11y/click-events-have-key-events": "off"
     // End temporary rules
   }
 }

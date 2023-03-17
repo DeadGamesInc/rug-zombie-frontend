@@ -54,7 +54,7 @@ const CardItem: React.FC<Props> = ({
   unit,
   value,
   highlightable = false,
-  isHighlighted = (v) => v > 0,
+  isHighlighted = (v) => Number(v) > 0,
   valueType = CardItemValueType.Text,
   additionalHighlightClassNames = [],
 }) => {

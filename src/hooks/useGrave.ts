@@ -1,6 +1,6 @@
 // Approve an address
 import { Contract } from 'web3-eth-contract'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { useCallback } from 'react'
 import { useAppDispatch } from '../state'

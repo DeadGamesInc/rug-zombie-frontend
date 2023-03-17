@@ -1,4 +1,4 @@
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { Address, Artist, Id, Token } from '../config/constants/types'
 
 export interface UserInfo {

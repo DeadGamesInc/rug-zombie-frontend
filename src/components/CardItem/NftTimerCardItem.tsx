@@ -128,7 +128,7 @@ const NftTimerCardItem: React.FC<Props> = ({
   return (
     <CardItem
       highlightable
-      isHighlighted={(value) => value && value > 0 && tier !== TimeRemainingTier.AtLeast14Days}
+      isHighlighted={(value) => value && Number(value) > 0 && tier !== TimeRemainingTier.AtLeast14Days}
       label="NFT Timer"
       value={secondsUntilMintable}
       valueType={CardItemValueType.Duration}

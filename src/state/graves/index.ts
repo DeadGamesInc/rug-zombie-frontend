@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 import gravesConfig from 'config/constants/graves'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import fetchGraves from './fetchGraves'
 import { fetchGraveUserEarnings, fetchGraveUserInfo, fetchGraveUserTokenInfo } from './fetchGraveUser'
 import { GravesState, Grave } from '../types'

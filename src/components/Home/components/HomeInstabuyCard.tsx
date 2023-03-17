@@ -19,7 +19,7 @@ import { BIG_ZERO } from 'utils/bigNumber'
 
 import { useInstaBuyContract } from 'hooks/useContract'
 import { getAddress } from 'utils/addressHelpers'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import useToast from 'hooks/useToast'
 import { instaBuyById } from '../../../utils'
 import { useGetNftById } from '../../../state/hooks'

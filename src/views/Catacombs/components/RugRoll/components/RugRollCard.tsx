@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button, Card, CardFooter, CardHeader, Flex, Text, CardBody } from '@catacombs-libs/uikit'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import ruggedTokens from 'config/constants/ruggedTokens'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 import { ethers } from 'ethers'
@@ -221,6 +221,7 @@ const RugRollCard: React.FC<ViewCardProps> = () => {
               }
               onClick={rugRoll}
             >
+
               {rugRollPending ? 'Pending...' : 'RUG ROLL'}
             </StyledButton>
           </Flex>

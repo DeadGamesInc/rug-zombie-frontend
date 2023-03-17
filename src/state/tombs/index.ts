@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 import tombsConfig from 'config/constants/tombs'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import fetchTombs from './fetchTombs'
 import { fetchTombUserEarnings, fetchTombUserInfo, fetchTombUserTokenInfo } from './fetchTombUser'
 import { Tomb, TombsState } from '../types'

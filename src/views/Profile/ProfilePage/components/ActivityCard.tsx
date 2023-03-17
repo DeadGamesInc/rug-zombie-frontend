@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import numeral from 'numeral'
 import { useGetNfts, useGetUserActivities } from '../../../../state/hooks'
 import { UserActivity } from '../../../../state/types'

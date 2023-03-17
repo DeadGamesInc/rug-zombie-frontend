@@ -1,7 +1,6 @@
 import React from 'react'
 import { ModalProvider } from '@rug-zombie-libs/uikit'
 import { Web3ReactProvider } from '@web3-react/core'
-import { HelmetProvider } from 'react-helmet-async'
 import { Provider } from 'react-redux'
 import { getLibrary } from 'utils/web3React'
 import { ThemeContextProvider } from 'contexts/ThemeContext'
@@ -9,8 +8,10 @@ import { LanguageProvider } from 'contexts/Localization'
 import { RefreshContextProvider } from 'contexts/RefreshContext'
 import { ToastsProvider } from 'contexts/ToastsContext'
 import store from 'state'
+import { HelmetProvider } from "react-helmet-async";
+import { ParentProps } from "./config/types";
 
-const Providers: React.FC = ({ children }) => {
+const Providers: React.FC<ParentProps> = ({ children }) => {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <Provider store={store}>

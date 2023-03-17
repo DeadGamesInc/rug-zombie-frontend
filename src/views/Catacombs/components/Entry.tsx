@@ -7,11 +7,11 @@ import { isMobile } from 'react-device-detect'
 import Typewriter from 'typewriter-effect'
 import styled from 'styled-components'
 import Page from '../../../components/layout/Page'
-import CatacombsEntryBackgroundDesktopSVG from '../../../images/CatacombsEntry-1920x1080px.svg'
-import CatacombsEntryBackgroundMobileSVG from '../../../images/CatacombsEntry-414x720px.svg'
 import BurnZombieConfirmationModal from './BurnZombieConfirmationModal'
 import WrongPasswordModal from './WrongPasswordModal'
 import '../Catacombs.Styles.css'
+import CatacombsEntry414x712 from "../../../components/Icons/CatacombsEntry414x720";
+import CatacombsEntry1920x1080 from "../../../components/Icons/CatacombsEntry1920x1080";
 
 const StyledText = styled(Text)`
   font-size: 35px;
@@ -50,9 +50,9 @@ const Entry: React.FC<EntryProps> = ({ setUnlocked }) => {
       <Page>
         <div className="parent-div">
           {isMobile ? (
-            <img src={CatacombsEntryBackgroundMobileSVG} alt="catacombs-rug-zombie" className="backgroundImageStyle" />
+            <CatacombsEntry414x712 />
           ) : (
-            <img src={CatacombsEntryBackgroundDesktopSVG} alt="catacombs-rug-zombie" className="backgroundImageStyle" />
+            <CatacombsEntry1920x1080 />
           )}
           <div className="main-text">
             <Typewriter

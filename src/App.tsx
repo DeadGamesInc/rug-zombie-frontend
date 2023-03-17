@@ -1,5 +1,5 @@
-import React, { useEffect, lazy, useState } from 'react'
-import { Router, Route, Switch, Redirect } from 'react-router-dom'
+import React, { lazy, useEffect, useState } from 'react'
+import { Redirect, Route, Router, Switch } from 'react-router-dom'
 import { ResetCSS } from '@rug-zombie-libs/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
@@ -7,13 +7,11 @@ import ToastListener from 'components/ToastListener'
 import { routes } from 'routes'
 import TopMenu from 'components/TopMenu'
 import AppContainer from 'components/AppContainer'
-import Loader from 'components/Loader'
 import Tombs from 'views/Tombs'
 import Gravedigger from 'views/Gravedigger/'
 import { useWeb3React } from '@web3-react/core'
 import SpawnWithUs from 'views/SpawnWithUs'
 import Catacombs from 'views/Catacombs'
-import SuspenseWithChunkError from './components/SuspenseWithChunkError'
 import history from './routerHistory'
 import GlobalStyle from './style/Global'
 import Graves from './views/Graves'
@@ -36,8 +34,8 @@ import Nfts from './views/Nfts'
 import BurnGraves from './views/BurnGraves'
 import { fetchPricesAsync } from './state/prices'
 import WhalePools from "./views/WhalePool";
-import Zom from "./views/Zom";
-import useToast from "./hooks/useToast";
+import SuspenseWithChunkError from "./components/SuspenseWithChunkError";
+import Loader from "./components/Loader";
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -78,144 +76,137 @@ const App: React.FC = () => {
     fetch.initialData(account)
   }, [account])
 
-  // toast tester
-  // const { toastGraves } = useToast()
-  // useEffect(() => {
-  //   let i = 0
-  //   setInterval(() => toastGraves(`${i++}`), 1000)
-  // }, [])
-
   return (
     <Router history={history}>
-      <ResetCSS />
-      <GlobalStyle />
-      <SuspenseWithChunkError fallback={<Loader />}>
+      <ResetCSS/>
+      <GlobalStyle/>
+      <SuspenseWithChunkError fallback={<Loader/>}>
         <Switch>
           <Route exact path={routes.GRAVEDIGGER}>
-            <Gravedigger />
+            <Gravedigger/>
           </Route>
           <Route exact path={routes.SPAWNWITHUS}>
-            <SpawnWithUs />
+            <SpawnWithUs/>
           </Route>
           <Route exact path={routes.CATACOMBS}>
-            <Catacombs />
+            <Catacombs/>
           </Route>
           <Route exact path={routes.RUGROLL}>
-            <RugRoll />
+            <RugRoll/>
           </Route>
           <Route exact path={routes.DATALAB}>
             <SwiperProvider>
-              <DataLab modalObj={{ modal, setModal }} />
+              <DataLab modalObj={{ modal, setModal }}/>
             </SwiperProvider>
           </Route>
           <Route exact path={routes.BLACKMARKET}>
-            <BlackMarket />
+            <BlackMarket/>
           </Route>
           <Route exact path={routes.BARRACKS}>
-            <Barracks />
+            <Barracks/>
           </Route>
           <Route exact path={routes.HOME}>
-            <Redirect to={routes.LANDING} />
+            <Redirect to={routes.LANDING}/>
           </Route>
           <Route exact path={routes.LANDING}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <Landing />
+                <Landing/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.GRAVES}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <Graves />
+                <Graves/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.TOMBS}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <Tombs />
+                <Tombs/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.SPAWNING_POOLS}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <SpawningPools />
+                <SpawningPools/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.PROFILE}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <Profile />
+                <Profile/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.GRAVEYARD}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <Graveyard />
+                <Graveyard/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.NFTS}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <Nfts />
+                <Nfts/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.MAUSOLEUM}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <PredictionsHome />
+                <PredictionsHome/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.AUCTION}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <Mausoleum />
+                <Mausoleum/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.SHARKTANK}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <SharkPools />
+                <SharkPools/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.BURNGRAVES}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <BurnGraves />
+                <BurnGraves/>
               </AppContainer>
             </>
           </Route>
           <Route exact path={routes.WHALE_POOLS}>
             <>
-              <TopMenu />
+              <TopMenu/>
               <AppContainer>
-                <WhalePools />
+                <WhalePools/>
               </AppContainer>
             </>
           </Route>
         </Switch>
       </SuspenseWithChunkError>
-      <ToastListener />
+      <ToastListener/>
       {modal}
     </Router>
   )

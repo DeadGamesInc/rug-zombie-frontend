@@ -10,7 +10,7 @@ import {
   Flex,
   Button,
 } from '@catacombs-libs/uikit'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { Lightbox } from 'react-modal-image'
 import { account } from '../../../../redux/get'
 import Video from '../../../../components/Video'

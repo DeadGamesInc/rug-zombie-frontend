@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import numeral from 'numeral'
 import { LinkExternal, useModal } from '@rug-zombie-libs/uikit'
 import ProgressBar from './components/ProgressBar'

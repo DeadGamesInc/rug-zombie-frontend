@@ -1,5 +1,5 @@
-import BigNumber from 'bignumber.js/bignumber'
-import { BIG_TEN } from 'utils/bigNumber'
+import { BigNumber } from 'bignumber.js'
+import { BIG_TEN } from '../utils/bigNumber'
 import { Dex } from './constants/types'
 
 BigNumber.config({

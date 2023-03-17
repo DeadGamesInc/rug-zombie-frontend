@@ -4,7 +4,6 @@ const ruggedTokens = [
   'zcel',
   'zape',
   'znomad',
-  'luna',
   'bonfire',
   'tndr',
   'rugbiden',
@@ -19,7 +18,6 @@ const ruggedTokens = [
   'rupee',
   'kids',
   'msc',
-  'zroningmz',
   'squidgame',
   'kcake',
 ]

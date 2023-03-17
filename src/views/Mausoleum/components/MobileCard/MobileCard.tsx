@@ -1,5 +1,5 @@
 import React from 'react'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { BIG_ZERO } from 'utils/bigNumber'
 import SwiperCore, { Keyboard, Mousewheel } from 'swiper'
 import styled from 'styled-components'

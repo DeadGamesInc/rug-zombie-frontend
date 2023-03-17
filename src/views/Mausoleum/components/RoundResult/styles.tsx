@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import styled, { DefaultTheme } from 'styled-components'
 import { Box, Flex, FlexProps, Text } from '@rug-zombie-libs/uikit'
 import { formatBnb } from 'views/Mausoleum/helpers'
 import { useTranslation } from 'contexts/Localization'
 import { BetPosition, Round } from 'state/types'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { auctionById } from '../../../../redux/get'
 import { useGetBnbPriceUsd, useGetZombiePerZombieBnbLp } from '../../../../state/hooks'
 import { formatNumber, getBalanceAmount } from '../../../../utils/formatBalance'
@@ -120,7 +120,7 @@ const StyledRoundResultBox = styled.div`
   padding: 16px;
 `
 
-export const RoundResultBox: React.FC<RoundResultBoxProps> = ({
+export const RoundResultBox: React.FC<PropsWithChildren<RoundResultBoxProps>> = ({
   isNext = false,
   hasEntered = false,
   isLive = false,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Flex, Image, Modal, Text } from '@rug-zombie-libs/uikit'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { useERC20, useSharkpool } from 'hooks/useContract'
 import { account, sharkPoolById } from 'redux/get'
 import { getAddress } from 'utils/addressHelpers'

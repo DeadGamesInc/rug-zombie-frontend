@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
-import styled, { ThemeContext } from 'styled-components'
+import React from 'react'
+import styled, { useTheme } from 'styled-components'
 
 interface SpacerProps {
   size?: 'sm' | 'md' | 'lg'
 }
 
 const Spacer: React.FC<SpacerProps> = ({ size = 'md' }) => {
-  const { spacing } = useContext(ThemeContext)
+  const { spacing } = useTheme()
 
   let s: number
   switch (size) {

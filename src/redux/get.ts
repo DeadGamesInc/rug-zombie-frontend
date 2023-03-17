@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BigNumber } from 'bignumber.js'
+import BigNumber from 'bignumber.js'
 import { getId } from '../utils'
 import * as actions from './actions'
 import store from './store'
