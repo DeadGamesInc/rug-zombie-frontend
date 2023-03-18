@@ -12,6 +12,7 @@ import { getBalanceNumber, getDecimalAmount } from '../../../../../../utils/form
 import { getGraveTombApr } from '../../../../../../utils/apr'
 import CardItem, { CardItemValueType, NftTimerCardItem } from '../../../../../../components/CardItem'
 import { now } from '../../../../../../utils/timerHelpers'
+import { TableTop } from "../../../../../../components/TableFactory";
 
 const GraveColumn = styled.div`
   height: 100%;
@@ -130,13 +131,7 @@ const Percentages = styled.div`
   flex-grow: 1;
 `
 
-interface TopProps {
-  grave: Grave
-  open: boolean
-  setOpen: any
-}
-
-const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
+const Top: TableTop<Grave> = ({ target: grave , open }) => {
   const {
     name,
     rug,
@@ -145,7 +140,6 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
     userInfo: { pendingZombie, nftMintDate, tokenWithdrawalDate, amount },
     endDate
   } = grave
-  const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
   }
@@ -214,7 +208,7 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
   }
 
   return (
-    <GraveColumn onClick={toggleOpen}>
+    <GraveColumn>
       <GraveHeaderRow>
         <TokenFlex>
           <img src={tokenImage(tokens.zmbe)} style={{ width: '30px', height: '30px' }} alt='Zombie Token logo' />

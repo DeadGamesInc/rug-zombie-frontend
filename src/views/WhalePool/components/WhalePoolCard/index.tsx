@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Top from './components/Top'
 import Bottom from './components/Bottom'
 import { WhalePool } from '../../../../state/types'
+import { WhalePoolTable as Table } from "../../../../components/TableFactory";
 
 const DetailsCard = styled.div<{ open: boolean }>`
   width: 100%;
@@ -39,16 +40,7 @@ interface WhalePoolCardProps {
 }
 
 const WhalePoolCard: React.FC<WhalePoolCardProps> = ({ whalePool }) => {
-  const [open, setOpen] = useState(true)
-  return (
-    <>
-      <DetailsCard open={open}>
-        <Top open={open} setOpen={setOpen} whalePool={whalePool} />
-        {open ? <Bottom whalePool={whalePool} /> : null}
-      </DetailsCard>
-      <Shadow />
-    </>
-  )
+  return <Table Top={Top} bottom={<Bottom whalePool={whalePool} />} borderColor='red' target={whalePool} openOnLoad />
 }
 
 export default WhalePoolCard

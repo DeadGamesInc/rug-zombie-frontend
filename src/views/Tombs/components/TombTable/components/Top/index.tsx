@@ -11,6 +11,7 @@ import { getBalanceNumber, getDecimalAmount } from '../../../../../../utils/form
 import { getGraveTombApr } from '../../../../../../utils/apr'
 import { DEXS } from '../../../../../../config'
 import CardItem, { CardItemValueType, NftTimerCardItem } from '../../../../../../components/CardItem'
+import { TableTop } from "../../../../../../components/TableFactory";
 
 const TombColumn = styled.div`
   height: 100%;
@@ -118,13 +119,7 @@ const Percentages = styled.div`
   flex-grow: 1;
 `
 
-interface TopProps {
-  tomb: Tomb
-  open: boolean
-  setOpen: any
-}
-
-const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
+const Top: TableTop<Tomb> = ({ target: tomb, open }) => {
   const {
     isNew,
     token1,
@@ -133,7 +128,6 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
     poolInfo: { allocPoint, tokenAmount, weight, lpPriceBnb },
     userInfo: { pendingZombie, nftMintTime, tokenWithdrawalDate, amount, isMinting, randomNumber },
   } = tomb
-  const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
   }
@@ -159,7 +153,7 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
   const lpName = `${token2.symbol}-${token1.symbol} LP`
 
   return (
-    <TombColumn onClick={toggleOpen}>
+    <TombColumn>
       <TombHeaderRow>
         <TokenFlex>
           <img src={tokenImage(token1)} style={{ width: '30px', height: '30px' }} alt="Token1 icon" />

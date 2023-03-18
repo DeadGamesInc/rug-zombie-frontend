@@ -7,6 +7,7 @@ import BigNumber from 'bignumber.js'
 import { WhalePool } from '../../../../../../state/types'
 import { useGetBnbPriceUsd } from '../../../../../../state/hooks'
 import { getBalanceNumber } from '../../../../../../utils/formatBalance'
+import { TableTop } from "../../../../../../components/TableFactory";
 
 const GraveColumn = styled.div`
   height: 100%;
@@ -123,12 +124,11 @@ interface TopProps {
   whalePool: WhalePool
 }
 
-const Top: React.FC<TopProps> = ({ open, setOpen, whalePool }) => {
+const Top: TableTop<WhalePool> = ({ open, target: whalePool }) => {
   const {
     poolInfo: { mintingFeeBnb },
     userInfo: { nftMintTime, isMinting, isStaked },
   } = whalePool
-  const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
   }
@@ -148,7 +148,7 @@ const Top: React.FC<TopProps> = ({ open, setOpen, whalePool }) => {
   }
 
   return (
-    <GraveColumn onClick={toggleOpen}>
+    <GraveColumn>
       <GraveHeaderRow>
         <TokenFlex>
           <img src={tokenImage(tokens.zmbe)} style={{ width: '30px', height: '30px' }} alt="Zombie Token logo" />

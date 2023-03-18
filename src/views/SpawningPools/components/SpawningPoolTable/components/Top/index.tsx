@@ -10,6 +10,7 @@ import { SpawningPool } from '../../../../../../state/types'
 import { getBalanceNumber, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 import { getSpawningPoolApr } from '../../../../../../utils/apr'
 import CardItem, { CardItemValueType, NftTimerCardItem } from '../../../../../../components/CardItem'
+import { TableTop } from "../../../../../../components/TableFactory";
 
 const SpawningPoolColumn = styled.div`
   height: 100%;
@@ -119,13 +120,7 @@ const Percentages = styled.div`
   flex-grow: 1;
 `
 
-interface TopProps {
-  spawningPool: SpawningPool
-  open: boolean
-  setOpen: any
-}
-
-const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
+const Top: TableTop<SpawningPool> = ({ target: spawningPool, open }) => {
   const {
     name,
     rewardToken,
@@ -134,7 +129,6 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
     poolInfo: { totalAmount, rewardTokenPriceBnb, rewardPerBlock },
     userInfo: { pendingReward, nftMintDate, tokenWithdrawalDate, amount },
   } = spawningPool
-  const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
   }
@@ -165,7 +159,7 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
   }
 
   return (
-    <SpawningPoolColumn onClick={toggleOpen}>
+    <SpawningPoolColumn>
       <SpawningPoolHeaderRow>
         <TokenFlex>
           <img src={tokenImage(tokens.zmbe)} style={{ width: '30px', height: '30px' }} alt="Zombie Token logo" />

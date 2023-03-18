@@ -1,15 +1,11 @@
 /* eslint-disable no-param-reassign */
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Top from './components/Top'
-import Bottom from './components/Bottom'
 import { Tomb } from '../../../../state/types'
 import { tableStyles } from "../../../../components/Style.styled";
-
-const TombCard = styled.div<{ open: boolean }>`
-  border: ${(props) => (props.open ? '2px solid #4B7BDC' : '2px solid #151E21')};
-  ${tableStyles};
-`
+import { TombTable as Table } from "../../../../components/TableFactory";
+import Top from "./components/Top";
+import Bottom from "./components/Bottom";
 
 const Shadow = styled.div`
   width: 100%;
@@ -29,17 +25,8 @@ interface TombProps {
 }
 
 const TombTable: React.FC<TombProps> = ({ tomb }) => {
-  const [open, setOpen] = useState(false)
 
-  return (
-    <>
-      <TombCard open={open}>
-        <Top tomb={tomb} open={open} setOpen={setOpen} />
-        {open ? <Bottom tomb={tomb} /> : null}
-      </TombCard>
-      <Shadow />
-    </>
-  )
+  return <Table Top={Top} bottom={<Bottom tomb={tomb} />} borderColor='#4B7BDC' target={tomb}/>
 }
 
 export default TombTable
