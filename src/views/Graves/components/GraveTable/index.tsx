@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { AnimatePresence, motion } from "framer-motion";
 import Top from './components/Top'
 import Bottom from './components/Bottom'
 import { Grave } from '../../../../state/types'
@@ -34,10 +35,16 @@ const GraveTable: React.FC<GraveProps> = ({ grave }) => {
   return (
     <>
       <GraveCard open={open}>
-        <Top grave={grave} open={open} setOpen={setOpen} />
-        {open ? <Bottom grave={grave} /> : null}
+        <Top grave={grave} open={open} setOpen={setOpen}/>
+        <AnimatePresence>
+          {open ? <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.3 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.5 }}
+          ><Bottom grave={grave}/></motion.div> : null}
+        </AnimatePresence>
       </GraveCard>
-      <Shadow />
+      <Shadow/>
     </>
   )
 }
