@@ -5,7 +5,12 @@ import instabuys from '../config/constants/instabuys'
 import tombs from '../config/constants/tombs'
 import { graves } from '../config/constants'
 
-// eslint-disable-next-line import/prefer-default-export
+export function shortenString(address: string, max = 4): string {
+  return address
+    ? `${address.slice(0, max)}...${address.slice(address.length - max, address.length)}`
+    : '';
+}
+
 export function getBscScanLink(
   data: string | number,
   type: 'transaction' | 'token' | 'address' | 'block' | 'countdown',

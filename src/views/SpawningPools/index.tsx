@@ -59,7 +59,7 @@ const SpawningPools: React.FC = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchSpawningPoolsPublicDataAsync())
-    if (account) {
+    if(account) {
       dispatch(fetchSpawningPoolsUserDataAsync(account))
     }
   }, [dispatch, account])
@@ -78,20 +78,26 @@ const SpawningPools: React.FC = () => {
       <SpawningPoolPage>
         <Row>
           <Header>
-            <HeaderCard />
+            <HeaderCard/>
           </Header>
           <SpawningPoolsColumn>
-            <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch} />
+            <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch}/>
+            {/* eslint-disable-next-line no-nested-ternary */}
             {(isUserDependentFilter && !account) ? (
               <Flex style={{ paddingTop: '10px', width: '100%', justifyContent: 'center' }}>
                 <div className="total-earned text-shadow">Connect Wallet to view staked spawning pools</div>
               </Flex>
-            ) : spawningPools.map((sp) => <SpawningPoolTable spawningPool={sp} key={sp.id} />)
+            ) : spawningPools.length > 0 ? spawningPools.map((sp) => <SpawningPoolTable spawningPool={sp}
+                                                                                        key={sp.id}/>) :
+              <div style={{ textAlign: 'center', color: "#6b7682" }}>
+                <h2 style={{marginBottom: '5px'}}>No Active Spawning Pools</h2>
+                <p>Please check back later for new pools.</p>
+              </div>
             }
           </SpawningPoolsColumn>
         </Row>
       </SpawningPoolPage>
-      <Footer />
+      <Footer/>
     </>
   )
 }

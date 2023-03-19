@@ -36,6 +36,7 @@ import { fetchPricesAsync } from './state/prices'
 import WhalePools from "./views/WhalePool";
 import SuspenseWithChunkError from "./components/SuspenseWithChunkError";
 import Loader from "./components/Loader";
+import NavBar from "./views/NavBar/NavBar";
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -110,7 +111,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.LANDING}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <Landing/>
               </AppContainer>
@@ -118,7 +119,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.GRAVES}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <Graves/>
               </AppContainer>
@@ -126,7 +127,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.TOMBS}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <Tombs/>
               </AppContainer>
@@ -134,7 +135,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.SPAWNING_POOLS}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <SpawningPools/>
               </AppContainer>
@@ -142,7 +143,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.PROFILE}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <Profile/>
               </AppContainer>
@@ -150,7 +151,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.GRAVEYARD}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <Graveyard/>
               </AppContainer>
@@ -158,7 +159,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.NFTS}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <Nfts/>
               </AppContainer>
@@ -166,7 +167,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.MAUSOLEUM}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <PredictionsHome/>
               </AppContainer>
@@ -174,7 +175,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.AUCTION}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <Mausoleum/>
               </AppContainer>
@@ -182,7 +183,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.SHARKTANK}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <SharkPools/>
               </AppContainer>
@@ -190,7 +191,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.BURNGRAVES}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <BurnGraves/>
               </AppContainer>
@@ -198,7 +199,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.WHALE_POOLS}>
             <>
-              <TopMenu/>
+              <NavBar />
               <AppContainer>
                 <WhalePools/>
               </AppContainer>
