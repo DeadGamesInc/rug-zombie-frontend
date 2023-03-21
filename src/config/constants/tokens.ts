@@ -88,6 +88,15 @@ const tokens: { [key: string]: Token } = {
     decimals: 18,
     tokenLogo: 'https://assets.coingecko.com/coins/images/4344/small/Y88JAze.png?1565065793',
   },
+  usdc: {
+    symbol: 'USDC',
+    address: {
+      56: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
+      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+    },
+    decimals: 18,
+    tokenLogo: 'https://assets.coingecko.com/coins/images/6319/small/USD_Coin_icon.png?1547042389',
+  },
   eafi: {
     symbol: 'EAFI',
     address: {
@@ -1233,15 +1242,6 @@ const tokens: { [key: string]: Token } = {
     },
     decimals: 18,
     projectLink: 'https://ethereum.org/en/eth2/beacon-chain/',
-  },
-  usdc: {
-    symbol: 'USDC',
-    address: {
-      56: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
-      97: '',
-    },
-    decimals: 18,
-    projectLink: 'https://www.centre.io/usdc',
   },
   dai: {
     symbol: 'DAI',

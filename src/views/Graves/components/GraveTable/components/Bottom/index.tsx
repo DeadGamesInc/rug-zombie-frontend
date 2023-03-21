@@ -27,6 +27,7 @@ import useToast from '../../../../../../hooks/useToast'
 import { formatDuration, now } from '../../../../../../utils/timerHelpers'
 import PreApprovalProgressBar from './components/PreApprovalProgressBar'
 import { BASE_EXCHANGE_URL } from '../../../../../../config'
+import DepositRugWarning from "./components/DepositRugWarning";
 
 const Separator = styled.div`
   height: 0px;
@@ -229,6 +230,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     <ConvertNftModal nftConverterPid={nftConverterPid} depositNftId={depositNftId} />,
   )
   const [onBurnZombieModal] = useModal(<BurnZombieModal pid={getId(pid)} />)
+  const [onDepositRugModal] = useModal(<DepositRugWarning onDepositRug={onDepositRug} rug={rug} />)
 
   if (depositNftId) {
     stakingSteps[StakingStep.ConvertDepositNft] = {
@@ -254,8 +256,8 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     stakingSteps[StakingStep.DepositRug] = {
       label: `Deposit ${rug.symbol}`,
       sent: `Depositing...`,
-      func: onDepositRug,
-      toast: { title: `Deposited ${rug.symbol}` },
+      func: onDepositRugModal,
+       nonAsync: true,
     }
   }
   stakingSteps[StakingStep.UnlockGrave] = {
@@ -310,6 +312,12 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const handleTx = useCallback(async () => {
     const step = stakingSteps[currentStep]
     if (step.nonAsync) {
+      if([StakingStep.DepositRug].includes(currentStep)) {
+        if(stakeAmount.isNaN()){
+          toastGraves('Please enter a deposit amount')
+          return
+        }
+      }
       step.func()
     } else {
       if ([StakingStep.StakeZombie, StakingStep.Staked].includes(currentStep)) {

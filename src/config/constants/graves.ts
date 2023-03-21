@@ -93,6 +93,17 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 69,
+      97: 1,
+    },
+    name: 'USD Coin Rare',
+    nftId: 118,
+    rug: tokens.usdc,
+    announcementIds: [],
+    rugDex: Dex.PCS_V2,
+  },
+  {
+    pid: {
       56: 66,
       97: 1,
     },
@@ -100,7 +111,6 @@ const graves: GraveConfig[] = [
     nftId: 116,
     rug: tokens.pots,
     announcementIds: [],
-    isNew: true,
     rugDex: Dex.PCS_V2,
   },
   {
@@ -112,7 +122,6 @@ const graves: GraveConfig[] = [
     nftId: 116,
     rug: tokens.zpots,
     announcementIds: [],
-    isNew: true,
     liquidityDetails: 'zPOTS token can be found in the Catacombs (RugMarket / RugRoll), you can also ask a community member in the RugZombie telegram.',
   },
   {

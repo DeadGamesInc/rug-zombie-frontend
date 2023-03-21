@@ -60,7 +60,7 @@ const MobileNavDropdown: React.FC<Props> = ({
                 <motion.p
                   initial={{ scale: 1, color: '#6b7682' }}
                   whileHover={{ color: '#b8c00d' }}
-                  whileTap={{ scale: 0.9 }}
+                  whileTap={{ scale: 0.9, color: '#b8c00d' }}
                 >
                   <St.DropdownItem
                     to={navItem.href}

@@ -1829,6 +1829,20 @@ const nfts: Nft[] = [
     rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 118,
+    name: 'Blood Money',
+    symbol: 'BLOODMONEY',
+    description: 'BRRR',
+    address: {
+      56: '0x39bfcfC7fF9258A672358940233417E22f136185',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

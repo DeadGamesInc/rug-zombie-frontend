@@ -7,13 +7,13 @@ import logo from 'images/Logo.svg';
 import Hamburger from 'hamburger-react';
 import basiczombie from 'images/BasicZombie.gif'
 import { motion } from "framer-motion";
+import zombiehead from "images/menu/ZombieHead.svg";
 import navContent, { LinkType } from './navContent';
 import MobileNavDropdown from './MobileNavDropdown/MobileNavDropdown';
 import ConnectModal from './Modals/ConnectModal';
 import WalletModal from './Modals/WalletModal';
 import * as St from './NavBar.styled';
 import { Buttons, ProfileImage, Text, TokenButton } from "../../components/TopMenu/styles";
-import zombiehead from "../../images/menu/ZombieHead.svg";
 import { routes } from "../../routes";
 import { useGetZombiePriceUsd } from "../../state/hooks";
 import UnlockButton from "../../components/UnlockButton";
@@ -28,13 +28,6 @@ const NavBar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showConnectModal, setShowConnectModal] = useState(false);
   const [showWalletModal, setShowWalletModal] = useState(false);
-
-  // TODO: make other modals close when one opens
-
-  const handleProfileImageClick = () => {
-    if(!account) setShowConnectModal(!showConnectModal);
-    else history.push(`/users/${account}`);
-  };
 
   const mobileNavSwitchWidth = 1170;
   const navSwitchHeight = 500;
@@ -78,7 +71,6 @@ const NavBar: React.FC = () => {
                     {navItem.label}
                   </St.MenuLink>
                 ) : (
-
                   <St.MenuLink to={navItem.href} key={navItem.label}>
                     {navItem.label}
                   </St.MenuLink>
