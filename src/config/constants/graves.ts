@@ -101,6 +101,7 @@ const graves: GraveConfig[] = [
     rug: tokens.usdc,
     announcementIds: [],
     rugDex: Dex.PCS_V2,
+    isNew: true
   },
   {
     pid: {
