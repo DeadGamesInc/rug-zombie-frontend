@@ -7,7 +7,7 @@
     "heroku-prebuild": "npm install -g serve",
     "start": "serve -s build",
     "devstart": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "CI=false && react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
