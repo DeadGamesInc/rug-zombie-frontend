@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import PreviewVideo from 'components/Video/PreviewVideo'
 import { useHistory } from 'react-router'
+import LazyLoad from "react-lazy-load";
 import { useGetNftById } from '../../../../../state/nfts/hooks'
-import { getAddress } from '../../../../../utils/addressHelpers'
 import { getHighResImage } from '../../../../../utils'
 
 const Container = styled.div`
@@ -39,7 +39,7 @@ const Shadow = styled.div`
   z-index: -1;
 `
 
-const PreviewDiv = styled.div`
+const PreviewDiv = styled(LazyLoad)`
   height: 240px;
   min-width: 300px;
   max-width: 300px;
@@ -109,18 +109,18 @@ const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply
           history.push(`nfts/${id}`)
         }}
       >
-        <PreviewDiv>
-          {type === 'image' ? (
-            <PreviewImage src={getHighResImage(address)} alt={`${name} NFT`} />
-          ) : (
-            <PreviewVid path={getHighResImage(address)} />
-          )}
+        <PreviewDiv offset={200}>
+            {type === 'image' ? (
+              <PreviewImage src={getHighResImage(address)} alt={`${name} NFT`}/>
+            ) : (
+              <PreviewVid path={getHighResImage(address)}/>
+            )}
         </PreviewDiv>
-        <div style={{ paddingTop: '20px' }} />
+        <div style={{ paddingTop: '20px' }}/>
         <RarityText>{rarity}</RarityText>
-        <div style={{ paddingTop: '10px' }} />
+        <div style={{ paddingTop: '10px' }}/>
         <Title>{name}</Title>
-        <div style={{ paddingTop: '22px' }} />
+        <div style={{ paddingTop: '22px' }}/>
         {showTotalSupply ? (
           <p style={{ paddingLeft: '30px', paddingBottom: '10px' }}>
             <SubText style={{ color: '#6B7682' }}>Total supply:&nbsp;&nbsp;</SubText>
@@ -133,9 +133,9 @@ const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply
             <SubText style={{ color: '#FFFFFF' }}>{ownedIds.length}</SubText>
           </p>
         ) : null}
-        <div style={{ paddingBottom: '10px' }} />
+        <div style={{ paddingBottom: '10px' }}/>
       </Card>
-      {ownedIds.length > 0 ? <Shadow /> : null}
+      {ownedIds.length > 0 ? <Shadow/> : null}
     </Container>
   )
 }
