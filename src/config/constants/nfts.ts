@@ -1842,6 +1842,19 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },
+  },  {
+    id: 119,
+    name: 'Perilous Eclipse',
+    symbol: 'ECLIPSE',
+    description: 'Beneath the lunar gaze, the undead stir, dancing between shadows and moonbeams, a haunting symphony of eternal night.',
+    address: {
+      56: '0xE8E5b08FBabf370990933Ba82d6c80FF849b03C5',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
 
