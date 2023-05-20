@@ -1002,7 +1002,7 @@ const tokens: { [key: string]: Token } = {
   sfm: {
     symbol: 'SFM',
     address: {
-      56: '0x42981d0bfbaf196529376ee702f2a9eb9092fcb5',
+      56: '0x8076c74c5e3f5852037f31ff0093eeb8c8add8d3',
       97: '',
     },
     decimals: 9,
