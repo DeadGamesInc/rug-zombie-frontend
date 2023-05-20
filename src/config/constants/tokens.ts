@@ -999,6 +999,15 @@ const tokens: { [key: string]: Token } = {
     decimals: 18,
     projectLink: 'https://www.safepal.io/',
   },
+  sfm: {
+    symbol: 'SFM',
+    address: {
+      56: '0x42981d0bfbaf196529376ee702f2a9eb9092fcb5',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://safemoon.net/',
+  },
   lina: {
     symbol: 'LINA',
     address: {

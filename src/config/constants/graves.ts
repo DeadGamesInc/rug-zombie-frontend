@@ -88,8 +88,20 @@ const graves: GraveConfig[] = [
     depositNftId: 6,
     nftConverterPid: 0,
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
-    isNew: true,
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common Grave to gain access.',
+  },
+  {
+    pid: {
+      56: 70,
+      97: 1,
+    },
+    name: 'SafeMoon Legendary',
+    nftId: 119,
+    rug: tokens.sfm,
+    announcementIds: [],
+    rugDex: Dex.PCS_V2,
+    endDate: 1697515200,
+    isNew: true
   },
   {
     pid: {
