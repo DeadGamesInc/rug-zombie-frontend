@@ -1008,6 +1008,15 @@ const tokens: { [key: string]: Token } = {
     decimals: 9,
     projectLink: 'https://safemoon.net/',
   },
+  torn: {
+    symbol: 'TORN',
+    address: {
+      56: '0x1ba8d3c4c219b124d351f603060663bd1bcd9bbf',
+      97: '',
+    },
+    decimals: 18,
+    tokenLogo: 'https://assets.coingecko.com/coins/images/13496/small/ZINt8NSB_400x400.jpg?1609193407'
+  },
   lina: {
     symbol: 'LINA',
     address: {

@@ -92,6 +92,19 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 71,
+      97: 1,
+    },
+    name: 'Tornado Cash Rare',
+    nftId: 120,
+    rug: tokens.torn,
+    announcementIds: [],
+    rugDex: Dex.PCS_V2,
+    isNew: true
+
+  },
+  {
+    pid: {
       56: 70,
       97: 1,
     },
@@ -113,7 +126,6 @@ const graves: GraveConfig[] = [
     rug: tokens.usdc,
     announcementIds: [],
     rugDex: Dex.PCS_V2,
-    isNew: true
   },
   {
     pid: {
