@@ -1859,7 +1859,7 @@ const nfts: Nft[] = [
     id: 120,
     name: 'Merkle Mangrove',
     symbol: 'MERKLE-MANGROVE',
-    description: 'Beneath the lunar gaze, the undead stir, dancing between shadows and moonbeams, a haunting symphony of eternal night.',
+    description: 'Its roots delve deep, intertwining with the hidden truths of those who seek its refuge.',
     address: {
       56: '0x856Ac772f6758aA2EDe74DdA27f6FBf71Fe0F5bD',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
