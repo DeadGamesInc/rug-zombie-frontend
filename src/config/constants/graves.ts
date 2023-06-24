@@ -92,6 +92,18 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 72,
+      97: 1,
+    },
+    name: 'SEC Rare',
+    nftId: 121,
+    rug: tokens.wbnb,
+    announcementIds: [],
+    rugDex: Dex.PCS_V2,
+    isNew: true
+  },
+  {
+    pid: {
       56: 71,
       97: 1,
     },
@@ -101,7 +113,6 @@ const graves: GraveConfig[] = [
     announcementIds: [],
     rugDex: Dex.PCS_V2,
     isNew: true
-
   },
   {
     pid: {

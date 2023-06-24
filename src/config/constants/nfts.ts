@@ -1868,6 +1868,19 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },
+  }, {
+    id: 121,
+    name: 'Gary',
+    symbol: 'GARY',
+    description: 'Its roots delve deep, intertwining with the hidden truths of those who seek its refuge.',
+    address: {
+      56: '0xcCfFE7AfAA9369054916b61D57228B3bd0B29477',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
 
