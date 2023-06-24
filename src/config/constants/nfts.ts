@@ -1872,7 +1872,7 @@ const nfts: Nft[] = [
     id: 121,
     name: 'Gary',
     symbol: 'GARY',
-    description: 'Its roots delve deep, intertwining with the hidden truths of those who seek its refuge.',
+    description: 'I make the rules.',
     address: {
       56: '0xcCfFE7AfAA9369054916b61D57228B3bd0B29477',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
