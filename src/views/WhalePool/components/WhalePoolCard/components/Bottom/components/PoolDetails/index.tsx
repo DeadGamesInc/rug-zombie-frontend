@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import { WhalePool } from '../../../../../../../../state/types'
 import { useGetNfts } from '../../../../../../../../state/hooks'
 import { getAddress } from '../../../../../../../../utils/addressHelpers'
-import { getHighResImage } from '../../../../../../../../utils'
+import { getLowResImage } from '../../../../../../../../utils'
 
 const Container = styled.div`
   display: flex;
@@ -101,7 +101,7 @@ const PoolDetails: React.FC<TableDetailsProps> = ({ whalePool }) => {
               <NftContainer>
                 <div>
                   <NftVideo key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} autoPlay loop muted>
-                    <source src={getHighResImage(nft.address)} type="video/webm" />
+                    <source src={getLowResImage(nft)} type="video/webm" />
                   </NftVideo>
                   <SwiperSlideContainerText>
                     <SubHeaderText>{nft.name}</SubHeaderText>
@@ -117,7 +117,7 @@ const PoolDetails: React.FC<TableDetailsProps> = ({ whalePool }) => {
               <NftImage
                 key={nft.id}
                 onClick={() => history.push(`/nfts/${nft.id}`)}
-                src={getHighResImage(nft.address)}
+                src={getLowResImage(nft)}
                 onError={imageOnErrorHandler}
               />
               <SwiperSlideContainerText>

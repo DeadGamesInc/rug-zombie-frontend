@@ -56,7 +56,8 @@ const initialNftInfo = {
 
 const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
   const { nftId, version } = instaBuyById(id)
-  const { name, symbol, description, address, path, type, totalSupply } = useGetNftById(nftId)
+  const nft = useGetNftById(nftId);
+  const { name, symbol, description, address, path, type, totalSupply } = nft;
   const [isOpen, setIsOpen] = useState(false)
   const [nftInfo, setNftInfo] = useState(initialNftInfo)
   const instaBuy = useInstaBuyContract(version)
@@ -103,7 +104,7 @@ const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
         <StyleCardHeader>
           <Flex justifyContent="center" paddingTop="5%" paddingBottom="5%" height="100%" onClick={openModal}>
             {type === 'image' ? (
-              <img src={getLowResImage(getAddress(address))} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
+              <img src={getLowResImage(nft)} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
             ) : (
               <Video path={path} />
             )}

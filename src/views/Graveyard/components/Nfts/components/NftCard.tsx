@@ -4,7 +4,7 @@ import PreviewVideo from 'components/Video/PreviewVideo'
 import { useHistory } from 'react-router'
 import LazyLoad from "react-lazy-load";
 import { useGetNftById } from '../../../../../state/nfts/hooks'
-import { getHighResImage } from '../../../../../utils'
+import { getLowResImage } from '../../../../../utils'
 
 const Container = styled.div`
   display: flex;
@@ -92,14 +92,7 @@ interface CollectionCardProps {
 }
 
 const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply }) => {
-  const {
-    address,
-    name,
-    totalSupply,
-    rarity,
-    type,
-    userInfo: { ownedIds },
-  } = useGetNftById(id)
+  const nft = useGetNftById(id)
   const history = useHistory()
 
   return (
@@ -110,32 +103,32 @@ const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply
         }}
       >
         <PreviewDiv offset={200}>
-            {type === 'image' ? (
-              <PreviewImage src={getHighResImage(address)} alt={`${name} NFT`}/>
+            {nft.type === 'image' ? (
+              <PreviewImage src={getLowResImage(nft)} alt={`${nft.name} NFT`}/>
             ) : (
-              <PreviewVid path={getHighResImage(address)}/>
+              <PreviewVid path={getLowResImage(nft)}/>
             )}
         </PreviewDiv>
         <div style={{ paddingTop: '20px' }}/>
-        <RarityText>{rarity}</RarityText>
+        <RarityText>{nft.rarity}</RarityText>
         <div style={{ paddingTop: '10px' }}/>
-        <Title>{name}</Title>
+        <Title>{nft.name}</Title>
         <div style={{ paddingTop: '22px' }}/>
         {showTotalSupply ? (
           <p style={{ paddingLeft: '30px', paddingBottom: '10px' }}>
             <SubText style={{ color: '#6B7682' }}>Total supply:&nbsp;&nbsp;</SubText>
-            <SubText style={{ color: '#FFFFFF' }}>{totalSupply.toString()}</SubText>
+            <SubText style={{ color: '#FFFFFF' }}>{nft.totalSupply.toString()}</SubText>
           </p>
         ) : null}
         {showOwned ? (
           <p style={{ paddingLeft: '30px' }}>
             <SubText style={{ color: '#6B7682' }}>Variants owned:&nbsp;&nbsp;</SubText>
-            <SubText style={{ color: '#FFFFFF' }}>{ownedIds.length}</SubText>
+            <SubText style={{ color: '#FFFFFF' }}>{nft.userInfo?.ownedIds.length}</SubText>
           </p>
         ) : null}
         <div style={{ paddingBottom: '10px' }}/>
       </Card>
-      {ownedIds.length > 0 ? <Shadow/> : null}
+      {nft.userInfo?.ownedIds.length > 0 ? <Shadow/> : null}
     </Container>
   )
 }

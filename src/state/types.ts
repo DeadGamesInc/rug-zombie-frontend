@@ -270,10 +270,24 @@ export interface BlockState {
 
 // Graveyard
 
+export interface ImageCache {
+  highResImage: string;
+  lowResImage: string;
+}
+
+export interface NftToken {
+  id: number;
+  imageCache: ImageCache;
+}
+
+export interface PreviewToken {
+  address: string;
+  previewToken: NftToken;
+}
+
 export interface NftUserInfo {
   ownedIds: number[]
 }
-
 export interface Nft {
   id: number
   name: string
@@ -286,6 +300,7 @@ export interface Nft {
   rarity: string
   artist?: Artist
   userInfo: NftUserInfo
+  imageCache?: ImageCache
 }
 
 export interface NftState {

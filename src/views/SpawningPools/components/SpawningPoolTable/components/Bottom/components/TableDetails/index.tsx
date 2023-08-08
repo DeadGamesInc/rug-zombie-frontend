@@ -8,7 +8,7 @@ import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../..
 import { SpawningPool } from '../../../../../../../../state/types'
 import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
 import { useGetBnbPriceUsd, useGetNftById, useGetZombiePriceUsd } from '../../../../../../../../state/hooks'
-import { getHighResImage } from "../../../../../../../../utils";
+import { getLowResImage } from "../../../../../../../../utils";
 
 export enum SpawningPoolItemType {
   Number,
@@ -118,10 +118,10 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
       <NftImageContainer onClick={() => placeholder ? null : history.push(`/nfts/${nftId}`)}>
         {nft?.type === 'video' ? (
           <NftVideo autoPlay loop muted>
-            <source src={getHighResImage(nft?.address)} type="video/webm" />
+            <source src={getLowResImage(nft)} type="video/webm" />
           </NftVideo>
         ) : (
-          <NftImage src={placeholder || getHighResImage(nft?.address)} onError={imageOnErrorHandler} />
+          <NftImage src={placeholder || getLowResImage(nft)} onError={imageOnErrorHandler} />
         )}
       </NftImageContainer>
       <Details>

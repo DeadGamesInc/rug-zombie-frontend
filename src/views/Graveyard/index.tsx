@@ -7,7 +7,7 @@ import { FooterImage } from 'components/Footer/styles'
 import { useWeb3React } from '@web3-react/core'
 import Collections from './components/Collections'
 import { useAppDispatch } from '../../state'
-import { fetchNftPublicDataAsync, fetchNftUserDataAsync } from '../../state/nfts'
+import { fetchNftUserDataAsync } from '../../state/nfts'
 import SectionHeader from '../../components/Home/components/SectionHeader'
 
 const Banner = styled.div`
@@ -51,7 +51,6 @@ const Graveyard: React.FC = () => {
   const { account } = useWeb3React()
 
   useEffect(() => {
-    dispatch(fetchNftPublicDataAsync())
     if (account) {
       dispatch(fetchNftUserDataAsync(account))
       // todo sometimes fails

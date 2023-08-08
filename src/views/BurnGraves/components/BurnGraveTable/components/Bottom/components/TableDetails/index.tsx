@@ -8,7 +8,7 @@ import { formatDays, formatDuration, now } from '../../../../../../../../utils/t
 import { useGetNftById, useGetZombiePriceUsd } from '../../../../../../../../state/hooks'
 import { BASE_EXCHANGE_URL } from '../../../../../../../../config'
 import { getAddress } from '../../../../../../../../utils/addressHelpers'
-import { getHighResImage } from "../../../../../../../../utils";
+import { getLowResImage } from "../../../../../../../../utils";
 import tokens from "../../../../../../../../config/constants/tokens";
 import { BurnGrave } from "../../../../../../../../state/types";
 
@@ -110,7 +110,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
     endDate,
     poolInfo: { nftMintTime, totalBurned, minimumStake, burnReduction, tokensToBurn },
   } = grave
-  const { name, address, type } = useGetNftById(nftId)
+  const nft = useGetNftById(nftId)
   const history = useHistory()
   const tvl = getBalanceAmount(totalBurned.times(useGetZombiePriceUsd()))
   const imageOnErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -126,17 +126,17 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
   return (
     <Container>
       <NftImageContainer>
-        {type === 'video' ? (
+        {nft.type === 'video' ? (
           <NftVideo onClick={linkToNft} autoPlay loop muted>
-            <source src={getHighResImage(address)} type="video/webm"/>
+            <source src={getLowResImage(nft)} type="video/webm"/>
           </NftVideo>
         ) : (
-          <NftImage onClick={linkToNft} src={getHighResImage(address)} onError={imageOnErrorHandler}/>
+          <NftImage onClick={linkToNft} src={getLowResImage(nft)} onError={imageOnErrorHandler}/>
         )}
       </NftImageContainer>
       <Details>
         <GraveInfo>
-          <HeaderText>{name}</HeaderText>
+          <HeaderText>{nft.name}</HeaderText>
           <SubHeaderText>
             Total Volume Burned: <Text>{numeral(tvl.toString()).format('$ (0.00 a)')}</Text>
           </SubHeaderText>

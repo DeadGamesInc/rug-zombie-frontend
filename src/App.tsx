@@ -28,7 +28,7 @@ import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 
 import SharkPools from './views/SharkPools'
 import { useAppDispatch } from './state'
-import { fetchNftPublicDataAsync } from './state/nfts'
+import { fetchNftInfoAsync } from './state/nfts'
 import Nfts from './views/Nfts'
 import BurnGraves from './views/BurnGraves'
 import { fetchPricesAsync } from './state/prices'
@@ -36,6 +36,9 @@ import WhalePools from "./views/WhalePool";
 import SuspenseWithChunkError from "./components/SuspenseWithChunkError";
 import Loader from "./components/Loader";
 import NavBar from "./views/NavBar/NavBar";
+import nfts from "./config/constants/nfts";
+import { ChainId } from "./config/constants/types";
+import { batch } from "react-redux";
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -59,22 +62,22 @@ const App: React.FC = () => {
 
   useEffect(() => {
     document.title = 'RugZombie'
-  })
+  }, [])
   useEagerConnect()
 
   const { account } = useWeb3React()
   useEffect(() => {
-    dispatch(fetchPricesAsync())
-  }, [dispatch])
+    batch(() => {
+      dispatch(fetchPricesAsync())
+      dispatch(fetchNftInfoAsync(nfts.map((nft) => nft.address[ChainId.BSC])))
+    });
 
-  // initialise nft state
-  useEffect(() => {
-    dispatch(fetchNftPublicDataAsync())
-  }, [dispatch])
+  }, [dispatch]);
+
 
   useEffect(() => {
     fetch.initialData(account)
-  }, [account])
+  }, [account]);
 
   return (
     <Router history={history}>
@@ -110,7 +113,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.LANDING}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <Landing/>
               </AppContainer>
@@ -118,7 +121,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.GRAVES}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <Graves/>
               </AppContainer>
@@ -126,7 +129,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.TOMBS}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <Tombs/>
               </AppContainer>
@@ -134,7 +137,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.SPAWNING_POOLS}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <SpawningPools/>
               </AppContainer>
@@ -142,7 +145,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.PROFILE}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <Profile/>
               </AppContainer>
@@ -150,7 +153,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.GRAVEYARD}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <Graveyard/>
               </AppContainer>
@@ -158,7 +161,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.NFTS}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <Nfts/>
               </AppContainer>
@@ -166,7 +169,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.MAUSOLEUM}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <PredictionsHome/>
               </AppContainer>
@@ -174,7 +177,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.AUCTION}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <Mausoleum/>
               </AppContainer>
@@ -182,7 +185,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.SHARKTANK}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <SharkPools/>
               </AppContainer>
@@ -190,7 +193,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.BURNGRAVES}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <BurnGraves/>
               </AppContainer>
@@ -198,7 +201,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.WHALE_POOLS}>
             <>
-              <NavBar />
+              <NavBar/>
               <AppContainer>
                 <WhalePools/>
               </AppContainer>

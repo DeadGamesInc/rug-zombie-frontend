@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import { useERC721, useNftConverter } from '../../../../../../../../hooks/useContract'
 import { getAddress, getNftConverterAddress } from '../../../../../../../../utils/addressHelpers'
-import { equalAddresses, getHighResImage, getLowResImage } from '../../../../../../../../utils'
+import { equalAddresses, getLowResImage } from '../../../../../../../../utils'
 import { useAppDispatch } from '../../../../../../../../state'
 import { fetchNftUserDataAsync } from '../../../../../../../../state/nfts'
 import { useGetNftById } from '../../../../../../../../state/hooks'
@@ -70,21 +70,15 @@ export interface ConvertNftModalProps {
 const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConverterPid, onDismiss }) => {
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
-  const {
-    symbol,
-    type,
-    path,
-    address,
-    userInfo: { ownedIds },
-  } = useGetNftById(depositNftId)
-  const nftContract = useERC721(getAddress(address))
+  const nft = useGetNftById(depositNftId)
+  const nftContract = useERC721(getAddress(nft.address))
   const nftConverterContract = useNftConverter()
   const [selected, setSelected] = useState(null)
   const [approved, setApproved] = useState(false)
   const [converting, setConverting] = useState(false)
   const [approving, setApproving] = useState(false)
   const { onNftConvert } = useConvertNft(nftConverterContract, nftConverterPid, selected)
-  const nftBalance = ownedIds.length
+  const nftBalance = nft.userInfo?.ownedIds.length
 
   useEffect(() => {
     dispatch(fetchNftUserDataAsync(account))
@@ -138,21 +132,21 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
   const approveButton = selected && !approved
   const depositButton = selected && approved
   return (
-    <Modal style={{maxWidth: "450px"}} onDismiss={onDismiss} title={`Convert ${symbol}`} headerBackground="black">
+    <Modal style={{maxWidth: "450px"}} onDismiss={onDismiss} title={`Convert ${nft.symbol}`} headerBackground="black">
       <Flex alignItems="center" justifyContent="space-between" mb="8px">
         <Text bold>Select ID of NFT:</Text>
         <Flex alignItems="center" minWidth="70px">
           <Text ml="4px" bold>
-            {symbol}
+            {nft.symbol}
           </Text>
         </Flex>
       </Flex>
       <Flex justifyContent="center" style={{ maxHeight: '200px' }}>
-        {type === 'image' ? (
-          <img src={getHighResImage(address)} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
+        {nft.type === 'image' ? (
+          <img src={getLowResImage(nft)} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
         ) : (
           <video autoPlay loop className="sc-cxNHIi bjMxQn">
-            <source src={getHighResImage(address)} type="video/webm" />
+            <source src={getLowResImage(nft)} type="video/webm" />
           </video>
         )}
       </Flex>
@@ -160,14 +154,14 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
         Balance: {nftBalance.toString()}
         {nftBalance === 0 ? (
           <Text mt="8px" ml="auto" color="tertiary" fontSize="12px" mb="8px">
-            Must have {symbol} NFT before you can deposit
+            Must have {nft.symbol} NFT before you can deposit
           </Text>
         ) : (
           <Text bold>IDS in your wallet:</Text>
         )}
       </Text>
       <OverflowFlex justifyContent="center">
-        {ownedIds.map((currentId) => {
+        {nft.userInfo?.ownedIds.map((currentId) => {
           return (
             <div id={currentId.toString()} key={currentId} style={{ padding: '10px' }}>
               {currentId === selected ? <PrimaryStakeButton  style={{width: "70px"}}  onClick={() => setSelected(currentId)}>
@@ -197,11 +191,11 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
         <Text mt="8px" color="textSubtle" fontSize="12px" mb="8px" style={{ width: '10%' }} />
         {selected && approved ? <PrimaryStakeButton onClick={handleConvert} >
           <PrimaryStakeButtonText>
-            {converting ? 'Converting...' : `Convert ${symbol}`}
+            {converting ? 'Converting...' : `Convert ${nft.symbol}`}
           </PrimaryStakeButtonText>
         </PrimaryStakeButton> : <SecondaryStakeButton onClick={handleConvert} disabled={!depositButton}>
           <SecondaryStakeButtonText>
-            Convert {symbol}
+            Convert {nft.symbol}
           </SecondaryStakeButtonText>
         </SecondaryStakeButton>}
       </Flex>

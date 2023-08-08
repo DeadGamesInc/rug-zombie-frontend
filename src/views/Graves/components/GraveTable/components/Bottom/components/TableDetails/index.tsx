@@ -10,7 +10,7 @@ import { useGetBnbPriceUsd, useGetNftById, useGetZombiePriceUsd } from '../../..
 import { BASE_EXCHANGE_URL, BASE_V1_EXCHANGE_URL } from '../../../../../../../../config'
 import { getAddress } from '../../../../../../../../utils/addressHelpers'
 import { Dex } from '../../../../../../../../config/constants/types'
-import { getHighResImage } from "../../../../../../../../utils";
+import { getLowResImage } from "../../../../../../../../utils";
 
 export enum GraveItemType {
   Number,
@@ -114,7 +114,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave , setMinimumStake}) =
     liquidityDetails,
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, minimumStake, unlockFee },
   } = grave
-  const { name, address, type } = useGetNftById(nftId)
+  const nft = useGetNftById(nftId)
   const history = useHistory()
   const tvl = getBalanceAmount(tokenAmount.times(useGetZombiePriceUsd()))
   const unlockFeeUsd = unlockFee.times(useGetBnbPriceUsd())
@@ -131,17 +131,17 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave , setMinimumStake}) =
   return (
     <Container>
       <NftImageContainer>
-        {type === 'video' ? (
+        {nft.type === 'video' ? (
           <NftVideo onClick={linkToNft} autoPlay loop muted>
-            <source src={getHighResImage(address)} type="video/webm" />
+            <source src={getLowResImage(nft)} type="video/webm" />
           </NftVideo>
         ) : (
-          <NftImage onClick={linkToNft} src={getHighResImage(address)} onError={imageOnErrorHandler} />
+          <NftImage onClick={linkToNft} src={getLowResImage(nft)} onError={imageOnErrorHandler} />
         )}
       </NftImageContainer>
       <Details>
         <GraveInfo>
-          <HeaderText>{nftId === 52 ? 'Artwork coming soon!' : name}</HeaderText>
+          <HeaderText>{nftId === 52 ? 'Artwork coming soon!' : nft.name}</HeaderText>
           <SubHeaderText>
             Weight: <Text>{allocPoint.div(100).toString()}X</Text>
           </SubHeaderText>

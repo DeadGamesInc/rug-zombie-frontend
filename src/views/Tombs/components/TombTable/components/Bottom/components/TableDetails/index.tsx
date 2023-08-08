@@ -7,7 +7,7 @@ import { getFullDisplayBalance } from '../../../../../../../../utils/formatBalan
 import { Tomb } from '../../../../../../../../state/types'
 import { formatDays } from '../../../../../../../../utils/timerHelpers'
 import { useGetBnbPriceUsd, useGetNftById } from '../../../../../../../../state/hooks'
-import { getHighResImage } from "../../../../../../../../utils";
+import { getLowResImage } from "../../../../../../../../utils";
 
 export enum TombItemType {
   Number,
@@ -96,7 +96,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, lpPriceBnb, mintingFee },
     overlay: { legendaryId },
   } = tomb
-  const { name, address, type } = useGetNftById(legendaryId)
+  const nft = useGetNftById(legendaryId)
 
   const bnbPriceUsd = useGetBnbPriceUsd()
   const tvl = tokenAmount.times(lpPriceBnb).times(bnbPriceUsd)
@@ -111,17 +111,17 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
   return (
     <Container>
       <NftImageContainer>
-        {type === 'video' ? (
+        {nft.type === 'video' ? (
           <NftVideo autoPlay loop muted>
-            <source src={getHighResImage(address)} type="video/webm" />
+            <source src={getLowResImage(nft)} type="video/webm"/>
           </NftVideo>
         ) : (
-          <NftImage src={getHighResImage(address)} onError={imageOnErrorHandler} />
+          <NftImage src={getLowResImage(nft)} onError={imageOnErrorHandler}/>
         )}
       </NftImageContainer>
       <Details>
         <TombInfo>
-          <HeaderText>{name}</HeaderText>
+          <HeaderText>{nft.name}</HeaderText>
           <SubHeaderText>
             Weight: <Text>{allocPoint.div(100).toString()}X</Text>
           </SubHeaderText>
@@ -129,7 +129,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
             Tomb TVL: <Text>{numeral(getFullDisplayBalance(tvl)).format('$ (0.00 a)')}</Text>
           </SubHeaderText>
           <SubHeaderText>
-            <ContractLink  address={getAddress(lpAddress)} linkText="LP Contract" />
+            <ContractLink address={getAddress(lpAddress)} linkText="LP Contract"/>
           </SubHeaderText>
         </TombInfo>
         <TombInfo>
