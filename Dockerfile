@@ -1,5 +1,5 @@
 # pull official base image
-FROM public.ecr.aws/docker/library/node:14.19.1-alpine as build-deps
+FROM public.ecr.aws/docker/library/node:16.20-alpine as build-deps
 WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 RUN apk add git
