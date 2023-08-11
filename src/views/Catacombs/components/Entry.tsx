@@ -42,7 +42,6 @@ const Entry: React.FC<EntryProps> = ({ setUnlocked }) => {
         }
       }
     }
-    // eslint-disable-next-line jsx-a11y/no-autofocus
     return <input type="password" className="password-input" onKeyDown={handleKeyDown} maxLength={8} autoFocus />
   }
   return (

@@ -6,7 +6,6 @@ import { useAppDispatch } from '../state'
 import { convertNft } from '../utils/callHelpers'
 import { fetchGravesUserDataAsync } from '../state/graves'
 
-// eslint-disable-next-line import/prefer-default-export
 export const useConvertNft = (nftSwapperContract: Contract, nftConverterPid: number, tokenId: number) => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()

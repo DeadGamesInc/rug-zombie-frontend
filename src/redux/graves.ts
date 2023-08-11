@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 import tokens from '../config/constants/tokens'
 import artists from '../config/constants/artists'
 import { BIG_ZERO } from '../utils/bigNumber'

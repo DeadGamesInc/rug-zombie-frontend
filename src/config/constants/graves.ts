@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 import { Dex } from './types'
 import tokens from './tokens'
 import { GraveConfig } from "../../state/types";
