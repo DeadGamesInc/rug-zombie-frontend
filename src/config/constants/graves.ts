@@ -79,15 +79,15 @@ const graves: GraveConfig[] = [
       56: 68,
       97: 1,
     },
-    name: 'Whale Pass Rare',
-    nftId: 117,
+    name: 'Whale Pass Rare (Yield only)',
+    nftId: 28,
     rug: tokens.basicZmbe,
     announcementIds: [],
-    endDate: 1689044400,
     depositNftId: 6,
     nftConverterPid: 0,
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common Grave to gain access.',
+    isFeatured: true
   },
   {
     pid: {
