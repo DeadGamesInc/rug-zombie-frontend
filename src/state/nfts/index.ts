@@ -32,7 +32,7 @@ export const nftSlice = createSlice({
       const previews = action.payload
       state.data = state.data.map((nft) => {
         const preview = previews.find((p) => equalAddresses(p.address, nft.address[ChainId.BSC]))
-        return { ...nft, imageCache: preview?.previewToken.imageCache, totalSupply: new BigNumber(preview?.totalSupply)  }
+        return { ...nft, imageCache: preview?.previewToken?.imageCache, totalSupply: new BigNumber(preview?.totalSupply)  }
       })
     },
   },
